@@ -8,6 +8,8 @@ namespace P2Project.Model
 {
     class Exercise
     {
-        //Chinese invasion 
+        public int ID { get; private set; }
+        public string Name { get; set; }
+        public LearningProfile Profile { get; set; }
     }
 }
