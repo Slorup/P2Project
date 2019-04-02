@@ -13,6 +13,13 @@ namespace P2Project.Model
         public double Kinesthetic { get; set; }
         public double Verbal { get; set; }
 
+        public LearningProfile(double visual, double auditory, double kinesthetic, double verbal)
+        {
+            Visual = visual;
+            Auditory = auditory;
+            Kinesthetic = kinesthetic;
+            Verbal = verbal;
+        }
         //UncertaityCoefficient
     }
 }

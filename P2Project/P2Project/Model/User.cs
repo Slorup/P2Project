@@ -16,14 +16,18 @@ namespace P2Project.Model
     class User
     {
         public string UserName { get; private set; }
-        public string Name { get; set; }
         public UserType Type { get; set; }
         public LearningProfile Profile { get; set; }
+        public List<int> CompletedExercisesID { get; set; }
 
-        public User(string username, string name, LearningProfile profile, UserType type)
+        public User(string username, LearningProfile profile, UserType type, List<int> completedExercisesID)
         {
-
+            UserName = username;
+            Profile = profile;
+            Type = type;
+            CompletedExercisesID = completedExercisesID;
         }
+
         //Once upon a time, there was a bsian boy called Grey Li
     }
 }

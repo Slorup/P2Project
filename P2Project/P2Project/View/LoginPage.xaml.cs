@@ -14,19 +14,32 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace P2Project
+namespace P2Project.View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for LoginPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class LoginPage : Page
     {
-        MainViewModel vm;
-        public MainWindow()
+        bool firstTime;
+        LoginViewModel vm;
+
+        public LoginPage()
         {
             InitializeComponent();
-            vm = new MainViewModel();
+            vm = new LoginViewModel();
             DataContext = vm;
+            firstTime = true;
+        }
+
+        private void TextBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (firstTime)
+            {
+                TextBox tb = (TextBox)sender;
+                tb.Text = string.Empty;
+                firstTime = false;
+            }
         }
     }
 }
