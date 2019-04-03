@@ -13,7 +13,7 @@ namespace P2Project.DAL
         public static User ImportUser(string username) //TODO: MASSER AF ERROR-HANDLING
         {
             User user = null;
-            using (StreamReader reader = new StreamReader("PATH"))
+            using (StreamReader reader = new StreamReader(@"C:\Users\Slorup\Desktop\LeNames.txt"))
             {
                 string currentline;
                 while((currentline = reader.ReadLine()) != null)
@@ -27,6 +27,7 @@ namespace P2Project.DAL
 
                         LearningProfile profile = new LearningProfile(double.Parse(userParts[2]), double.Parse(userParts[3]), double.Parse(userParts[4]), double.Parse(userParts[5]));
                         user = new User(userParts[0], profile, (UserType)int.Parse(userParts[1]), exercisesIDs);
+                        break;
                     }
                 }
             }

@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace P2Project.Model
 {
-    enum UserType
+    public enum UserType
     {
         Pupil,
         Teacher,
         Admin
     }
 
-    class User
+    public class User
     {
         public string UserName { get; private set; }
         public UserType Type { get; set; }

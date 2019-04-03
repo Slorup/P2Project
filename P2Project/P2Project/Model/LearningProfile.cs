@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace P2Project.Model
 {
-    class LearningProfile
+    public class LearningProfile
     {
         public double Visual { get; set; }
         public double Auditory { get; set; }
