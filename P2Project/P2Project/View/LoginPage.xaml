@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:P2Project.View"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="540" d:DesignWidth="960"
       Title="LoginPage" Background="HotPink">
     <Page.Resources>
         <Style x:Key="FocusVisual">
@@ -63,8 +63,8 @@
     <Grid RenderTransformOrigin="0.5,0.5">
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="#FF38075B" Offset="1"/>
-                <GradientStop Color="#FFAF3CFF"/>
+                <GradientStop Color="#324c54" Offset="1"/>
+                <GradientStop Color="#66797f"/>
             </LinearGradientBrush>
         </Grid.Background>
         <Grid.ColumnDefinitions>
@@ -77,7 +77,7 @@
             <RowDefinition Height="10*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Rectangle Grid.Column="1" Grid.Row="1" Fill="#FF9C9C9C" OpacityMask="#66000000" RadiusY="15" RadiusX="15" Width="350" Height="350"/>
+        <Rectangle Grid.Column="1" Grid.Row="1" Fill="#001c25" OpacityMask="#66000000" RadiusY="15" RadiusX="15" Width="350" Height="350"/>
         <Grid Grid.Column="1" Grid.Row="1" RenderTransformOrigin="0.5,0.5" Width="350" Height="350">
             <Grid.RowDefinitions>
                 <RowDefinition/>
@@ -96,8 +96,8 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" Text="P2 PROJECT" VerticalAlignment="Center" FontSize="36" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Center"/>
-            <TextBox Grid.Row="3" Grid.Column="1" Text="Username" Name="tbUserName" FontSize="26" FontWeight="SemiBold" Height="40" Width="200" VerticalAlignment="Center" PreviewMouseDown="TextBox_PreviewMouseDown"/>
-            <Button Content="OPRET BRUGER" Grid.Column="1" Grid.Row="5" Height="30" Width="240" Style="{DynamicResource RoundButton}" FontSize="20"/>
+            <TextBox Grid.Row="3" Grid.Column="1" Text="Username" Name="tbUserName" FontSize="26" FontWeight="SemiBold" Height="40" Width="250" VerticalAlignment="Center" PreviewMouseDown="TextBox_PreviewMouseDown" Background="#B2D4D4D4" BorderBrush="{x:Null}"/>
+            <Button Content="OPRET BRUGER" Grid.Column="1" Grid.Row="5" Height="30" Width="240" Style="{DynamicResource RoundButton}"/>
             <Button Grid.Row="7" Grid.Column="1" Content="Login" Height="30" Width="240" Command="{Binding LoginClickCommand}" CommandParameter="{Binding Text, ElementName=tbUserName}" Style="{DynamicResource RoundButton}"/>
         </Grid>
     </Grid>
