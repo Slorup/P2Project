@@ -17,27 +17,16 @@ using System.Windows.Shapes;
 namespace P2Project.View
 {
     /// <summary>
-    /// Interaction logic for LoginPage.xaml
+    /// Interaction logic for CreateUserPage.xaml
     /// </summary>
-    public partial class LoginPage : Page
+    public partial class CreateUserPage : Page
     {
-        bool firstTime;
-
-        public LoginPage(MainViewModel vm)
+        CreateUserViewModel vm;
+        public CreateUserPage(Page mainPage)
         {
             InitializeComponent();
+            vm = new CreateUserViewModel(mainPage);
             DataContext = vm;
-            firstTime = true;
-        }
-
-        private void TextBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (firstTime)
-            {
-                TextBox tb = (TextBox)sender;
-                tb.Text = string.Empty;
-                firstTime = false;
-            }
         }
     }
 }

@@ -13,16 +13,16 @@ namespace P2Project.DAL
         public static User ImportUser(string username) //TODO: MASSER AF ERROR-HANDLING
         {
             User user = null;
-            using (StreamReader reader = new StreamReader(@"C:\Users\Slorup\Desktop\LeNames.txt"))
+            using (StreamReader reader = new StreamReader(File.Open("Users.txt", FileMode.OpenOrCreate)))
             {
-                string currentline;
-                while((currentline = reader.ReadLine()) != null)
+                string currentLine;
+                while((currentLine = reader.ReadLine()) != null)
                 {
-                    string[] userParts = currentline.Split(';');
+                    string[] userParts = currentLine.Split(';');
                     if (userParts.Length >= 6 && userParts[0] == username)
                     {
                         List<int> exercisesIDs = new List<int>();
-                        for (int i = 6; i < userParts.Length; i++)   //TEST
+                        for (int i = 6; i < userParts.Length; i++)  
                             exercisesIDs.Add(int.Parse(userParts[i]));
 
                         LearningProfile profile = new LearningProfile(double.Parse(userParts[2]), double.Parse(userParts[3]), double.Parse(userParts[4]), double.Parse(userParts[5]));
@@ -33,5 +33,36 @@ namespace P2Project.DAL
             }
             return user;
         }
+
+        public static void CreateUser(User user) //TRY CATCH OG ALT DET DER
+        {
+            string path = "Users.txt";
+            if (!File.Exists(path))
+                File.Create(path);
+
+            using (StreamWriter writer = new StreamWriter(path, true))
+            {
+                writer.WriteLine($"{user.UserName};{(int)user.Type};{user.Profile.Visual};{user.Profile.Auditory};{user.Profile.Kinesthetic};{user.Profile.Verbal};");
+            }
+        }
+
+        public static bool UserExist(string username)
+        {
+            bool userFound = false;
+            using(StreamReader reader = new StreamReader("Users.txt"))
+            {
+                string currentLine;
+                while ((currentLine = reader.ReadLine()) != null)
+                {
+                    if(currentLine.Split(';')[0] == username)
+                    {
+                        userFound = true;
+                        break;
+                    }
+                }
+            }
+            return userFound;
+        }
+
     }
 }

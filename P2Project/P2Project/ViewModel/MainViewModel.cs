@@ -57,6 +57,23 @@ namespace P2Project.ViewModel
                 FramePage = new MainPage(this);
         }
 
+        private ICommand _createUserCommand;
+
+        public ICommand CreateUserCommand
+        {
+            get
+            {
+                return _createUserCommand ?? (_createUserCommand = new RelayCommand(param => CreateUserClick(param), param => CanCreateUserClick(param)));
+            }
+        }
+
+        private void CreateUserClick(object param)
+        {
+            FramePage = new CreateUserPage(FramePage);
+        }
+
+        private bool CanCreateUserClick(object param) { return true; }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")

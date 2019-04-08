@@ -95,9 +95,9 @@
                 <ColumnDefinition Width="10*"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" Text="P2 PROJECT" VerticalAlignment="Center" FontSize="36" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" Text="P2 PROJEKT" VerticalAlignment="Center" FontSize="36" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Center"/>
             <TextBox Grid.Row="3" Grid.Column="1" Text="Username" Name="tbUserName" FontSize="26" FontWeight="SemiBold" Height="40" Width="250" VerticalAlignment="Center" PreviewMouseDown="TextBox_PreviewMouseDown" Background="#B2D4D4D4" BorderBrush="{x:Null}"/>
-            <Button Content="OPRET BRUGER" Grid.Column="1" Grid.Row="5" Height="30" Width="240" Style="{DynamicResource RoundButton}"/>
+            <Button Content="OPRET BRUGER" Grid.Column="1" Grid.Row="5" Height="30" Width="240" Command="{Binding CreateUserCommand}" Style="{DynamicResource RoundButton}"/>
             <Button Grid.Row="7" Grid.Column="1" Content="Login" Height="30" Width="240" Command="{Binding LoginClickCommand}" CommandParameter="{Binding Text, ElementName=tbUserName}" Style="{DynamicResource RoundButton}"/>
         </Grid>
     </Grid>
