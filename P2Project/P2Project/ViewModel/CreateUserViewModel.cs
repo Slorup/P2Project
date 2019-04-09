@@ -17,10 +17,12 @@ namespace P2Project.ViewModel
         public Page MainPage { get; set; }
         public string UserName { get; set; }
         public int SelectedUserTypeIndex { get; set; }
-        
+        public Survey Surveys { get; set; }
+
         public CreateUserViewModel(Page mainPage)
         {
             MainPage = mainPage;
+            Surveys = new Survey(8);
         }
 
         private ICommand _createUserCommand;
@@ -37,7 +39,7 @@ namespace P2Project.ViewModel
         {
             if (!FileData.UserExist(UserName))
             {
-                FileData.CreateUser(new User(UserName, new LearningProfile(0.25, 0.25, 0.25, 0.25), (UserType)SelectedUserTypeIndex, new List<int>()));
+                FileData.CreateUser(new User(UserName, StartLearningProfile(Surveys), (UserType)SelectedUserTypeIndex, new List<int>()));
                 //MainPage = new LoginPage();
             }
             else
@@ -46,6 +48,14 @@ namespace P2Project.ViewModel
 
         private bool CanCreateUserClick(object param) { return true; }
 
+        public LearningProfile StartLearningProfile(Survey Surveys)
+        { 
+            LearningProfile Lp = new LearningProfile(5 * Surveys.QuestionList[0].SliderValue + 5 * Surveys.QuestionList[1].SliderValue,
+                                                     5 * Surveys.QuestionList[2].SliderValue + 5 * Surveys.QuestionList[3].SliderValue,
+                                                     5 * Surveys.QuestionList[4].SliderValue + 5 * Surveys.QuestionList[5].SliderValue,
+                                                     5 * Surveys.QuestionList[6].SliderValue + 5 * Surveys.QuestionList[7].SliderValue);
+            return Lp;
+        }
 
     }
 }
