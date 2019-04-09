@@ -7,6 +7,6 @@
         mc:Ignorable="d"
         Title="Overskrift" Height="450" Width="800" MinHeight="540" MinWidth="960" WindowState="Maximized">
     <Grid>
-        <Frame Content="{Binding FramePage}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" NavigationUIVisibility="Hidden"/>
+        <Frame Name="NavigationFrame" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>

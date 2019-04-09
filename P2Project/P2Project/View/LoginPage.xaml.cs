@@ -23,10 +23,9 @@ namespace P2Project.View
     {
         bool firstTime;
 
-        public LoginPage(MainViewModel vm)
+        public LoginPage()
         {
             InitializeComponent();
-            DataContext = vm;
             firstTime = true;
         }
 

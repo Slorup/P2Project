@@ -57,9 +57,12 @@
     </ApplicationDefinition>
     <Compile Include="DAL\FileData.cs" />
     <Compile Include="Model\RelayCommand.cs" />
+    <Compile Include="Singleton\Navigator.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\CreateUserViewModel.cs" />
+    <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="View\CreateUserPage.xaml.cs">
       <DependentUpon>CreateUserPage.xaml</DependentUpon>
     </Compile>

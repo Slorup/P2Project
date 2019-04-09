@@ -1,4 +1,6 @@
-﻿using P2Project.ViewModel;
+﻿using P2Project.Singleton;
+using P2Project.View;
+using P2Project.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,12 +23,15 @@ namespace P2Project
     /// </summary>
     public partial class MainWindow : Window
     {
-        MainViewModel vm;
         public MainWindow()
         {
             InitializeComponent();
-            vm = new MainViewModel();
-            DataContext = vm;
+            Navigator.NavigationService = NavigationFrame.NavigationService;
+
+            LoginViewModel loginvm = new LoginViewModel();
+            LoginPage loginPage = new LoginPage();
+            loginPage.DataContext = loginvm;
+            Navigator.NavigationService.Navigate(loginPage);
         }
     }
 }

@@ -21,12 +21,9 @@ namespace P2Project.View
     /// </summary>
     public partial class CreateUserPage : Page
     {
-        CreateUserViewModel vm;
-        public CreateUserPage(Page mainPage)
+        public CreateUserPage()
         {
             InitializeComponent();
-            vm = new CreateUserViewModel(mainPage);
-            DataContext = vm;
         }
     }
 }

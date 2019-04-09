@@ -21,12 +21,9 @@ namespace P2Project.View
     /// </summary>
     public partial class MainPage : Page
     {
-        MainViewModel vm;
-        public MainPage(MainViewModel mainViewModel)
+        public MainPage()
         {
             InitializeComponent();
-            vm = mainViewModel;
-            DataContext = vm;
         }
     }
 }

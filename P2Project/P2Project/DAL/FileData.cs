@@ -23,7 +23,7 @@ namespace P2Project.DAL
                     {
                         List<int> exercisesIDs = new List<int>();
                         for (int i = 6; i < userParts.Length; i++)  
-                            exercisesIDs.Add(int.Parse(userParts[i]));
+                            exercisesIDs.Add(int.Parse(userParts[i])); //Check if null (crash hvis det slutter på ;)
 
                         LearningProfile profile = new LearningProfile(double.Parse(userParts[2]), double.Parse(userParts[3]), double.Parse(userParts[4]), double.Parse(userParts[5]));
                         user = new User(userParts[0], profile, (UserType)int.Parse(userParts[1]), exercisesIDs);
