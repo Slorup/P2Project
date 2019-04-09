@@ -13,18 +13,14 @@ using System.Windows.Input;
 
 namespace P2Project.ViewModel
 {
-    public class MainViewModel : INotifyPropertyChanged
+    public class MainViewModel : BaseViewModel
     {
         private Page _framePage;
 
         public Page FramePage
         {
             get { return _framePage; }
-            set
-            {
-                _framePage = value;
-                NotifyPropertyChanged();
-            }
+            set { SetProperty(ref _framePage, value); }
         }
 
         public User CurrentUser { get; set; }
@@ -74,11 +70,5 @@ namespace P2Project.ViewModel
 
         private bool CanCreateUserClick(object param) { return true; }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
 }

@@ -57,6 +57,7 @@
     </ApplicationDefinition>
     <Compile Include="DAL\FileData.cs" />
     <Compile Include="Model\RelayCommand.cs" />
+    <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\CreateUserViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="View\CreateUserPage.xaml.cs">

@@ -12,7 +12,7 @@ using System.Windows.Input;
 
 namespace P2Project.ViewModel
 {
-    class CreateUserViewModel
+    class CreateUserViewModel : BaseViewModel
     {
         public Page MainPage { get; set; }
         public string UserName { get; set; }
