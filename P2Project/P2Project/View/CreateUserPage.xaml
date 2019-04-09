@@ -10,8 +10,9 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
         <Button Grid.Column="0" Content="Button" HorizontalAlignment="Left" Margin="109,329,0,0" VerticalAlignment="Top" Width="75" Command="{Binding CreateUserCommand}"/>
         <TextBox Grid.Column="0" HorizontalAlignment="Left" Height="23" Margin="109,75,0,0" TextWrapping="Wrap" Text="{Binding UserName}" VerticalAlignment="Top" Width="120"/>
@@ -20,6 +21,15 @@
             <ListBoxItem Content="Lærer"/>
             <ListBoxItem Content="Admin"/>
         </ListBox>
+        <Slider Grid.Column="1" HorizontalAlignment="Stretch" Margin="84,152,0,0" VerticalAlignment="Top" Minimum="-2" Maximum="2" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Surveys.QuestionList[0].SliderValue}"/>
+        <Slider Grid.Column="1" HorizontalAlignment="Stretch" Margin="84,175,0,0" VerticalAlignment="Top" Minimum="-2" Maximum="2" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Surveys.QuestionList[1].SliderValue}"/>
+        <Slider Grid.Column="1" HorizontalAlignment="Stretch" Margin="84,198,0,0" VerticalAlignment="Top" Minimum="-2" Maximum="2" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Surveys.QuestionList[2].SliderValue}"/>
+        <Slider Grid.Column="1" HorizontalAlignment="Stretch" Margin="84,221,0,0" VerticalAlignment="Top" Minimum="-2" Maximum="2" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Surveys.QuestionList[3].SliderValue}"/>
+        <Slider Grid.Column="1" HorizontalAlignment="Stretch" Margin="84,244,0,0" VerticalAlignment="Top" Minimum="-2" Maximum="2" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Surveys.QuestionList[4].SliderValue}"/>
+        <Slider Grid.Column="1" HorizontalAlignment="Stretch" Margin="84,267,0,0" VerticalAlignment="Top" Minimum="-2" Maximum="2" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Surveys.QuestionList[5].SliderValue}"/>
+        <Slider Grid.Column="1" HorizontalAlignment="Stretch" Margin="84,290,0,0" VerticalAlignment="Top" Minimum="-2" Maximum="2" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Surveys.QuestionList[6].SliderValue}"/>
+        <Slider Grid.Column="1" HorizontalAlignment="Stretch" Margin="84,313,0,0" VerticalAlignment="Top" Minimum="-2" Maximum="2" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Surveys.QuestionList[7].SliderValue}"/>
+
 
     </Grid>
 </Page>

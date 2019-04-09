@@ -42,7 +42,7 @@ namespace P2Project.DAL
 
             using (StreamWriter writer = new StreamWriter(path, true))
             {
-                writer.WriteLine($"{user.UserName};{(int)user.Type};{user.Profile.Visual};{user.Profile.Auditory};{user.Profile.Kinesthetic};{user.Profile.Verbal};");
+                writer.WriteLine($"{user.UserName};{(int)user.Type};{user.Profile.Visual};{user.Profile.Auditory};{user.Profile.Kinesthetic};{user.Profile.Verbal}");
             }
         }
 
