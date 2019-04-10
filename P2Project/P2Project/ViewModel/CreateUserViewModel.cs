@@ -18,6 +18,7 @@ namespace P2Project.ViewModel
         public string UserName { get; set; }
         public int SelectedUserTypeIndex { get; set; }
         public Survey Surveys { get; set; }
+        public int SurveyWeight{ get; set; }
 
         public CreateUserViewModel()
         {
@@ -48,11 +49,12 @@ namespace P2Project.ViewModel
         private bool CanCreateUserClick(object param) { return true; } //TODO
 
         public LearningProfile StartLearningProfile(Survey Surveys)
-        { 
-            LearningProfile Lp = new LearningProfile(5 * Surveys.QuestionList[0].SliderValue + 5 * Surveys.QuestionList[1].SliderValue,
-                                                     5 * Surveys.QuestionList[2].SliderValue + 5 * Surveys.QuestionList[3].SliderValue,
-                                                     5 * Surveys.QuestionList[4].SliderValue + 5 * Surveys.QuestionList[5].SliderValue,
-                                                     5 * Surveys.QuestionList[6].SliderValue + 5 * Surveys.QuestionList[7].SliderValue);
+        {
+            SurveyWeight = 5;
+            LearningProfile Lp = new LearningProfile(SurveyWeight * Surveys.QuestionList[0].SliderValue + SurveyWeight * Surveys.QuestionList[1].SliderValue,
+                                                     SurveyWeight * Surveys.QuestionList[2].SliderValue + SurveyWeight * Surveys.QuestionList[3].SliderValue,
+                                                     SurveyWeight * Surveys.QuestionList[4].SliderValue + SurveyWeight * Surveys.QuestionList[5].SliderValue,
+                                                     SurveyWeight * Surveys.QuestionList[6].SliderValue + SurveyWeight * Surveys.QuestionList[7].SliderValue);
             return Lp;
         }
         private ICommand _goBackCommand;
