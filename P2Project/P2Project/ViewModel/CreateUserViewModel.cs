@@ -39,10 +39,7 @@ namespace P2Project.ViewModel
             if (!FileData.UserExist(UserName)) //TRY CATCH
             {
                 FileData.CreateUser(new User(UserName, StartLearningProfile(Surveys), (UserType)SelectedUserTypeIndex, new List<int>()));
-                LoginViewModel loginVM = new LoginViewModel();
-                LoginPage loginPage = new LoginPage();
-                loginPage.DataContext = loginVM;
-                Navigator.MainNavigationService.Navigate(loginPage);
+                Navigator.MainNavigationService.GoBack();
             }
             else
                 MessageBox.Show("Brugernavnet er optaget!");
@@ -58,6 +55,18 @@ namespace P2Project.ViewModel
                                                      5 * Surveys.QuestionList[6].SliderValue + 5 * Surveys.QuestionList[7].SliderValue);
             return Lp;
         }
+        private ICommand _goBackCommand;
+        public ICommand GoBackCommand
+        {
+            get
+            {
+                return _goBackCommand ?? (_goBackCommand = new RelayCommand(param => GoBackClick(param)));
+            }
+        }
 
+        private void GoBackClick(object param)
+        {
+            Navigator.MainNavigationService.GoBack();
+        }
     }
 }

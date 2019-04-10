@@ -14,7 +14,8 @@
             <ColumnDefinition Width="3*"/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
-        <Button Grid.Column="0" Content="Button" HorizontalAlignment="Left" Margin="109,329,0,0" VerticalAlignment="Top" Width="75" Command="{Binding CreateUserCommand}"/>
+        <Button Grid.Column="0" Content="Opret" HorizontalAlignment="Left" Margin="109,329,0,0" VerticalAlignment="Top" Width="75" Command="{Binding CreateUserCommand}"/>
+        <Button Grid.Column="0" Content="Tilbage" HorizontalAlignment="Left" Margin="189,329,0,0" VerticalAlignment="Top" Width="75" Command="{Binding GoBackCommand}"/>
         <TextBox Grid.Column="0" HorizontalAlignment="Left" Height="23" Margin="109,75,0,0" TextWrapping="Wrap" Text="{Binding UserName}" VerticalAlignment="Top" Width="120"/>
         <ListBox Grid.Column="0" HorizontalAlignment="Left" Height="100" Margin="109,126,0,0" VerticalAlignment="Top" Width="100" SelectedIndex="{Binding SelectedUserTypeIndex}" >
             <ListBoxItem Content="Elev"/>
@@ -29,6 +30,7 @@
         <Slider Grid.Column="1" HorizontalAlignment="Stretch" Margin="84,267,0,0" VerticalAlignment="Top" Minimum="-2" Maximum="2" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Surveys.QuestionList[5].SliderValue}"/>
         <Slider Grid.Column="1" HorizontalAlignment="Stretch" Margin="84,290,0,0" VerticalAlignment="Top" Minimum="-2" Maximum="2" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Surveys.QuestionList[6].SliderValue}"/>
         <Slider Grid.Column="1" HorizontalAlignment="Stretch" Margin="84,313,0,0" VerticalAlignment="Top" Minimum="-2" Maximum="2" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Surveys.QuestionList[7].SliderValue}"/>
+
 
 
     </Grid>
