@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Navigation;
 
-namespace P2Project.Singleton
+namespace P2Project.MVVM
 {
     public static class Navigator
     {

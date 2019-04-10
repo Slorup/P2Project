@@ -8,14 +8,14 @@ namespace P2Project.Model
 {
     class Survey
     {
-        public List<SurvayQuestion> QuestionList { get; set; }
+        public List<SurveyQuestion> QuestionList { get; set; }
 
         public Survey(int NumberofSurveys)
         {
-            QuestionList = new List<SurvayQuestion>();
+            QuestionList = new List<SurveyQuestion>();
             for (int i = 0; i < NumberofSurveys; i++)
             {
-                QuestionList.Add(new SurvayQuestion());
+                QuestionList.Add(new SurveyQuestion());
             }
         }
     }

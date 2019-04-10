@@ -1,6 +1,6 @@
 ﻿using P2Project.DAL;
 using P2Project.Model;
-using P2Project.Singleton;
+using P2Project.MVVM;
 using P2Project.View;
 using System;
 using System.Collections.Generic;

@@ -1,5 +1,4 @@
-﻿using P2Project.Singleton;
-using P2Project.View;
+﻿using P2Project.View;
 using P2Project.ViewModel;
 using System;
 using System.Collections.Generic;

@@ -25,9 +25,7 @@ namespace P2Project.ViewModel
 
         public User CurrentUser { get; set; }
 
-        public MainViewModel()
-        {
-        }
+        public MainViewModel() {}
 
     }
 }

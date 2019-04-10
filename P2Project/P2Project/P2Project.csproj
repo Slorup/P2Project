@@ -57,9 +57,9 @@
     </ApplicationDefinition>
     <Compile Include="DAL\FileData.cs" />
     <Compile Include="Model\RelayCommand.cs" />
-    <Compile Include="Singleton\Navigator.cs" />
-    <Compile Include="Model\SurvayQuestion.cs" />
+    <Compile Include="Model\SurveyQuestion.cs" />
     <Compile Include="Model\Survey.cs" />
+    <Compile Include="MVVM\Navigator.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\CreateUserViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />

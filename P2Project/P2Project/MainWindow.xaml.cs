@@ -1,4 +1,4 @@
-﻿using P2Project.Singleton;
+﻿using P2Project.MVVM;
 using P2Project.View;
 using P2Project.ViewModel;
 using System;

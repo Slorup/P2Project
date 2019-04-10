@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace P2Project.Model
 {
-    class SurvayQuestion
+    class SurveyQuestion
     {
         public int SliderValue { get; set; }
         public string QuestionText { get; set; }
