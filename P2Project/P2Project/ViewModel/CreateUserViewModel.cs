@@ -42,7 +42,7 @@ namespace P2Project.ViewModel
                 LoginViewModel loginVM = new LoginViewModel();
                 LoginPage loginPage = new LoginPage();
                 loginPage.DataContext = loginVM;
-                Navigator.NavigationService.Navigate(loginPage);
+                Navigator.MainNavigationService.Navigate(loginPage);
             }
             else
                 MessageBox.Show("Brugernavnet er optaget!");

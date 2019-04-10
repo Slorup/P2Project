@@ -9,6 +9,8 @@ namespace P2Project.MVVM
 {
     public static class Navigator
     {
-        public static NavigationService NavigationService { get; set; }
+        public static NavigationService MainNavigationService { get; set; }
+        public static NavigationService SubNavigationService { get; set; }
+
     }
 }

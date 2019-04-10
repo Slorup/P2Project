@@ -1,6 +1,4 @@
-﻿using P2Project.MVVM;
-using P2Project.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,16 +16,13 @@ using System.Windows.Shapes;
 namespace P2Project.View
 {
     /// <summary>
-    /// Interaction logic for MainPage.xaml
+    /// Interaction logic for ProfilePage.xaml
     /// </summary>
-    public partial class MainPage : Page
+    public partial class ProfilePage : Page
     {
-        public MainPage()
+        public ProfilePage()
         {
             InitializeComponent();
-            Navigator.SubNavigationService = SubNavigationFrame.NavigationService; //TODO, Skal flyttes
-
-            
         }
     }
 }

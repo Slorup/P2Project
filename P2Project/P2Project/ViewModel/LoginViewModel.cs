@@ -36,10 +36,10 @@ namespace P2Project.ViewModel
             User currentUser = FileData.ImportUser((string)param); //TRYCATCH
             if (currentUser != null)
             {
-                MainViewModel mainvm = new MainViewModel();
                 MainPage mainPage = new MainPage();
+                MainViewModel mainvm = new MainViewModel(currentUser);
                 mainPage.DataContext = mainvm;
-                Navigator.NavigationService.Navigate(mainPage);
+                Navigator.MainNavigationService.Navigate(mainPage);
             }
         }
 
@@ -58,7 +58,7 @@ namespace P2Project.ViewModel
             CreateUserViewModel createUserViewModel = new CreateUserViewModel();
             CreateUserPage createUserPage = new CreateUserPage();
             createUserPage.DataContext = createUserViewModel;
-            Navigator.NavigationService.Navigate(createUserPage);
+            Navigator.MainNavigationService.Navigate(createUserPage);
         }
 
         private bool CanCreateUserClick(object param) { return true; }

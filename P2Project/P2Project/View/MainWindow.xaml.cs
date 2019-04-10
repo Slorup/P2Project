@@ -26,12 +26,12 @@ namespace P2Project
         public MainWindow()
         {
             InitializeComponent();
-            Navigator.NavigationService = NavigationFrame.NavigationService;
+            Navigator.MainNavigationService = NavigationFrame.NavigationService; //TODO, skal flyttes
 
             LoginViewModel loginvm = new LoginViewModel();
             LoginPage loginPage = new LoginPage();
             loginPage.DataContext = loginvm;
-            Navigator.NavigationService.Navigate(loginPage);
+            Navigator.MainNavigationService.Navigate(loginPage);
         }
     }
 }

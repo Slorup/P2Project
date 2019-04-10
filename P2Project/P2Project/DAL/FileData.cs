@@ -49,7 +49,7 @@ namespace P2Project.DAL
         public static bool UserExist(string username)
         {
             bool userFound = false;
-            using(StreamReader reader = new StreamReader("Users.txt"))
+            using(StreamReader reader = new StreamReader("Users.txt")) //Laver ikke fil?
             {
                 string currentLine;
                 while ((currentLine = reader.ReadLine()) != null)
