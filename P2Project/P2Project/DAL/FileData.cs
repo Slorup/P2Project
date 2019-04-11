@@ -71,10 +71,14 @@ namespace P2Project.DAL
 
             using (StreamWriter writer = new StreamWriter(path, true))
             {
-                writer.WriteLine($"{exercise.Name};{exercise.ID};{exercise.Profile.Visual};{exercise.Profile.Auditory};{exercise.Profile.Kinesthetic};{exercise.Profile.Verbal};{exercise.Description.TextDescription};{exercise.Description.VideoPath};{exercise.Description.AudioPath};{exercise.Description.ImagePaths}");
+                string test = $"{exercise.Name};{exercise.ID};{exercise.Profile.Visual};{exercise.Profile.Auditory};{exercise.Profile.Kinesthetic};{exercise.Profile.Verbal};{exercise.Description.TextDescription};{exercise.Description.VideoPath};{exercise.Description.AudioPath}";
+                foreach (string item in exercise.Description.ImagePaths)
+                {
+                    test += $";{item}";
+                }
+                writer.WriteLine(test);
             }
         }
-
 
     }
 }

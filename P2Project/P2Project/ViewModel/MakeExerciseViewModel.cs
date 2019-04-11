@@ -66,7 +66,7 @@ namespace P2Project.ViewModel
 
             fileDialog.ShowDialog();
             TextBlock1 = fileDialog.FileName;
-            
+            VideoPath = fileDialog.FileName;
         }
 
         private ICommand _browseCommandSound;
@@ -86,7 +86,7 @@ namespace P2Project.ViewModel
 
             fileDialog.ShowDialog();
             TextBlock2 = fileDialog.FileName;
-
+            AudioPath = fileDialog.FileName;
         }
 
         private ICommand _browseCommandImage;
@@ -101,7 +101,8 @@ namespace P2Project.ViewModel
         private void BrowseCommandImageClick(object param)
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
-            fileDialog.DefaultExt = ".txt"; 
+            fileDialog.DefaultExt = ".txt";
+            fileDialog.Multiselect = true;
             fileDialog.Filter = "Text documents (.txt)|*.txt";
 
             fileDialog.ShowDialog();
@@ -126,6 +127,7 @@ namespace P2Project.ViewModel
             ExerciseDescription exDescription = new ExerciseDescription(Description) { AudioPath = this.AudioPath, VideoPath = this.VideoPath, ImagePaths = this.ImagePaths };
             Exercise exercise = new Exercise(Name, exDescription, ExerciseProfile);
             FileData.CreateExercise(exercise);
+            //NAVIGATE
         }
     }
 }
