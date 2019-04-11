@@ -15,16 +15,11 @@ namespace P2Project.Model
         public string AudioPath { get; set; }
         public List<string> ImagePaths { get; set; }
 
-        public ExerciseDescription(string textDescription, string videoPath, string audioPath, List<string> imagePaths)
+        public ExerciseDescription(string textDescription)
         {
             TextDescription = textDescription;
-            VideoPath = videoPath;
-            AudioPath = audioPath;
-            ImagePaths = imagePaths;
+            //ToDo
         }
 
-        public ExerciseDescription(string textDescription) : this(textDescription, null, null, null) { }
-        public ExerciseDescription(string textDescription, string videoPath) : this(textDescription, videoPath, null, null) { }
-        //TODO
     }
 }

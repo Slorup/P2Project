@@ -10,10 +10,18 @@
     <Grid>
         <DockPanel>
             <Menu DockPanel.Dock="Top" Height="22" FontSize="15" FontWeight="DemiBold">
-                <MenuItem Header="Opgaver" Command="{Binding MenuExerciseCommand}"/>
+                <StackPanel>
+                    <Menu Height="22" FontSize="15" FontWeight="DemiBold">
+                        <MenuItem Header="Opgaver">
+                            <MenuItem Header="Løs opgave" Command="{Binding MenuExerciseCommand}"/>
+                            <MenuItem Header="Opret opgave" Command="{Binding MenuMakeExerciseCommand}"/>
+                        </MenuItem>
+                    </Menu>
+                </StackPanel>
                 <MenuItem Header="Profil" Command="{Binding MenuProfileCommand}"/>
                 <MenuItem Header="Log?"/>
                 <MenuItem Header="Admin"/>
+                
             </Menu>
             <Frame Name="SubNavigationFrame" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" NavigationUIVisibility="Hidden"/>
         </DockPanel>
