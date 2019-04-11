@@ -62,5 +62,23 @@ namespace P2Project.ViewModel
             exercisePage.DataContext = exerciseVM;
             Navigator.SubNavigationService.Navigate(exercisePage);
         }
+
+        private ICommand _menuMakeExerciseCommand;
+
+        public ICommand MenuMakeExerciseCommand
+        {
+            get
+            {
+                return _menuMakeExerciseCommand ?? (_menuMakeExerciseCommand = new RelayCommand(param => MenuMakeExerciseClick(param)));
+            }
+        }
+
+        private void MenuMakeExerciseClick(object param)
+        {
+            MakeExerciseViewModel makeexerciseVM = new MakeExerciseViewModel(CurrentUser);
+            MakeExercisePage makeexercisePage = new MakeExercisePage();
+            makeexercisePage.DataContext = makeexerciseVM;
+            Navigator.SubNavigationService.Navigate(makeexercisePage);
+        }
     }
 }
