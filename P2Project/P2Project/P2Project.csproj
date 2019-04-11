@@ -56,6 +56,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DAL\FileData.cs" />
+    <Compile Include="Model\ExerciseDescription.cs" />
     <Compile Include="Model\RelayCommand.cs" />
     <Compile Include="Model\SurveyQuestion.cs" />
     <Compile Include="Model\Survey.cs" />
