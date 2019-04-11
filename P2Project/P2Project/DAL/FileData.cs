@@ -63,6 +63,18 @@ namespace P2Project.DAL
             }
             return userFound;
         }
+        public static void CreateExercise(Exercise exercise) //TRY CATCH OG ALT DET DER
+        {
+            string path = "Exercises.txt";
+            if (!File.Exists(path))
+                File.Create(path);
+
+            using (StreamWriter writer = new StreamWriter(path, true))
+            {
+                writer.WriteLine($"{exercise.Name};{exercise.ID};{exercise.Profile.Visual};{exercise.Profile.Auditory};{exercise.Profile.Kinesthetic};{exercise.Profile.Verbal};{exercise.Description.TextDescription};{exercise.Description.VideoPath};{exercise.Description.AudioPath};{exercise.Description.ImagePaths}");
+            }
+        }
+
 
     }
 }

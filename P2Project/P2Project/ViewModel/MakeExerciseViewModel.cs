@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using P2Project.DAL;
 using P2Project.Model;
 using System;
 using System.Collections.Generic;
@@ -124,6 +125,7 @@ namespace P2Project.ViewModel
         {
             ExerciseDescription exDescription = new ExerciseDescription(Description) { AudioPath = this.AudioPath, VideoPath = this.VideoPath, ImagePaths = this.ImagePaths };
             Exercise exercise = new Exercise(Name, exDescription, ExerciseProfile);
+            FileData.CreateExercise(exercise);
         }
     }
 }
