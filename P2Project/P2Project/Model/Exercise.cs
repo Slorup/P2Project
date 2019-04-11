@@ -11,5 +11,14 @@ namespace P2Project.Model
         public int ID { get; private set; }
         public string Name { get; set; }
         public LearningProfile Profile { get; set; }
+        public ExerciseDescription Description { get; set; }
+
+        public Exercise(string name, ExerciseDescription description, LearningProfile profile)
+        {
+            Name = name;
+            Profile = profile;
+            Description = description;
+            //LAV ID
+        }
     }
 }
