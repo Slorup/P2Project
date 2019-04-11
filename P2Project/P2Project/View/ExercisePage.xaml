@@ -11,7 +11,8 @@
     <Grid>
         <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
             <StackPanel Width="200" Background="AliceBlue" VerticalAlignment="Stretch" Visibility="{Binding PanelVisibility}">
-                
+                <TextBlock TextWrapping="Wrap" Text="{Binding Exercisedescription}"/>
+
             </StackPanel>
             <Button VerticalAlignment="Center" HorizontalAlignment="Left" Width="15" Height="50" Command="{Binding PanelShowCommand}"/>
         </StackPanel>

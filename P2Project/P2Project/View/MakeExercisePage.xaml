@@ -18,5 +18,9 @@
         <Button Content="Opret" HorizontalAlignment="Left" Margin="257,198,0,0" VerticalAlignment="Top" Width="75" Command="{Binding ExerciseCreateCommand}"/>
         <TextBox HorizontalAlignment="Left" Height="145" Margin="470,282,0,0" TextWrapping="Wrap" Text="{Binding Description}" VerticalAlignment="Top" Width="275"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="470,254,0,0" TextWrapping="Wrap" Text="{Binding Name}" VerticalAlignment="Top" Width="120"/>
+        <TextBlock HorizontalAlignment="Left" Margin="145,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="{Binding TextBlock1}" Width="90" Height="20"/>
+
+        <TextBlock HorizontalAlignment="Left" Margin="10,328,0,0" TextWrapping="Wrap" Text="{Binding TextBlock2}" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="418,67,0,0" TextWrapping="Wrap" Text="{Binding TextBlock3}" VerticalAlignment="Top"/>
     </Grid>
 </Page>

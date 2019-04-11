@@ -107,11 +107,16 @@ namespace P2Project.ViewModel
             fileDialog.Filter = "Text documents (.txt)|*.txt";
 
             fileDialog.ShowDialog();
-
+            ImagePaths.Clear();
+            TextBlock3 = "";
             foreach (string filename in fileDialog.FileNames) //CHECK IF DIALOG OK
                 ImagePaths.Add(filename);
 
-            TextBlock3 = ImagePaths.ToString();
+            foreach (string ImagePaths in ImagePaths)
+            {
+                TextBlock3 += ImagePaths + "\n";
+            }
+            
         }
 
         private ICommand _exerciseCreateCommand;
