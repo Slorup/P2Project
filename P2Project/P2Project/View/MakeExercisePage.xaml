@@ -10,8 +10,14 @@
 
     <Grid>
         <Button Content="Opret" HorizontalAlignment="Left" Margin="704,395,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button Content="Gennemse" HorizontalAlignment="Left" Margin="84,80,0,0" VerticalAlignment="Top" Width="75" Command="{Binding BrowseCommand}"/>
+        <Button Content="Gennemse" HorizontalAlignment="Left" Margin="84,80,0,0" VerticalAlignment="Top" Width="75" Command="{Binding BrowseCommandVideo}"/>
+        <Button Content="Gennemse" HorizontalAlignment="Left" Margin="10,291,0,0" VerticalAlignment="Top" Width="75" Command="{Binding BrowseCommandSound}"/>
+        <Button Content="Gennemse" HorizontalAlignment="Left" Margin="418,27,0,0" VerticalAlignment="Top" Width="75" Command="{Binding BrowseCommandImage}"/>
+        <Label Margin="182,77,576,339">Video</Label>
+        <Label Margin="110,282,596,134">Lyd</Label>
+        <Label Margin="522,13,184,403">Billeder</Label>
         <TextBlock Name="TextBlock1" HorizontalAlignment="Left" Margin="84,136,0,0" TextWrapping="Wrap" Text="{Binding TextBlock1}" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="695" Height="158"/>
-
+        <TextBlock Name="TextBlock2" HorizontalAlignment="Left" Margin="56,316,0,-24" TextWrapping="Wrap" Text="{Binding TextBlock2}" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="695" Height="158"/>
+        <TextBlock Name="TextBlock3" HorizontalAlignment="Left" Margin="822,13,-717,0" TextWrapping="Wrap" Text="{Binding TextBlock3}" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="695" Height="158"/>
     </Grid>
 </Page>
