@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using P2Project.DAL;
 using P2Project.Model;
+using P2Project.MVVM;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -106,11 +107,16 @@ namespace P2Project.ViewModel
             fileDialog.Filter = "Text documents (.txt)|*.txt";
 
             fileDialog.ShowDialog();
-
+            ImagePaths.Clear();
+            TextBlock3 = "";
             foreach (string filename in fileDialog.FileNames) //CHECK IF DIALOG OK
                 ImagePaths.Add(filename);
 
-            TextBlock3 = ImagePaths.ToString();
+            foreach (string ImagePaths in ImagePaths)
+            {
+                TextBlock3 += ImagePaths + "\n";
+            }
+            
         }
 
         private ICommand _exerciseCreateCommand;
@@ -127,7 +133,7 @@ namespace P2Project.ViewModel
             ExerciseDescription exDescription = new ExerciseDescription(Description) { AudioPath = this.AudioPath, VideoPath = this.VideoPath, ImagePaths = this.ImagePaths };
             Exercise exercise = new Exercise(Name, exDescription, ExerciseProfile);
             FileData.CreateExercise(exercise);
-            //NAVIGATE
+            Navigator.SubNavigationService.GoBack();
         }
     }
 }

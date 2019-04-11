@@ -20,11 +20,20 @@ namespace P2Project.ViewModel
             get { return _panelVisibility; }
             set { SetProperty(ref _panelVisibility, value); }
         }
-        
+        private string _exercisedescription;
+
+        public string Exercisedescription
+        {
+            get { return _exercisedescription; }
+            set { SetProperty(ref _exercisedescription, value); }
+        }
+
+
 
         public ExerciseViewModel(User currentUser)
         {
             CurrentUser = currentUser;
+            //Exercisedescription = exercise.Description.TextDescription;
         }
 
         private ICommand _panelShowCommand;
