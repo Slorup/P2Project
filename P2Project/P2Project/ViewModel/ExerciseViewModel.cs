@@ -33,6 +33,7 @@ namespace P2Project.ViewModel
         public ExerciseViewModel(User currentUser)
         {
             CurrentUser = currentUser;
+            //Exercisedescription = exercise.Description.TextDescription;
         }
 
         private ICommand _panelShowCommand;
