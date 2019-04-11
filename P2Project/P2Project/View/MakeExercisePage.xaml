@@ -9,7 +9,7 @@
       Title="MakeExercisePage" Background="Cyan">
 
     <Grid>
-        <Button Content="Opret" HorizontalAlignment="Left" Margin="704,395,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="Opret" HorizontalAlignment="Left" Margin="704,395,0,0" VerticalAlignment="Top" Width="75" Command="{Binding ExerciseCreateCommand}"/>
         <Button Content="Gennemse" HorizontalAlignment="Left" Margin="84,80,0,0" VerticalAlignment="Top" Width="75" Command="{Binding BrowseCommandVideo}"/>
         <Button Content="Gennemse" HorizontalAlignment="Left" Margin="10,291,0,0" VerticalAlignment="Top" Width="75" Command="{Binding BrowseCommandSound}"/>
         <Button Content="Gennemse" HorizontalAlignment="Left" Margin="418,27,0,0" VerticalAlignment="Top" Width="75" Command="{Binding BrowseCommandImage}"/>

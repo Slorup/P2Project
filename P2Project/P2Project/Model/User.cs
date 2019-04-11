@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace P2Project.Model
 {
-    public enum UserType
+    public enum UserType //IT PROB SHOULDNT BE HERE
     {
         Pupil,
         Teacher,

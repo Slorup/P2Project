@@ -10,7 +10,7 @@ namespace P2Project.Model
 {
     class ExerciseDescription
     {
-        public string TextDescription { get; set; }
+        public string TextDescription { get; set; } //TODO Husk bruger ikke må bruge ;
         public string VideoPath { get; set; }
         public string AudioPath { get; set; }
         public List<string> ImagePaths { get; set; }

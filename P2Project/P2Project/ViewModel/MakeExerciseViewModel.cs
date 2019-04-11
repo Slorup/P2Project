@@ -12,7 +12,13 @@ namespace P2Project.ViewModel
     class MakeExerciseViewModel : BaseViewModel
     {
         public User CurrentUser { get; set; }
-        public List<string> Files { get; set; }
+        public List<string> ImagePaths { get; set; }
+        public string VideoPath { get; set; }
+        public string AudioPath { get; set; }
+        public string Description { get; set; }
+        public string Name { get; set; }
+        public LearningProfile ExerciseProfile { get; set; }
+
         private string _textBlock1;
 
         public  string TextBlock1
@@ -38,7 +44,10 @@ namespace P2Project.ViewModel
         public MakeExerciseViewModel(User currentUser)
         {
             CurrentUser = currentUser;
+            ImagePaths = new List<string>();
+            ExerciseProfile = new LearningProfile(0,0,0,0);
         }
+
         private ICommand _browseCommandVideo;
         public ICommand BrowseCommandVideo
         {
@@ -95,8 +104,26 @@ namespace P2Project.ViewModel
             fileDialog.Filter = "Text documents (.txt)|*.txt";
 
             fileDialog.ShowDialog();
-            TextBlock3 = fileDialog.FileName;
 
+            foreach (string filename in fileDialog.FileNames) //CHECK IF DIALOG OK
+                ImagePaths.Add(filename);
+
+            TextBlock3 = ImagePaths.ToString();
+        }
+
+        private ICommand _exerciseCreateCommand;
+        public ICommand ExerciseCreateCommand
+        {
+            get
+            {
+                return _exerciseCreateCommand ?? (_exerciseCreateCommand = new RelayCommand(param => ExerciseCreateClick(param)));
+            }
+        }
+
+        private void ExerciseCreateClick(object param)
+        {
+            ExerciseDescription exDescription = new ExerciseDescription(Description) { AudioPath = this.AudioPath, VideoPath = this.VideoPath, ImagePaths = this.ImagePaths };
+            Exercise exercise = new Exercise(Name, exDescription, ExerciseProfile);
         }
     }
 }
