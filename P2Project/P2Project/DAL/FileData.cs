@@ -63,6 +63,7 @@ namespace P2Project.DAL
             }
             return userFound;
         }
+
         public static void CreateExercise(Exercise exercise) //TRY CATCH OG ALT DET DER
         {
             string path = "Exercises.txt";
@@ -73,11 +74,33 @@ namespace P2Project.DAL
             {
                 string test = $"{exercise.Name};{exercise.ID};{exercise.Profile.Visual};{exercise.Profile.Auditory};{exercise.Profile.Kinesthetic};{exercise.Profile.Verbal};{exercise.Description.TextDescription};{exercise.Description.VideoPath};{exercise.Description.AudioPath}";
                 foreach (string item in exercise.Description.ImagePaths)
-                {
                     test += $";{item}";
-                }
                 writer.WriteLine(test);
             }
+        }
+
+        public static Exercise ImportExerciseByID(int id) //TODO: MASSER AF ERROR-HANDLING
+        {
+            Exercise exercise = null;
+            using (StreamReader reader = new StreamReader(File.Open("Exercises.txt", FileMode.OpenOrCreate)))
+            {
+                string currentLine;
+                while ((currentLine = reader.ReadLine()) != null)
+                {
+                    string[] parts = currentLine.Split(';');
+                    if (parts.Length >= 9 && Convert.ToInt32(parts[0]) == id)
+                    {
+
+                        LearningProfile profile = new LearningProfile(double.Parse(parts[2]), double.Parse(parts[3]), double.Parse(parts[4]), double.Parse(parts[5]));
+                        ExerciseDescription exDesc = new ExerciseDescription(parts[6]) { VideoPath = parts[7], AudioPath = parts[8] };
+                        for (int i = 9; i < parts.Length; i++)
+                            exDesc.ImagePaths.Add(parts[i]); //Check if null (crash hvis det slutter på ;)
+                        exercise = new Exercise(parts[0], exDesc, profile);
+                        break;
+                    }
+                }
+            }
+            return exercise;
         }
 
     }

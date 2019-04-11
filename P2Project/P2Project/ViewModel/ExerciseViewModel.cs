@@ -20,7 +20,7 @@ namespace P2Project.ViewModel
             get { return _panelVisibility; }
             set { SetProperty(ref _panelVisibility, value); }
         }
-
+        
 
         public ExerciseViewModel(User currentUser)
         {

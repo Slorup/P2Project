@@ -11,6 +11,5 @@ namespace P2Project.MVVM
     {
         public static NavigationService MainNavigationService { get; set; }
         public static NavigationService SubNavigationService { get; set; }
-
     }
 }
