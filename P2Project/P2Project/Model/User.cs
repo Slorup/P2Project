@@ -19,6 +19,7 @@ namespace P2Project.Model
         public UserType Type { get; set; }
         public LearningProfile Profile { get; set; }
         public List<int> CompletedExercisesID { get; set; }
+        public string ProfileImage { get; set; }
 
         public User(string username, LearningProfile profile, UserType type, List<int> completedExercisesID)
         {
