@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace P2Project
+namespace P2Project.View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for MakeExercisePage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MakeExercisePage : Page
     {
-        public MainWindow()
+        public MakeExercisePage()
         {
             InitializeComponent();
         }

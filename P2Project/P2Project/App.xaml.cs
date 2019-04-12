@@ -1,4 +1,6 @@
-﻿using System;
+﻿using P2Project.View;
+using P2Project.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +15,7 @@ namespace P2Project
     /// </summary>
     public partial class App : Application
     {
+        
+        
     }
 }
