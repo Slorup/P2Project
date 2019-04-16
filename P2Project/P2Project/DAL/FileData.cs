@@ -88,7 +88,7 @@ namespace P2Project.DAL
                 while ((currentLine = reader.ReadLine()) != null)
                 {
                     string[] parts = currentLine.Split(';');
-                    if (parts.Length >= 9 && Convert.ToInt32(parts[0]) == id)
+                    if (parts.Length >= 9 && Convert.ToInt32(parts[1]) == id)
                     {
 
                         LearningProfile profile = new LearningProfile(double.Parse(parts[2]), double.Parse(parts[3]), double.Parse(parts[4]), double.Parse(parts[5]));

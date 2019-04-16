@@ -12,7 +12,13 @@
         <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
             <StackPanel Width="200" Background="AliceBlue" VerticalAlignment="Stretch" Visibility="{Binding PanelVisibility}">
                 <TextBlock TextWrapping="Wrap" Text="{Binding Exercisedescription}"/>
-
+                <Button Content="Færdig" Command="{Binding FinishedExerciseCommand}"/>
+                <Button Content="Spring over" Command="{Binding SkipExerciseCommand}"/>
+                <StackPanel>
+                    <Button Content="arrow Left" HorizontalAlignment="Left"  Command="{Binding GoLeftCommand}"/>
+                    <Image  Height="100" Width="100" VerticalAlignment="Top" Source="{Binding ImagePath}"/>
+                    <Button Content="arrow Right" HorizontalAlignment="Right" Command="{Binding GoRightCommand}"/>
+                </StackPanel>
             </StackPanel>
             <Button VerticalAlignment="Center" HorizontalAlignment="Left" Width="15" Height="50" Command="{Binding PanelShowCommand}"/>
         </StackPanel>
