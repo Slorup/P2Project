@@ -33,7 +33,7 @@ namespace P2Project.ViewModel
 
         private void ExecuteLoginClick(object param)
         {
-            User currentUser = FileData.ImportUser((string)param); //TRYCATCH
+            User currentUser = FileData.GetUserByUsername((string)param); //TRYCATCH
             if (currentUser != null)
             {
                 MainPage mainPage = new MainPage();

@@ -1,6 +1,7 @@
 ﻿using P2Project.Model;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,66 @@ namespace P2Project.DAL
 {
     static class FileData
     {
+
+        static string connString = "Server=p2project-server.database.windows.net; Database=P2ProjectDB; User Id=Slorup; Password=Password123";
+
+        public static void CreateUser(User user)
+        {
+            using(SqlConnection conn = new SqlConnection(connString))
+            {
+                SqlCommand cmd = new SqlCommand("INSERT INTO [User] (username, usertype, visualpref, auditorypref, kinestheticpref, verbalpref, uncertaintycoef) " +
+                    "VALUES (@username, @usertype, @visualpref, @auditorypref, @kinestheticpref, @verbalpref, @uncertaintycoef)", conn); 
+                cmd.Parameters.AddWithValue("@username", user.UserName);
+                cmd.Parameters.AddWithValue("@usertype", (int)user.Type);
+                cmd.Parameters.AddWithValue("@visualpref", user.Profile.Visual);
+                cmd.Parameters.AddWithValue("@auditorypref", user.Profile.Auditory);
+                cmd.Parameters.AddWithValue("@kinestheticpref", user.Profile.Kinesthetic);
+                cmd.Parameters.AddWithValue("@verbalpref", user.Profile.Verbal);
+                cmd.Parameters.AddWithValue("uncertaintycoef", 0);
+                //TRY CATCH
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public static User GetUserByUsername(string username)
+        {
+            return null;
+        }
+
+        public static bool UserExist(string username)
+        {
+            return false;
+        }
+
+        public static void CreateExercise(Exercise exercise)
+        {
+            using(SqlConnection conn = new SqlConnection(connString))
+            {
+                SqlCommand cmd = new SqlCommand("INSERT INTO Exercise([name], visualpref, auditorypref, kinestheticpref, verbalpref, description, videopath, audiopath) " + 
+                    "VALUES(@name, @visual, @auditory, @kinesthetic, @verbal, @description, @videopath, @audiopath)"); //IMAGEPATHS
+                //evt output id: INSERT INTO Exercise (.....) OUTPUT INSERTED.id VALUES (@.., @..)
+                cmd.Parameters.AddWithValue("@name", exercise.Name);
+                cmd.Parameters.AddWithValue("@visual", exercise.Profile.Visual);
+                cmd.Parameters.AddWithValue("@auditory", exercise.Profile.Auditory);
+                cmd.Parameters.AddWithValue("@kinesthetic", exercise.Profile.Kinesthetic);
+                cmd.Parameters.AddWithValue("@verbal", exercise.Profile.Verbal);
+                cmd.Parameters.AddWithValue("@description", exercise.Description.TextDescription);
+                cmd.Parameters.AddWithValue("@videopath", exercise.Description.VideoPath);
+                cmd.Parameters.AddWithValue("@audiopath", exercise.Description.AudioPath);
+                //TRYCATCH
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public static Exercise GetExerciseByID(int id)
+        {
+            return null;
+        }
+
+
+        /*
         public static User ImportUser(string username) //TODO: MASSER AF ERROR-HANDLING
         {
             User user = null;
@@ -102,6 +163,6 @@ namespace P2Project.DAL
             }
             return exercise;
         }
-
+        */
     }
 }

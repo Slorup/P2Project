@@ -29,6 +29,5 @@ namespace P2Project.Model
             CompletedExercisesID = completedExercisesID;
         }
 
-        //Once upon a time, there was a bsian boy called Grey Li
     }
 }

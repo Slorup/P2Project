@@ -13,7 +13,7 @@ namespace P2Project.Model
         public string TextDescription { get; set; } //TODO Husk bruger ikke må bruge ;
         public string VideoPath { get; set; }
         public string AudioPath { get; set; }
-        public List<string> ImagePaths { get; set; }
+        public List<string> ImagePaths { get; set; } //MAX IMAGE SIZE
 
         public ExerciseDescription(string textDescription)
         {
