@@ -94,7 +94,7 @@ namespace P2Project.ViewModel
 
         private void GetNewExercise()
         {
-            CurrentExercise = FileData.ImportExerciseByID(0);
+            CurrentExercise = FileData.GetExerciseByID(0);
         }
         private ICommand _goLeftCommand;
 
