@@ -129,7 +129,7 @@ namespace P2Project.ViewModel
         }
 
         private void ExerciseCreateClick(object param)
-        {
+        { 
             ExerciseDescription exDescription = new ExerciseDescription(Description) { AudioPath = this.AudioPath, VideoPath = this.VideoPath, ImagePaths = this.ImagePaths };
             Exercise exercise = new Exercise(Name, exDescription, ExerciseProfile);
             FileData.CreateExercise(exercise);
