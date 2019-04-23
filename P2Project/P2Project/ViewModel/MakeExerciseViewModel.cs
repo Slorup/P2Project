@@ -62,8 +62,7 @@ namespace P2Project.ViewModel
         private void BrowseCommandVideoClick(object param)
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
-            fileDialog.DefaultExt = ".txt";
-            fileDialog.Filter = "Text documents (.txt)|*.txt";
+            fileDialog.Filter = "Video files (.mp4)|*.mp4";
 
             fileDialog.ShowDialog();
             TextBlock1 = fileDialog.FileName;
@@ -133,7 +132,7 @@ namespace P2Project.ViewModel
             //TRY
             ExerciseDescription exDescription = new ExerciseDescription(Description) { AudioPath = this.AudioPath, VideoPath = this.VideoPath, ImagePaths = this.ImagePaths };
             Exercise exercise = new Exercise(Name, exDescription, ExerciseProfile); //EXERCISE PROFILE TODO
-            FileData.CreateExercise(exercise);
+            DBConnection.CreateExercise(exercise);
             Navigator.SubNavigationService.GoBack();
         }
     }

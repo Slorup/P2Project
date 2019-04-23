@@ -20,9 +20,35 @@ namespace P2Project.View
     /// </summary>
     public partial class ExercisePage : Page
     {
+        public bool IsPlaying { get; set; }
         public ExercisePage()
         {
             InitializeComponent();
+            IsPlaying = true;
+        }
+
+        private void ButtonPause_Click(object sender, RoutedEventArgs e)
+        {
+            if (IsPlaying)
+            {
+                VideoPlayer.Pause();
+                IsPlaying = false;
+            }
+            else
+            {
+                VideoPlayer.Play();
+                IsPlaying = true;
+            }
+        }
+
+        private void ButtonReset_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ButtonFullScreen_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

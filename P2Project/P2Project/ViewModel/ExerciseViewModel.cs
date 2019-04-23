@@ -13,7 +13,6 @@ namespace P2Project.ViewModel
     class ExerciseViewModel : BaseViewModel
     {
         public User CurrentUser { get; set; }
-        public Exercise CurrentExercise { get; set; }
 
         private Visibility _panelVisibility;
 
@@ -22,28 +21,22 @@ namespace P2Project.ViewModel
             get { return _panelVisibility; }
             set { SetProperty(ref _panelVisibility, value); }
         }
-        private string _exercisedescription;
 
-        public string Exercisedescription
+        private string _currentImagePath;
+
+        public string CurrentImagePath
         {
-            get { return _exercisedescription; }
-            set { SetProperty(ref _exercisedescription, value); }
+            get { return _currentImagePath; }
+            set { SetProperty(ref _currentImagePath, value); }
         }
-        private string _imagePath;
-
-        public string ImagePath
-        {
-            get { return _imagePath; }
-            set { SetProperty(ref _imagePath, value); }
-        }
-
 
         public ExerciseViewModel(User currentUser)
         {
             CurrentUser = currentUser;
-            //if (CurrentExercise == null)
-            //    GetNewExercise();
-            //Exercisedescription = CurrentExercise.Description.TextDescription;
+            //if (CurrentUser.CurrentExercise.Description.ImagePaths != null && CurrentUser.CurrentExercise.Description.ImagePaths.Count > 0)
+                CurrentImagePath = @"C:\Users\Slorup\Desktop\Kurt.png";
+                    //CurrentImagePath = CurrentUser.CurrentExercise.Description.ImagePaths[0];
+
         }
 
         private ICommand _panelShowCommand;
@@ -63,6 +56,7 @@ namespace P2Project.ViewModel
             else
                 PanelVisibility = Visibility.Collapsed;
         }
+
         private ICommand _finishedExerciseCommand;
 
         public ICommand FinishedExerciseCommand
@@ -75,8 +69,9 @@ namespace P2Project.ViewModel
 
         private void FinishedExerciseClick(object param)
         {
-            
+            //TODO
         }
+
         private ICommand _skipExerciseCommand;
 
         public ICommand SkipExerciseCommand
@@ -89,13 +84,9 @@ namespace P2Project.ViewModel
 
         private void SkipExerciseClick(object param)
         {
-            GetNewExercise();
+            CurrentUser.GiveNewExercise();
         }
 
-        private void GetNewExercise()
-        {
-            CurrentExercise = FileData.GetExerciseByID(0);
-        }
         private ICommand _goLeftCommand;
 
         public ICommand GoLeftCommand
@@ -110,6 +101,7 @@ namespace P2Project.ViewModel
         {
             //exercise. = todo;
         }
+
         private ICommand _goRightCommand;
 
         public ICommand GoRightCommand

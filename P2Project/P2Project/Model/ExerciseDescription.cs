@@ -8,7 +8,7 @@ using System.Windows.Media;
 
 namespace P2Project.Model
 {
-    class ExerciseDescription
+    public class ExerciseDescription
     {
         public string TextDescription { get; set; } //TODO Husk bruger ikke må bruge ;
         public string VideoPath { get; set; }
@@ -18,6 +18,7 @@ namespace P2Project.Model
         public ExerciseDescription(string textDescription)
         {
             TextDescription = textDescription;
+            ImagePaths = new List<string>();
             //ToDo
         }
 

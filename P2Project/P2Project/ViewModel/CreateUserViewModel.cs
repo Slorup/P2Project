@@ -37,9 +37,9 @@ namespace P2Project.ViewModel
 
         private void CreateUserClick(object param)
         {
-            if (!FileData.UserExist(UserName)) //TRY CATCH
+            if (!DBConnection.UserExist(UserName)) //TRY CATCH
             {
-                FileData.CreateUser(new User(UserName, StartLearningProfile(Surveys), (UserType)SelectedUserTypeIndex, new List<int>()));
+                DBConnection.CreateUser(new User(UserName, StartLearningProfile(Surveys), (UserType)SelectedUserTypeIndex, new List<int>()));
                 Navigator.MainNavigationService.GoBack();
             }
             else

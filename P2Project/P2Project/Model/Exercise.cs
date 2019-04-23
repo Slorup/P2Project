@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace P2Project.Model
 {
-    class Exercise
+    public class Exercise
     {
-        public int ID { get; private set; }
+        public int ID { get; set; }
         public string Name { get; set; }
         public LearningProfile Profile { get; set; }
         public ExerciseDescription Description { get; set; }

@@ -55,7 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DAL\FileData.cs" />
+    <Compile Include="DAL\DBConnection.cs" />
     <Compile Include="Model\ExerciseDescription.cs" />
     <Compile Include="Model\RelayCommand.cs" />
     <Compile Include="Model\SurveyQuestion.cs" />
@@ -85,6 +85,9 @@
     </Compile>
     <Compile Include="View\ProfilePage.xaml.cs">
       <DependentUpon>ProfilePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\VideoPlayerPage.xaml.cs">
+      <DependentUpon>VideoPlayerPage.xaml</DependentUpon>
     </Compile>
     <Page Include="View\ExercisePage.xaml">
       <SubType>Designer</SubType>
@@ -119,6 +122,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ProfilePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\VideoPlayerPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

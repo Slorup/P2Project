@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace P2Project.DAL
 {
-    static class FileData
+    static class DBConnection
     {
 
         static string connString = "Server=p2project-server.database.windows.net; Database=P2ProjectDB; User Id=Slorup; Password=Password123";
@@ -89,7 +89,23 @@ namespace P2Project.DAL
 
         public static Exercise GetExerciseByID(int id)
         {
-            return null;
+            Exercise exercise = null;
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                SqlCommand cmd = new SqlCommand("select * from Exercise where id = @id", conn);
+                cmd.Parameters.AddWithValue("@id", id);
+                //TRYCATCH
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    LearningProfile profile = new LearningProfile(Convert.ToDouble(reader[2]), Convert.ToDouble(reader[3]), Convert.ToDouble(reader[4]), Convert.ToDouble(reader[5]));
+                    ExerciseDescription desc = new ExerciseDescription(reader[6].ToString()) { VideoPath = reader[7].ToString(), AudioPath = reader[8].ToString() };
+                    //TODO - Image paths
+                    exercise = new Exercise(reader[1].ToString(), desc, profile) { ID = Convert.ToInt32(reader[0]) };
+                }
+            }
+            return exercise;
         }
 
 
