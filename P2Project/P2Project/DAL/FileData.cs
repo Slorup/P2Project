@@ -35,12 +35,36 @@ namespace P2Project.DAL
 
         public static User GetUserByUsername(string username)
         {
-            return null;
+            User user = null;
+            using(SqlConnection conn = new SqlConnection(connString))
+            {
+                SqlCommand cmd = new SqlCommand("select * from [User] where username = @username", conn);
+                cmd.Parameters.AddWithValue("@username", username);
+                //TRYCATCH
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    LearningProfile profile = new LearningProfile(Convert.ToDouble(reader[2]), Convert.ToDouble(reader[3]), Convert.ToDouble(reader[4]), Convert.ToDouble(reader[5]));
+                    user = new User(reader[0].ToString(), profile, (UserType)reader[1], new List<int>());
+                }
+                //SET COMPLETED EXERCISE IDS
+            }
+            return user;
         }
 
         public static bool UserExist(string username)
         {
-            return false;
+            int userCount;
+            using(SqlConnection conn = new SqlConnection(connString))
+            {
+                SqlCommand cmd = new SqlCommand("select count(*) from [User] where username = @username", conn);
+                cmd.Parameters.AddWithValue("@username", username);
+                //TRY CATCH
+                conn.Open();
+                userCount = (int)cmd.ExecuteScalar();
+            }
+            return userCount != 0;
         }
 
         public static void CreateExercise(Exercise exercise)

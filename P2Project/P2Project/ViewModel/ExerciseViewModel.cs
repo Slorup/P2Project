@@ -41,9 +41,9 @@ namespace P2Project.ViewModel
         public ExerciseViewModel(User currentUser)
         {
             CurrentUser = currentUser;
-            if (CurrentExercise == null)
-                GetNewExercise();
-            Exercisedescription = CurrentExercise.Description.TextDescription;
+            //if (CurrentExercise == null)
+            //    GetNewExercise();
+            //Exercisedescription = CurrentExercise.Description.TextDescription;
         }
 
         private ICommand _panelShowCommand;
