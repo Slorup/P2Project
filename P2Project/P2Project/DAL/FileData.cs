@@ -71,8 +71,7 @@ namespace P2Project.DAL
         {
             using(SqlConnection conn = new SqlConnection(connString))
             {
-                SqlCommand cmd = new SqlCommand("INSERT INTO Exercise([name], visualpref, auditorypref, kinestheticpref, verbalpref, description, videopath, audiopath) " + 
-                    "VALUES(@name, @visual, @auditory, @kinesthetic, @verbal, @description, @videopath, @audiopath)"); //IMAGEPATHS
+                SqlCommand cmd = new SqlCommand("INSERT INTO Exercise([name], visualpref, auditorypref, kinestheticpref, verbalpref, description, videopath, audiopath) VALUES(@name, @visual, @auditory, @kinesthetic, @verbal, @description, @videopath, @audiopath)", conn); //IMAGEPATHS
                 //evt output id: INSERT INTO Exercise (.....) OUTPUT INSERTED.id VALUES (@.., @..)
                 cmd.Parameters.AddWithValue("@name", exercise.Name);
                 cmd.Parameters.AddWithValue("@visual", exercise.Profile.Visual);
@@ -80,8 +79,8 @@ namespace P2Project.DAL
                 cmd.Parameters.AddWithValue("@kinesthetic", exercise.Profile.Kinesthetic);
                 cmd.Parameters.AddWithValue("@verbal", exercise.Profile.Verbal);
                 cmd.Parameters.AddWithValue("@description", exercise.Description.TextDescription);
-                cmd.Parameters.AddWithValue("@videopath", exercise.Description.VideoPath);
-                cmd.Parameters.AddWithValue("@audiopath", exercise.Description.AudioPath);
+                cmd.Parameters.AddWithValue("@videopath", (object)exercise.Description.VideoPath ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@audiopath", (object)exercise.Description.AudioPath ?? DBNull.Value);
                 //TRYCATCH
                 conn.Open();
                 cmd.ExecuteNonQuery();

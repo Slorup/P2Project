@@ -130,8 +130,9 @@ namespace P2Project.ViewModel
 
         private void ExerciseCreateClick(object param)
         {
+            //TRY
             ExerciseDescription exDescription = new ExerciseDescription(Description) { AudioPath = this.AudioPath, VideoPath = this.VideoPath, ImagePaths = this.ImagePaths };
-            Exercise exercise = new Exercise(Name, exDescription, ExerciseProfile);
+            Exercise exercise = new Exercise(Name, exDescription, ExerciseProfile); //EXERCISE PROFILE TODO
             FileData.CreateExercise(exercise);
             Navigator.SubNavigationService.GoBack();
         }
