@@ -22,5 +22,9 @@
 
         <TextBlock HorizontalAlignment="Left" Margin="10,328,0,0" TextWrapping="Wrap" Text="{Binding TextBlock2}" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="418,67,0,0" TextWrapping="Wrap" Text="{Binding TextBlock3}" VerticalAlignment="Top"/>
+        <Slider HorizontalAlignment="Stretch" Margin="411,116,55,0" VerticalAlignment="Top" Minimum="1" Maximum="100" Interval="1" IsSnapToTickEnabled="True" Value="{Binding ExerciseProfile.Visual}"/>
+        <Slider HorizontalAlignment="Stretch" Margin="411,139,55,0" VerticalAlignment="Top" Minimum="1" Maximum="100" Interval="1" IsSnapToTickEnabled="True" Value="{Binding ExerciseProfile.Auditory}"/>
+        <Slider HorizontalAlignment="Stretch" Margin="411,162,55,0" VerticalAlignment="Top" Minimum="1" Maximum="100" Interval="1" IsSnapToTickEnabled="True" Value="{Binding ExerciseProfile.Kinesthetic}"/>
+        <Slider HorizontalAlignment="Stretch" Margin="411,185,55,0" VerticalAlignment="Top" Minimum="1" Maximum="100" Interval="1" IsSnapToTickEnabled="True" Value="{Binding ExerciseProfile.Verbal}"/>
     </Grid>
 </Page>
