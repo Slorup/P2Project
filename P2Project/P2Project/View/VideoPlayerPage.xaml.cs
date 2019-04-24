@@ -20,9 +20,15 @@ namespace P2Project.View
     /// </summary>
     public partial class VideoPlayerPage : Page
     {
+
+       
+
         public VideoPlayerPage()
         {
             InitializeComponent();
+            
         }
+
+        
     }
 }

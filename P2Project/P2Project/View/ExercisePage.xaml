@@ -10,7 +10,7 @@
 
     <Grid>
         <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-            <StackPanel Width="200" Background="AliceBlue" VerticalAlignment="Stretch" Visibility="{Binding PanelVisibility}">
+            <StackPanel Width="200" Background="AliceBlue" Orientation="Vertical" VerticalAlignment="Stretch" Visibility="{Binding PanelVisibility}">
                 <TextBlock TextWrapping="Wrap" Text="{Binding CurrentUser.CurrentExercise.Description.TextDescription}"/>
                 <Button Content="Færdig" Command="{Binding FinishedExerciseCommand}"/>
                 <Button Content="Spring over" Command="{Binding SkipExerciseCommand}"/>
@@ -19,12 +19,7 @@
                     <Image Height="116" Width="116" VerticalAlignment="Top" Source="{Binding CurrentImagePath}"/>
                     <Button Width="43" Height="20" Content="Næste" HorizontalAlignment="Right" Command="{Binding GoRightCommand}"/>
                 </StackPanel>
-                <MediaElement Name="VideoPlayer" Height="100" Source="{Binding CurrentUser.CurrentExercise.Description.VideoPath}"/>
-                <StackPanel Height="15" Orientation="Horizontal">
-                    <Button Width="15" Height="15" VerticalAlignment="Top" Click="ButtonPause_Click"/>
-                    <Button Width="15" Height="15" VerticalAlignment="Top" Click="ButtonReset_Click"/>
-                    <Button Width="15" Height="15" VerticalAlignment="Top" Click="ButtonFullScreen_Click"/>
-                </StackPanel>
+                <Frame Height="150" Width="200" Content="{Binding VideoFrame}"/>
             </StackPanel>
             <Button VerticalAlignment="Center" HorizontalAlignment="Left" Width="15" Height="50" Command="{Binding PanelShowCommand}"/>
         </StackPanel>

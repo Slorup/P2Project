@@ -68,6 +68,7 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MakeExerciseViewModel.cs" />
     <Compile Include="ViewModel\ProfileViewModel.cs" />
+    <Compile Include="ViewModel\VideoPlayerViewModel.cs" />
     <Compile Include="View\CreateUserPage.xaml.cs">
       <DependentUpon>CreateUserPage.xaml</DependentUpon>
     </Compile>

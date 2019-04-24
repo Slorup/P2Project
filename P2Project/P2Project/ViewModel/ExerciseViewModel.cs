@@ -1,11 +1,13 @@
 ﻿using P2Project.DAL;
 using P2Project.Model;
+using P2Project.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace P2Project.ViewModel
@@ -13,6 +15,14 @@ namespace P2Project.ViewModel
     class ExerciseViewModel : BaseViewModel
     {
         public User CurrentUser { get; set; }
+
+        private Page _videoFrame;
+
+        public Page VideoFrame
+        {
+            get { return _videoFrame; }
+            set { SetProperty(ref _videoFrame, value); }
+        }
 
         private Visibility _panelVisibility;
 
@@ -33,10 +43,13 @@ namespace P2Project.ViewModel
         public ExerciseViewModel(User currentUser)
         {
             CurrentUser = currentUser;
+            VideoPlayerPage page = new VideoPlayerPage();
+            VideoPlayerViewModel vm = new VideoPlayerViewModel(CurrentUser.CurrentExercise.Description.VideoPath, new TimeSpan(0), false);
+            page.DataContext = vm;
+            VideoFrame = page;
             //if (CurrentUser.CurrentExercise.Description.ImagePaths != null && CurrentUser.CurrentExercise.Description.ImagePaths.Count > 0)
                 CurrentImagePath = @"C:\Users\Slorup\Desktop\Kurt.png";
                     //CurrentImagePath = CurrentUser.CurrentExercise.Description.ImagePaths[0];
-
         }
 
         private ICommand _panelShowCommand;
