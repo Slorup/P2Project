@@ -51,10 +51,10 @@ namespace P2Project.ViewModel
         public LearningProfile StartLearningProfile(Survey Surveys)
         {
             SurveyWeight = 2;
-            LearningProfile Lp = new LearningProfile(Math.Pow(Surveys.QuestionList[0].SliderValue, SurveyWeight) + Math.Pow(Surveys.QuestionList[1].SliderValue, SurveyWeight),
-                                                     Math.Pow(Surveys.QuestionList[2].SliderValue, SurveyWeight) + Math.Pow(Surveys.QuestionList[3].SliderValue, SurveyWeight),
-                                                     Math.Pow(Surveys.QuestionList[4].SliderValue, SurveyWeight) + Math.Pow(Surveys.QuestionList[5].SliderValue, SurveyWeight),
-                                                     Math.Pow(Surveys.QuestionList[6].SliderValue, SurveyWeight) + Math.Pow(Surveys.QuestionList[7].SliderValue, SurveyWeight));
+            LearningProfile Lp = new LearningProfile(Surveys.QuestionList[0].SliderValue * Surveys.QuestionList[0].SliderValue + Surveys.QuestionList[1].SliderValue * Surveys.QuestionList[1].SliderValue,
+                Surveys.QuestionList[2].SliderValue * Surveys.QuestionList[2].SliderValue + Surveys.QuestionList[3].SliderValue * Surveys.QuestionList[3].SliderValue,
+                Surveys.QuestionList[4].SliderValue * Surveys.QuestionList[4].SliderValue + Surveys.QuestionList[5].SliderValue * Surveys.QuestionList[5].SliderValue,
+                Surveys.QuestionList[6].SliderValue * Surveys.QuestionList[6].SliderValue + Surveys.QuestionList[7].SliderValue * Surveys.QuestionList[7].SliderValue);
             return Lp;
         }
         private ICommand _goBackCommand;

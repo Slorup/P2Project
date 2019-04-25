@@ -47,7 +47,7 @@ namespace P2Project.DAL
                 {
 
                     ExerciseDescription desc = new ExerciseDescription(reader[6].ToString());
-                    LearningProfile profile = new LearningProfile(Convert.ToDouble(reader[2]), Convert.ToDouble(reader[3]), Convert.ToDouble(reader[4]), Convert.ToDouble(reader[5]));
+                    LearningProfile profile = new LearningProfile(float.Parse(reader[2].ToString()), float.Parse(reader[3].ToString()), float.Parse(reader[4].ToString()), float.Parse(reader[5].ToString()));
                     Exercise exercise = new Exercise(reader[1].ToString(), desc, profile) { ID = Convert.ToInt32(reader[0])};
                     exerciselist.Add(exercise);
                 }
@@ -80,7 +80,7 @@ namespace P2Project.DAL
                 SqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
                 {
-                    LearningProfile profile = new LearningProfile(Convert.ToDouble(reader[2]), Convert.ToDouble(reader[3]), Convert.ToDouble(reader[4]), Convert.ToDouble(reader[5]));
+                    LearningProfile profile = new LearningProfile(float.Parse(reader[2].ToString()), float.Parse(reader[3].ToString()), float.Parse(reader[4].ToString()), float.Parse(reader[5].ToString()));
                     user = new User(reader[0].ToString(), profile, (UserType)reader[1], new List<int>());
                 }
                 conn.Close();
@@ -155,7 +155,7 @@ namespace P2Project.DAL
                 SqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
                 {
-                    LearningProfile profile = new LearningProfile(Convert.ToDouble(reader[2]), Convert.ToDouble(reader[3]), Convert.ToDouble(reader[4]), Convert.ToDouble(reader[5]));
+                    LearningProfile profile = new LearningProfile(float.Parse(reader[2].ToString()), float.Parse(reader[3].ToString()), float.Parse(reader[4].ToString()), float.Parse(reader[5].ToString()));
                     ExerciseDescription desc = new ExerciseDescription(reader[6].ToString()) { VideoPath = reader[7].ToString(), AudioPath = reader[8].ToString() };
                     exercise = new Exercise(reader[1].ToString(), desc, profile) { ID = Convert.ToInt32(reader[0]) };
                 }
