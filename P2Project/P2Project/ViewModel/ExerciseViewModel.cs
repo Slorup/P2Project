@@ -24,6 +24,14 @@ namespace P2Project.ViewModel
             set { SetProperty(ref _videoFrame, value); }
         }
 
+        private Page _imageFrame;
+
+        public Page ImageFrame
+        {
+            get { return _imageFrame; }
+            set { SetProperty(ref _imageFrame, value); }
+        }
+
         private Visibility _panelVisibility;
 
         public Visibility PanelVisibility
@@ -32,24 +40,18 @@ namespace P2Project.ViewModel
             set { SetProperty(ref _panelVisibility, value); }
         }
 
-        private string _currentImagePath;
-
-        public string CurrentImagePath
-        {
-            get { return _currentImagePath; }
-            set { SetProperty(ref _currentImagePath, value); }
-        }
-
         public ExerciseViewModel(User currentUser)
         {
             CurrentUser = currentUser;
-            VideoPlayerPage page = new VideoPlayerPage();
-            VideoPlayerViewModel vm = new VideoPlayerViewModel(CurrentUser.CurrentExercise.Description.VideoPath, new TimeSpan(0), false);
-            page.DataContext = vm;
-            VideoFrame = page;
-            //if (CurrentUser.CurrentExercise.Description.ImagePaths != null && CurrentUser.CurrentExercise.Description.ImagePaths.Count > 0)
-                CurrentImagePath = @"C:\Users\Slorup\Desktop\Kurt.png";
-                    //CurrentImagePath = CurrentUser.CurrentExercise.Description.ImagePaths[0];
+            VideoPlayerPage videopage = new VideoPlayerPage();
+            VideoPlayerViewModel videovm = new VideoPlayerViewModel(CurrentUser.CurrentExercise.Description.VideoPath, new TimeSpan(0));
+            videopage.DataContext = videovm;
+            VideoFrame = videopage;
+
+            ImageScrollPage imagepage = new ImageScrollPage();
+            ImageScrollViewModel imagevm = new ImageScrollViewModel(CurrentUser.CurrentExercise.Description.ImagePaths);
+            imagepage.DataContext = imagevm;
+            ImageFrame = imagepage;
         }
 
         private ICommand _panelShowCommand;
@@ -98,36 +100,6 @@ namespace P2Project.ViewModel
         private void SkipExerciseClick(object param)
         {
             CurrentUser.GiveNewExercise();
-        }
-
-        private ICommand _goLeftCommand;
-
-        public ICommand GoLeftCommand
-        {
-            get
-            {
-                return _goLeftCommand ?? (_goLeftCommand = new RelayCommand(param => GoLeftClick(param)));
-            }
-        }
-
-        private void GoLeftClick(object param)
-        {
-            //exercise. = todo;
-        }
-
-        private ICommand _goRightCommand;
-
-        public ICommand GoRightCommand
-        {
-            get
-            {
-                return _goRightCommand ?? (_goRightCommand = new RelayCommand(param => GoRightClick(param)));
-            }
-        }
-
-        private void GoRightClick(object param)
-        {
-            //exercise. = todo;
         }
     }
 }

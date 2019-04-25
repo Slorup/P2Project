@@ -1,0 +1,18 @@
+﻿<Page x:Class="P2Project.View.ImageScrollPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:P2Project.View"
+      mc:Ignorable="d" 
+      MinHeight="130" MinWidth="180"
+      Title="ImageScrollPage">
+
+    <Grid>
+        <StackPanel Orientation="Horizontal">
+            <Button Width="43" Height="20" Content="Forrige" HorizontalAlignment="Left"  Command="{Binding GoLeftCommand}"/>
+            <Image Height="116" Width="116" VerticalAlignment="Top" Source="{Binding CurrentImagePath}"/>
+            <Button Width="43" Height="20" Content="Næste" HorizontalAlignment="Right" Command="{Binding GoRightCommand}"/>
+        </StackPanel>
+    </Grid>
+</Page>

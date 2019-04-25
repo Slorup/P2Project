@@ -87,12 +87,12 @@ namespace P2Project.ViewModel
             }
         }
 
-        public VideoPlayerViewModel(string path, TimeSpan currentTime, bool isFullScreen)
+        public VideoPlayerViewModel(string path, TimeSpan currentTime)
         {
             VideoPath = path;
             CurrentTime = currentTime;
             IsPlaying = false;
-            _isFullScreen = isFullScreen;
+            _isFullScreen = false;
         }
     }
 }
