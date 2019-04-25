@@ -101,9 +101,8 @@ namespace P2Project.ViewModel
         private void BrowseCommandImageClick(object param)
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
-            fileDialog.DefaultExt = ".txt";
             fileDialog.Multiselect = true;
-            fileDialog.Filter = "Text documents (.txt)|*.txt";
+            fileDialog.Filter = "Image files (.jpg, .jpeg, .png)|*.jpg; *.jpeg; *.png";
 
             fileDialog.ShowDialog();
             ImagePaths.Clear();

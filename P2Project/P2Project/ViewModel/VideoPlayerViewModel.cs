@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace P2Project.ViewModel
@@ -16,8 +17,7 @@ namespace P2Project.ViewModel
         public bool IsPlaying { get; set; }
         public TimeSpan CurrentTime { get; set; }
         private string _videoPath;
-
-        private bool _isFullScreen;
+        private bool _isFullScreen; //Private set property senere
 
         public string VideoPath
         {
@@ -32,6 +32,44 @@ namespace P2Project.ViewModel
             {
                 return _fullScreenCommand ?? (_fullScreenCommand = new RelayCommand(param => FullScreenClick(param)));
             }
+        }
+
+        private ICommand _pauseCommand;
+        public ICommand PauseCommand
+        {
+            get
+            {
+                return _pauseCommand ?? (_pauseCommand = new RelayCommand(param => PauseClick(param)));
+            }
+        }
+
+        private void PauseClick(object param)
+        {
+            if (IsPlaying)
+            {
+                ((MediaElement)param).Pause();
+                IsPlaying = false;
+            }
+            else
+            {
+                ((MediaElement)param).Play();
+                IsPlaying = true;
+            }
+        }
+
+        private ICommand _resetCommand;
+        public ICommand ResetCommand
+        {
+            get
+            {
+                return _resetCommand ?? (_resetCommand = new RelayCommand(param => ResetClick(param)));
+            }
+        }
+
+        private void ResetClick(object param)
+        {
+            ((MediaElement)param).Stop();
+            ((MediaElement)param).Play();
         }
 
         private void FullScreenClick(object param)
@@ -53,28 +91,8 @@ namespace P2Project.ViewModel
         {
             VideoPath = path;
             CurrentTime = currentTime;
-            IsPlaying = true;
+            IsPlaying = false;
             _isFullScreen = isFullScreen;
-        }
-
-        private void ButtonPause_Click(object sender, RoutedEventArgs e)
-        {
-            if (IsPlaying)
-            {
-                //VideoPlayer.Pause();
-                IsPlaying = false;
-            }
-            else
-            {
-                //VideoPlayer.Play();
-                IsPlaying = true;
-            }
-        }
-
-        private void ButtonReset_Click(object sender, RoutedEventArgs e)
-        {
-            //STOP
-            //PLAY
         }
     }
 }

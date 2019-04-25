@@ -1,6 +1,7 @@
 ﻿using P2Project.Model;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
@@ -48,7 +49,20 @@ namespace P2Project.DAL
                     LearningProfile profile = new LearningProfile(Convert.ToDouble(reader[2]), Convert.ToDouble(reader[3]), Convert.ToDouble(reader[4]), Convert.ToDouble(reader[5]));
                     user = new User(reader[0].ToString(), profile, (UserType)reader[1], new List<int>());
                 }
+                conn.Close();
                 //SET COMPLETED EXERCISE IDS
+
+                if(user != null)
+                {
+                    SqlCommand exercisecmd = new SqlCommand("select * from UserExercise where username = @username", conn);
+                    exercisecmd.Parameters.AddWithValue("@username", username);
+                    conn.Open();
+                    SqlDataReader exerciseReader = exercisecmd.ExecuteReader();
+                    while (exerciseReader.Read())
+                    {
+                        user.CompletedExercisesID.Add(Convert.ToInt32(exerciseReader[1]));
+                    }
+                }
             }
             return user;
         }
@@ -69,10 +83,10 @@ namespace P2Project.DAL
 
         public static void CreateExercise(Exercise exercise)
         {
+            int id = 0;
             using(SqlConnection conn = new SqlConnection(connString))
             {
-                SqlCommand cmd = new SqlCommand("INSERT INTO Exercise([name], visualpref, auditorypref, kinestheticpref, verbalpref, description, videopath, audiopath) VALUES(@name, @visual, @auditory, @kinesthetic, @verbal, @description, @videopath, @audiopath)", conn); //IMAGEPATHS
-                //evt output id: INSERT INTO Exercise (.....) OUTPUT INSERTED.id VALUES (@.., @..)
+                SqlCommand cmd = new SqlCommand("INSERT INTO Exercise([name], visualpref, auditorypref, kinestheticpref, verbalpref, description, videopath, audiopath) OUTPUT INSERTED.id VALUES(@name, @visual, @auditory, @kinesthetic, @verbal, @description, @videopath, @audiopath)", conn); //IMAGEPATHS
                 cmd.Parameters.AddWithValue("@name", exercise.Name);
                 cmd.Parameters.AddWithValue("@visual", exercise.Profile.Visual);
                 cmd.Parameters.AddWithValue("@auditory", exercise.Profile.Auditory);
@@ -83,7 +97,15 @@ namespace P2Project.DAL
                 cmd.Parameters.AddWithValue("@audiopath", (object)exercise.Description.AudioPath ?? DBNull.Value);
                 //TRYCATCH
                 conn.Open();
-                cmd.ExecuteNonQuery();
+                id = (int)cmd.ExecuteScalar();
+
+                foreach (string path in exercise.Description.ImagePaths)
+                {
+                    SqlCommand imagecmd = new SqlCommand("INSERT INTO ImagePath VALUES(@id, @imagepath)", conn);
+                    imagecmd.Parameters.AddWithValue("@id", id);
+                    imagecmd.Parameters.AddWithValue("@imagepath", path);
+                    imagecmd.ExecuteNonQuery();
+                }
             }
         }
 
@@ -101,8 +123,20 @@ namespace P2Project.DAL
                 {
                     LearningProfile profile = new LearningProfile(Convert.ToDouble(reader[2]), Convert.ToDouble(reader[3]), Convert.ToDouble(reader[4]), Convert.ToDouble(reader[5]));
                     ExerciseDescription desc = new ExerciseDescription(reader[6].ToString()) { VideoPath = reader[7].ToString(), AudioPath = reader[8].ToString() };
-                    //TODO - Image paths
                     exercise = new Exercise(reader[1].ToString(), desc, profile) { ID = Convert.ToInt32(reader[0]) };
+                }
+                conn.Close();
+
+                if(exercise != null)
+                {
+                    SqlCommand imagecmd = new SqlCommand("select * from ImagePath where exerciseid = @id", conn);
+                    imagecmd.Parameters.AddWithValue("@id", id);
+                    conn.Open();
+                    reader = imagecmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        exercise.Description.ImagePaths.Add(reader[1].ToString());
+                    }
                 }
             }
             return exercise;
