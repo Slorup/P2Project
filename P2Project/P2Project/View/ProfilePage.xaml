@@ -10,7 +10,7 @@
 
     <Grid>
         <Button Content="Log af" HorizontalAlignment="Left" Margin="646,364,0,0" VerticalAlignment="Top" Width="75" Command="{Binding LogofCommand}"/>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Username}" VerticalAlignment="Top" Margin="363,255,0,0"/>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding CurrentUser.Username}" VerticalAlignment="Top" Margin="363,255,0,0"/>
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding NumberofExercises}" VerticalAlignment="Top" Margin="363,298,0,0"/>
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding DanishUserType}" VerticalAlignment="Top" Margin="363,364,0,0"/>
 

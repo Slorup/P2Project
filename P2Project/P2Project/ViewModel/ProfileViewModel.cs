@@ -33,6 +33,7 @@ namespace P2Project.ViewModel
             get { return _numberofExercises; }
             set { SetProperty(ref _numberofExercises, value); }
         }
+
         private string _danishUserType;
 
         public string DanishUserType
@@ -58,7 +59,7 @@ namespace P2Project.ViewModel
             else if (usertype == UserType.Admin)
                 return "Admin";
             else
-                return "0";
+                return "Ukendt";
         }
         
         private ICommand _logofCommand;

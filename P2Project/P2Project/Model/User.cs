@@ -33,9 +33,34 @@ namespace P2Project.Model
 
         public void GiveNewExercise()
         {
-            //Avoid getting same exercise again
-            //Get new exercise, id
-            CurrentExercise = DBConnection.GetExerciseByID(6); //todo
+            List<Exercise> exerciselist = DBConnection.GetAllExercises();
+            exerciselist = exerciselist.Where(p => !CompletedExercisesID.Contains(p.ID)).ToList();
+
+            var chancelist = exerciselist.GroupBy(p => p).Select(p => new { ID = p.Key, Liking = CalcChanceLikeExercise(p.Key) });
+            //Get all exercises fom DB (maybe where completed ids isnt chosen)
+            //(Remove completed ones)
+            //Calc chance of liking them
+            //Get "random" exercise from chances
+
+            CurrentExercise = chancelist.; //todo
+        }
+
+        private int CalcChanceLikeExercise(Exercise exercise)
+        {
+            double total = GetAbsDifference(exercise.Profile.Visual, Profile.Visual) + GetAbsDifference(exercise.Profile.Verbal, Profile.Verbal) + GetAbsDifference(exercise.Profile.Kinesthetic, Profile.Kinesthetic) + GetAbsDifference(exercise.Profile.Auditory, Profile.Auditory);
+            return (int)(1 - (total / 4)) * 100; 
+        }
+
+        private double GetAbsDifference(double a, double b)
+        {
+            return Math.Abs(a - b);
+        }
+
+        public void ExerciseCompleted()
+        {
+            DBConnection.InsertCompletedExercise(UserName, CurrentExercise.ID);
+            CompletedExercisesID.Add(CurrentExercise.ID);
+            GiveNewExercise();
         }
     }
 }

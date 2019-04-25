@@ -5,14 +5,18 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:P2Project.View"
       mc:Ignorable="d" 
-      MinHeight="130" MinWidth="180"
+      MinHeight="180" MinWidth="160"
       Title="ImageScrollPage">
 
     <Grid>
-        <StackPanel Orientation="Horizontal">
-            <Button Width="43" Height="20" Content="Forrige" HorizontalAlignment="Left"  Command="{Binding GoLeftCommand}"/>
-            <Image Height="116" Width="116" VerticalAlignment="Top" Source="{Binding CurrentImagePath}"/>
-            <Button Width="43" Height="20" Content="Næste" HorizontalAlignment="Right" Command="{Binding GoRightCommand}"/>
-        </StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Button Grid.Row="0" Background="AliceBlue" BorderThickness="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Command="{Binding ImageClickCommand}">
+            <Image VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Source="{Binding CurrentImagePath}"/>
+        </Button>
+        <Button Grid.Row="1" Height="20" Width="50" Content="Forrige" HorizontalAlignment="Left" Command="{Binding GoLeftCommand}"/>
+        <Button Grid.Row="1" Height="20" Width="50" Content="Næste" HorizontalAlignment="Right" Command="{Binding GoRightCommand}"/>
     </Grid>
 </Page>

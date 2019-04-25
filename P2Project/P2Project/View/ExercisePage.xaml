@@ -13,15 +13,15 @@
             <ColumnDefinition Width="5*"/>
             <ColumnDefinition Width="7*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0" HorizontalAlignment="Left" Orientation="Horizontal">
-            <StackPanel Background="AliceBlue" Orientation="Vertical" VerticalAlignment="Stretch" Visibility="{Binding PanelVisibility}">
+        <StackPanel Grid.Column="0" Orientation="Horizontal">
+            <StackPanel Width="300" Background="AliceBlue" Orientation="Vertical" VerticalAlignment="Stretch" Visibility="{Binding PanelVisibility}">
                 <TextBlock TextWrapping="Wrap" Text="{Binding CurrentUser.CurrentExercise.Description.TextDescription}"/>
+                <Frame Height="180" Width="160" Content="{Binding ImageFrame}"/>
+                <Frame Height="150" Width="200" Content="{Binding VideoFrame}"/>
                 <Button Content="Færdig" Command="{Binding FinishedExerciseCommand}"/>
                 <Button Content="Spring over" Command="{Binding SkipExerciseCommand}"/>
-                <Frame Height="150" Width="200" Content="{Binding ImageFrame}"/>
-                <Frame Height="150" Width="200" Content="{Binding VideoFrame}"/>
             </StackPanel>
-            <Button VerticalAlignment="Center" HorizontalAlignment="Left" Width="15" Height="50" Command="{Binding PanelShowCommand}"/>
-        </StackPanel>
+            <Button Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Width="15" Height="50" Command="{Binding PanelShowCommand}"/>
+    </StackPanel>
     </Grid>
 </Page>

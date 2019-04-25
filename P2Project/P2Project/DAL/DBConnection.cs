@@ -34,6 +34,40 @@ namespace P2Project.DAL
             }
         }
 
+        public static List<Exercise> GetAllExercises()
+        {
+            List<Exercise> exerciselist = new List<Exercise>();
+            using(SqlConnection conn = new SqlConnection(connString))
+            {
+                SqlCommand cmd = new SqlCommand("select * from Exercise", conn);
+                conn.Open();
+                //TRYCATCH
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+
+                    ExerciseDescription desc = new ExerciseDescription(reader[6].ToString());
+                    LearningProfile profile = new LearningProfile(Convert.ToDouble(reader[2]), Convert.ToDouble(reader[3]), Convert.ToDouble(reader[4]), Convert.ToDouble(reader[5]));
+                    Exercise exercise = new Exercise(reader[1].ToString(), desc, profile) { ID = Convert.ToInt32(reader[0])};
+                    exerciselist.Add(exercise);
+                }
+            }
+            return exerciselist;
+        }
+
+        public static void InsertCompletedExercise(string userName, int id)
+        {
+            using(SqlConnection conn = new SqlConnection(connString))
+            {
+                SqlCommand cmd = new SqlCommand("insert into UserExercise values(@username, @exerciseid)", conn);
+                cmd.Parameters.AddWithValue("@username", userName);
+                cmd.Parameters.AddWithValue("@exerciseid", id);
+                conn.Open();
+                //trycatch
+                cmd.ExecuteNonQuery();
+            }
+        }
+
         public static User GetUserByUsername(string username)
         {
             User user = null;

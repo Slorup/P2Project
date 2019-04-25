@@ -69,8 +69,13 @@ namespace P2Project.ViewModel
         {
             get
             {
-                return _menuMakeExerciseCommand ?? (_menuMakeExerciseCommand = new RelayCommand(param => MenuMakeExerciseClick(param)));
+                return _menuMakeExerciseCommand ?? (_menuMakeExerciseCommand = new RelayCommand(param => MenuMakeExerciseClick(param), param => CanMenuMakeExerciseClick(param)));
             }
+        }
+
+        private bool CanMenuMakeExerciseClick(object param)
+        {
+            return CurrentUser.Type == UserType.Teacher || CurrentUser.Type == UserType.Admin;
         }
 
         private void MenuMakeExerciseClick(object param)
