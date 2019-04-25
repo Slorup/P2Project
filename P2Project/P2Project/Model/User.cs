@@ -35,7 +35,7 @@ namespace P2Project.Model
         {
             //Avoid getting same exercise again
             //Get new exercise, id
-            CurrentExercise = DBConnection.GetExerciseByID(6); //todo
+            CurrentExercise = DBConnection.GetExerciseByID(13); //todo
         }
     }
 }

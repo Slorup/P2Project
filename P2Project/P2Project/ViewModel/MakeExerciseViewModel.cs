@@ -129,6 +129,11 @@ namespace P2Project.ViewModel
         private void ExerciseCreateClick(object param)
         {
             //TRY
+            ExerciseProfile.Auditory *= 0.01;
+            ExerciseProfile.Verbal *= 0.01;
+            ExerciseProfile.Visual *= 0.01;
+            ExerciseProfile.Kinesthetic *= 0.01;
+
             ExerciseDescription exDescription = new ExerciseDescription(Description) { AudioPath = this.AudioPath, VideoPath = this.VideoPath, ImagePaths = this.ImagePaths };
             Exercise exercise = new Exercise(Name, exDescription, ExerciseProfile); //EXERCISE PROFILE TODO
             DBConnection.CreateExercise(exercise);
