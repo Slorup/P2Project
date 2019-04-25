@@ -37,18 +37,23 @@ namespace P2Project.Model
             exerciselist = exerciselist.Where(p => !CompletedExercisesID.Contains(p.ID)).ToList();
 
             var chancelist = exerciselist.GroupBy(p => p).Select(p => new { ID = p.Key, Liking = CalcChanceLikeExercise(p.Key) });
+            foreach (var exercise in chancelist)
+            {
+
+            }
             //Get all exercises fom DB (maybe where completed ids isnt chosen)
             //(Remove completed ones)
             //Calc chance of liking them
             //Get "random" exercise from chances
 
-            CurrentExercise = DBConnection.GetExerciseByID(10); //todo
+            CurrentExercise = DBConnection.GetExerciseByID(1); //todo
         }
 
         private int CalcChanceLikeExercise(Exercise exercise)
         {
-            double total = GetAbsDifference(exercise.Profile.Visual, Profile.Visual) + GetAbsDifference(exercise.Profile.Verbal, Profile.Verbal) + GetAbsDifference(exercise.Profile.Kinesthetic, Profile.Kinesthetic) + GetAbsDifference(exercise.Profile.Auditory, Profile.Auditory);
-            return (int)(1 - (total / 4)) * 100; 
+            double sum = Profile.Auditory + Profile.Kinesthetic + Profile.Verbal + Profile.Visual;
+            double total = GetAbsDifference(exercise.Profile.Visual, Profile.Visual / sum) + GetAbsDifference(exercise.Profile.Verbal, Profile.Verbal / sum) + GetAbsDifference(exercise.Profile.Kinesthetic, Profile.Kinesthetic / sum) + GetAbsDifference(exercise.Profile.Auditory, Profile.Auditory / sum);
+            return (int)((1 - (total / 4)) * 100); 
         }
 
         private double GetAbsDifference(double a, double b)
