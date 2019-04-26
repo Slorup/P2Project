@@ -46,7 +46,7 @@ namespace P2Project.Model
             //Calc chance of liking them
             //Get "random" exercise from chances
 
-            CurrentExercise = DBConnection.GetExerciseByID(1); //todo
+            CurrentExercise = DBConnection.GetExerciseByID(4); //todo
         }
 
         private int CalcChanceLikeExercise(Exercise exercise)

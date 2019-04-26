@@ -81,8 +81,8 @@ namespace P2Project.ViewModel
         private void BrowseCommandSoundClick(object param)
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
-            fileDialog.DefaultExt = ".txt";
-            fileDialog.Filter = "Text documents (.txt)|*.txt"; 
+            fileDialog.DefaultExt = ".mp3";
+            fileDialog.Filter = "Audio File (.mp3)|*.mp3"; 
 
             fileDialog.ShowDialog();
             TextBlock2 = fileDialog.FileName;

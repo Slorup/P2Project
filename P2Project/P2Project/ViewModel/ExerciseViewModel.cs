@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace P2Project.ViewModel
 {
@@ -56,6 +57,8 @@ namespace P2Project.ViewModel
             get { return _panelVisibility; }
             set { SetProperty(ref _panelVisibility, value); }
         }
+        private MediaPlayer mediaPlayer = new MediaPlayer();
+
 
         public ExerciseViewModel(User currentUser)
         {
@@ -125,6 +128,22 @@ namespace P2Project.ViewModel
         {
             CurrentUser.GiveNewExercise();
             //Set visibility on frames?
+        }
+
+        private ICommand _playAudioCommand;
+
+        public ICommand PlayAudioCommand
+        {
+            get
+            {
+                return _playAudioCommand ?? (_playAudioCommand = new RelayCommand(param => PlayAudioClick(param)));
+            }
+        }
+
+        private void PlayAudioClick(object param)
+        {
+            mediaPlayer.Open(new Uri(CurrentUser.CurrentExercise.Description.AudioPath));
+            mediaPlayer.Play();
         }
     }
 }
