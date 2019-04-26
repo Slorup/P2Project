@@ -51,12 +51,12 @@ namespace P2Project.Model
 
         private int CalcChanceLikeExercise(Exercise exercise)
         {
-            double sum = Profile.Auditory + Profile.Kinesthetic + Profile.Verbal + Profile.Visual;
-            double total = GetAbsDifference(exercise.Profile.Visual, Profile.Visual / sum) + GetAbsDifference(exercise.Profile.Verbal, Profile.Verbal / sum) + GetAbsDifference(exercise.Profile.Kinesthetic, Profile.Kinesthetic / sum) + GetAbsDifference(exercise.Profile.Auditory, Profile.Auditory / sum);
+            decimal sum = Profile.Auditory + Profile.Kinesthetic + Profile.Verbal + Profile.Visual;
+            decimal total = GetAbsDifference(exercise.Profile.Visual, Profile.Visual / sum) + GetAbsDifference(exercise.Profile.Verbal, Profile.Verbal / sum) + GetAbsDifference(exercise.Profile.Kinesthetic, Profile.Kinesthetic / sum) + GetAbsDifference(exercise.Profile.Auditory, Profile.Auditory / sum);
             return (int)((1 - (total / 4)) * 100); 
         }
 
-        private double GetAbsDifference(double a, double b)
+        private decimal GetAbsDifference(decimal a, decimal b)
         {
             return Math.Abs(a - b);
         }
