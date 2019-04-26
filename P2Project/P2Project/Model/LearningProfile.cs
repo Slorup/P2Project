@@ -8,12 +8,12 @@ namespace P2Project.Model
 {
     public class LearningProfile
     {
-        public decimal Visual { get; set; }
-        public decimal Auditory { get; set; }
-        public decimal Kinesthetic { get; set; }
-        public decimal Verbal { get; set; }
+        public double Visual { get; set; }
+        public double Auditory { get; set; }
+        public double Kinesthetic { get; set; }
+        public double Verbal { get; set; }
 
-        public LearningProfile(decimal visual, decimal auditory, decimal kinesthetic, decimal verbal)
+        public LearningProfile(double visual, double auditory, double kinesthetic, double verbal)
         {
             Visual = visual;
             Auditory = auditory;

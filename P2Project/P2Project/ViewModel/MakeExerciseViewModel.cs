@@ -129,7 +129,7 @@ namespace P2Project.ViewModel
         private void ExerciseCreateClick(object param)
         {
             //TRY
-            decimal sum = ExerciseProfile.Auditory + ExerciseProfile.Kinesthetic + ExerciseProfile.Verbal + ExerciseProfile.Visual;
+            double sum = ExerciseProfile.Auditory + ExerciseProfile.Kinesthetic + ExerciseProfile.Verbal + ExerciseProfile.Visual;
             ExerciseProfile.Auditory /= sum;
             ExerciseProfile.Kinesthetic /= sum;
             ExerciseProfile.Verbal /= sum;
