@@ -45,7 +45,6 @@ namespace P2Project.DAL
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-
                     ExerciseDescription desc = new ExerciseDescription(reader[6].ToString());
                     LearningProfile profile = new LearningProfile(Convert.ToDouble(reader[2]), Convert.ToDouble(reader[3]), Convert.ToDouble(reader[4]), Convert.ToDouble(reader[5]));
                     Exercise exercise = new Exercise(reader[1].ToString(), desc, profile) { ID = Convert.ToInt32(reader[0])};
@@ -71,8 +70,19 @@ namespace P2Project.DAL
         public static User GetUserByUsername(string username)
         {
             User user = null;
+            List<int> ids = new List<int>();
             using(SqlConnection conn = new SqlConnection(connString))
             {
+                SqlCommand exercisecmd = new SqlCommand("select * from UserExercise where username = @username", conn);
+                exercisecmd.Parameters.AddWithValue("@username", username);
+                conn.Open();
+                SqlDataReader exerciseReader = exercisecmd.ExecuteReader();
+                while (exerciseReader.Read())
+                {
+                    ids.Add(Convert.ToInt32(exerciseReader[1]));
+                }
+                conn.Close();
+
                 SqlCommand cmd = new SqlCommand("select * from [User] where username = @username", conn);
                 cmd.Parameters.AddWithValue("@username", username);
                 //TRYCATCH
@@ -81,21 +91,7 @@ namespace P2Project.DAL
                 if (reader.Read())
                 {
                     LearningProfile profile = new LearningProfile(Convert.ToDouble(reader[2]), Convert.ToDouble(reader[3]), Convert.ToDouble(reader[4]), Convert.ToDouble(reader[5]));
-                    user = new User(reader[0].ToString(), profile, (UserType)reader[1], new List<int>());
-                }
-                conn.Close();
-                //SET COMPLETED EXERCISE IDS
-
-                if(user != null)
-                {
-                    SqlCommand exercisecmd = new SqlCommand("select * from UserExercise where username = @username", conn);
-                    exercisecmd.Parameters.AddWithValue("@username", username);
-                    conn.Open();
-                    SqlDataReader exerciseReader = exercisecmd.ExecuteReader();
-                    while (exerciseReader.Read())
-                    {
-                        user.CompletedExercisesID.Add(Convert.ToInt32(exerciseReader[1]));
-                    }
+                    user = new User(reader[0].ToString(), profile, (UserType)reader[1], ids);
                 }
             }
             return user;

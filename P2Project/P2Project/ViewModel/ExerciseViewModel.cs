@@ -14,7 +14,13 @@ namespace P2Project.ViewModel
 {
     class ExerciseViewModel : BaseViewModel
     {
-        public User CurrentUser { get; set; }
+        private User _currentUser;
+
+        public User CurrentUser
+        {
+            get { return _currentUser; }
+            set { SetProperty(ref _currentUser, value); }
+        }
 
         private Page _videoFrame;
 
@@ -60,20 +66,28 @@ namespace P2Project.ViewModel
         public ExerciseViewModel(User currentUser)
         {
             CurrentUser = currentUser;
-            if(CurrentUser.CurrentExercise.Description.VideoPath != null && CurrentUser.CurrentExercise.Description.VideoPath != "")
+            UpdateExerciseDesc();
+        }
+
+        private void UpdateExerciseDesc()
+        {
+            if (CurrentUser.CurrentExercise != null)
             {
-                VideoPlayerPage videopage = new VideoPlayerPage();
-                VideoPlayerViewModel videovm = new VideoPlayerViewModel(CurrentUser.CurrentExercise.Description.VideoPath, new TimeSpan(0));
-                videopage.DataContext = videovm;
-                VideoFrame = videopage;
-            }
-            
-            if(CurrentUser.CurrentExercise.Description.ImagePaths != null && CurrentUser.CurrentExercise.Description.ImagePaths.Count != 0)
-            {
-                ImageScrollPage imagepage = new ImageScrollPage();
-                ImageScrollViewModel imagevm = new ImageScrollViewModel(CurrentUser.CurrentExercise.Description.ImagePaths);
-                imagepage.DataContext = imagevm;
-                ImageFrame = imagepage;
+                if (CurrentUser.CurrentExercise.Description.VideoPath != null && CurrentUser.CurrentExercise.Description.VideoPath != "")
+                {
+                    VideoPlayerPage videopage = new VideoPlayerPage();
+                    VideoPlayerViewModel videovm = new VideoPlayerViewModel(CurrentUser.CurrentExercise.Description.VideoPath, new TimeSpan(0));
+                    videopage.DataContext = videovm;
+                    VideoFrame = videopage;
+                }
+
+                if (CurrentUser.CurrentExercise.Description.ImagePaths != null && CurrentUser.CurrentExercise.Description.ImagePaths.Count != 0)
+                {
+                    ImageScrollPage imagepage = new ImageScrollPage();
+                    ImageScrollViewModel imagevm = new ImageScrollViewModel(CurrentUser.CurrentExercise.Description.ImagePaths);
+                    imagepage.DataContext = imagevm;
+                    ImageFrame = imagepage;
+                }
             }
         }
 
@@ -101,13 +115,19 @@ namespace P2Project.ViewModel
         {
             get
             {
-                return _finishedExerciseCommand ?? (_finishedExerciseCommand = new RelayCommand(param => FinishedExerciseClick(param)));
+                return _finishedExerciseCommand ?? (_finishedExerciseCommand = new RelayCommand(param => FinishedExerciseClick(param), param => CanFinishedExerciseClick(param)));
             }
+        }
+
+        private bool CanFinishedExerciseClick(object param)
+        {
+            return CurrentUser.CurrentExercise != null;
         }
 
         private void FinishedExerciseClick(object param)
         {
             CurrentUser.ExerciseCompleted();
+            UpdateExerciseDesc();
             //TODO
         }
 
@@ -117,14 +137,15 @@ namespace P2Project.ViewModel
         {
             get
             {
-                return _skipExerciseCommand ?? (_skipExerciseCommand = new RelayCommand(param => SkipExerciseClick(param)));
+                return _skipExerciseCommand ?? (_skipExerciseCommand = new RelayCommand(param => SkipExerciseClick(param), param => CanFinishedExerciseClick(param)));
             }
         }
 
         private void SkipExerciseClick(object param)
         {
             CurrentUser.GiveNewExercise();
-            //Set visibility on frames?
+            UpdateExerciseDesc();
+            //TODO
         }
     }
 }
