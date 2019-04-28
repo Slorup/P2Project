@@ -130,13 +130,16 @@ namespace P2Project.ViewModel
         {
             //TRY
             double sum = ExerciseProfile.Auditory + ExerciseProfile.Kinesthetic + ExerciseProfile.Verbal + ExerciseProfile.Visual;
-            ExerciseProfile.Auditory /= sum;
-            ExerciseProfile.Kinesthetic /= sum;
-            ExerciseProfile.Verbal /= sum;
-            ExerciseProfile.Visual /= sum;
+            if(sum != 0)
+            {
+                ExerciseProfile.Auditory /= sum;
+                ExerciseProfile.Kinesthetic /= sum;
+                ExerciseProfile.Verbal /= sum;
+                ExerciseProfile.Visual /= sum;
+            }
 
             ExerciseDescription exDescription = new ExerciseDescription(Description) { AudioPath = this.AudioPath, VideoPath = this.VideoPath, ImagePaths = this.ImagePaths };
-            Exercise exercise = new Exercise(Name, exDescription, ExerciseProfile); //EXERCISE PROFILE TODO
+            Exercise exercise = new Exercise(Name, exDescription, ExerciseProfile);
             DBConnection.CreateExercise(exercise);
             Navigator.SubNavigationService.GoBack();
         }

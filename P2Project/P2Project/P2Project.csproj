@@ -64,6 +64,7 @@
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\CreateUserViewModel.cs" />
     <Compile Include="ViewModel\ExerciseViewModel.cs" />
+    <Compile Include="ViewModel\FeedbackViewModel.cs" />
     <Compile Include="ViewModel\ImageScrollViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -75,6 +76,9 @@
     </Compile>
     <Compile Include="View\ExercisePage.xaml.cs">
       <DependentUpon>ExercisePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\FeedbackWindow.xaml.cs">
+      <DependentUpon>FeedbackWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ImageScrollPage.xaml.cs">
       <DependentUpon>ImageScrollPage.xaml</DependentUpon>
@@ -95,6 +99,10 @@
       <DependentUpon>VideoPlayerPage.xaml</DependentUpon>
     </Compile>
     <Page Include="View\ExercisePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\FeedbackWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,4 +1,5 @@
 ﻿using P2Project.DAL;
+using P2Project.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -81,14 +82,20 @@ namespace P2Project.Model
             return Math.Abs(a - b);
         }
 
-        public void ExerciseCompleted()
+        public void ExerciseCompleted(Feedback feedback = Feedback.Medium)
         {
             if(CurrentExercise != null)
             {
                 DBConnection.InsertCompletedExercise(UserName, CurrentExercise.ID);
+                UpdateProfileValues(feedback);
                 CompletedExercisesID.Add(CurrentExercise.ID);
                 GiveNewExercise();
             }
+        }
+
+        private void UpdateProfileValues(Feedback feedback)
+        {
+            //TODO
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

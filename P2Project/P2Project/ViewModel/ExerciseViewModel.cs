@@ -129,7 +129,15 @@ namespace P2Project.ViewModel
 
         private void FinishedExerciseClick(object param)
         {
-            CurrentUser.ExerciseCompleted();
+            FeedbackWindow window = new FeedbackWindow();
+            FeedbackViewModel vm = new FeedbackViewModel(window);
+            window.DataContext = vm;
+
+            Feedback feedback = Feedback.Medium;
+            bool? result = window.ShowDialog();
+            if (result == true)
+                feedback = vm.UserFeedback;
+            CurrentUser.ExerciseCompleted(feedback);
             UpdateExerciseDesc();
             //TODO
         }
@@ -157,8 +165,13 @@ namespace P2Project.ViewModel
         {
             get
             {
-                return _playAudioCommand ?? (_playAudioCommand = new RelayCommand(param => PlayAudioClick(param)));
+                return _playAudioCommand ?? (_playAudioCommand = new RelayCommand(param => PlayAudioClick(param), param => CanPlayAudioClick(param)));
             }
+        }
+
+        private bool CanPlayAudioClick(object param)
+        {
+            return CurrentUser.CurrentExercise != null && CurrentUser.CurrentExercise.Description.AudioPath != null;
         }
 
         private void PlayAudioClick(object param)
