@@ -18,6 +18,7 @@
                 <TextBlock TextWrapping="Wrap" Text="{Binding CurrentUser.CurrentExercise.Description.TextDescription}"/>
                 <Frame Height="180" Width="160" Content="{Binding ImageFrame}"/>
                 <Frame Height="150" Width="200" Content="{Binding VideoFrame}"/>
+                <Button Command="{Binding PlayAudioCommand}" />
                 <Button Content="Færdig" Command="{Binding FinishedExerciseCommand}"/>
                 <Button Content="Spring over" Command="{Binding SkipExerciseCommand}"/>
             </StackPanel>
