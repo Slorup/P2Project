@@ -171,7 +171,7 @@ namespace P2Project.ViewModel
 
         private bool CanPlayAudioClick(object param)
         {
-            return CurrentUser.CurrentExercise != null && CurrentUser.CurrentExercise.Description.AudioPath != null;
+            return CurrentUser.CurrentExercise != null && CurrentUser.CurrentExercise.Description.AudioPath != null && CurrentUser.CurrentExercise.Description.AudioPath != "";
         }
 
         private void PlayAudioClick(object param)

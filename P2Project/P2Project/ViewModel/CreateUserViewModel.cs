@@ -48,15 +48,14 @@ namespace P2Project.ViewModel
 
         private bool CanCreateUserClick(object param) { return true; } //TODO
 
-        public LearningProfile StartLearningProfile(Survey Surveys)
+        public UserLearningProfile StartLearningProfile(Survey Surveys)
         {
-            SurveyWeight = 2;
-            LearningProfile Lp = new LearningProfile(Surveys.QuestionList[0].SliderValue * Surveys.QuestionList[0].SliderValue + Surveys.QuestionList[1].SliderValue * Surveys.QuestionList[1].SliderValue,
-                Surveys.QuestionList[2].SliderValue * Surveys.QuestionList[2].SliderValue + Surveys.QuestionList[3].SliderValue * Surveys.QuestionList[3].SliderValue,
-                Surveys.QuestionList[4].SliderValue * Surveys.QuestionList[4].SliderValue + Surveys.QuestionList[5].SliderValue * Surveys.QuestionList[5].SliderValue,
-                Surveys.QuestionList[6].SliderValue * Surveys.QuestionList[6].SliderValue + Surveys.QuestionList[7].SliderValue * Surveys.QuestionList[7].SliderValue);
+            UserLearningProfile Lp = new UserLearningProfile(Surveys.QuestionList[0].SliderValue, Surveys.QuestionList[1].SliderValue,
+                Surveys.QuestionList[2].SliderValue, Surveys.QuestionList[3].SliderValue,
+                Surveys.QuestionList[4].SliderValue, Surveys.QuestionList[5].SliderValue, 10);
             return Lp;
         }
+
         private ICommand _goBackCommand;
         public ICommand GoBackCommand
         {
