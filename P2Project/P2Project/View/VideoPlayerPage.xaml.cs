@@ -1,4 +1,5 @@
-﻿using System;
+﻿using P2Project.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,12 @@ namespace P2Project.View
         public VideoPlayerPage()
         {
             InitializeComponent();
+        }
+
+        private void Slider_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            Slider slider = sender as Slider;
+            ((VideoPlayerViewModel)this.DataContext).Slider_MouseLeftButtonUp(slider);
         }
     }
 }

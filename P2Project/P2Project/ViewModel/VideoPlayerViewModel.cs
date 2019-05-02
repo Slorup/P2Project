@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace P2Project.ViewModel
 {
@@ -18,6 +19,41 @@ namespace P2Project.ViewModel
         public TimeSpan CurrentTime { get; set; }
         private string _videoPath;
         private bool _isFullScreen; //Private set property senere
+        private TimeSpan _totaltime;
+
+        private TimeSpan _position;
+
+        public TimeSpan Position
+        {
+            get { return _position; }
+            set { SetProperty(ref _position, value); }
+        }
+
+
+        private Duration _naturalDuration;
+
+        public Duration NaturalDuration
+        {
+            get { return _naturalDuration; }
+            set { SetProperty(ref _naturalDuration, value); }
+        }
+
+        private int myVar;
+
+        public int MyProperty
+        {
+            get { return myVar; }
+            set { myVar = value; }
+        }
+
+
+        private double _sliderValue;
+
+        public double SliderValue
+        {
+            get { return _sliderValue; }
+            set { SetProperty(ref _sliderValue, value); }
+        }
 
         public string VideoPath
         {
@@ -93,6 +129,23 @@ namespace P2Project.ViewModel
             CurrentTime = currentTime;
             IsPlaying = false;
             _isFullScreen = false;
+
+            DispatcherTimer timerVideoTime = new DispatcherTimer();
+            timerVideoTime.Interval = TimeSpan.FromSeconds(1);
+            timerVideoTime.Tick += new EventHandler(timer_tick);
+            timerVideoTime.Start();
+        }
+
+        private void timer_tick(object sender, EventArgs e)
+        {
+            if (NaturalDuration.TimeSpan.TotalSeconds > 0 && _totaltime.TotalSeconds > 0)
+                SliderValue = Position.TotalSeconds / _totaltime.TotalSeconds;
+        }
+
+        public void Slider_MouseLeftButtonUp(Slider slider)
+        {
+            if (_totaltime.TotalSeconds > 0)
+                Position = TimeSpan.FromSeconds(SliderValue * _totaltime.TotalSeconds);
         }
     }
 }

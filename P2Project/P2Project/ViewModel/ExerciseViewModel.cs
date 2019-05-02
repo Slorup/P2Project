@@ -63,13 +63,14 @@ namespace P2Project.ViewModel
             get { return _panelVisibility; }
             set { SetProperty(ref _panelVisibility, value); }
         }
-        private MediaPlayer mediaPlayer = new MediaPlayer();
+        private MediaPlayer audioPlayer;
 
 
         public ExerciseViewModel(User currentUser)
         {
             CurrentUser = currentUser;
             UpdateExerciseDesc();
+            audioPlayer = new MediaPlayer();
         }
 
         private void UpdateExerciseDesc()
@@ -79,7 +80,7 @@ namespace P2Project.ViewModel
                 if (CurrentUser.CurrentExercise.Description.VideoPath != null && CurrentUser.CurrentExercise.Description.VideoPath != "")
                 {
                     VideoPlayerPage videopage = new VideoPlayerPage();
-                    VideoPlayerViewModel videovm = new VideoPlayerViewModel(CurrentUser.CurrentExercise.Description.VideoPath, new TimeSpan(0));
+                    VideoPlayerViewModel videovm = new VideoPlayerViewModel(CurrentUser.CurrentExercise.Description.VideoPath, new TimeSpan(0)); //Remove timespan?
                     videopage.DataContext = videovm;
                     VideoFrame = videopage;
                 }
@@ -91,6 +92,11 @@ namespace P2Project.ViewModel
                     imagepage.DataContext = imagevm;
                     ImageFrame = imagepage;
                 }
+
+                if (CurrentUser.CurrentExercise.Description.AudioPath != null && CurrentUser.CurrentExercise.Description.AudioPath != "")
+                    audioPlayer.Open(new Uri(CurrentUser.CurrentExercise.Description.AudioPath));
+                else
+                    audioPlayer = null;
             }
         }
 
@@ -171,13 +177,12 @@ namespace P2Project.ViewModel
 
         private bool CanPlayAudioClick(object param)
         {
-            return CurrentUser.CurrentExercise != null && CurrentUser.CurrentExercise.Description.AudioPath != null;
+            return audioPlayer != null && CurrentUser.CurrentExercise != null && CurrentUser.CurrentExercise.Description.AudioPath != null;
         }
 
         private void PlayAudioClick(object param)
         {
-            mediaPlayer.Open(new Uri(CurrentUser.CurrentExercise.Description.AudioPath));
-            mediaPlayer.Play();
+            audioPlayer.Play();
         }
     }
 }
