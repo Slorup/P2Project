@@ -19,7 +19,7 @@ namespace P2Project.ViewModel
         public string AudioPath { get; set; }
         public string Description { get; set; }
         public string Name { get; set; }
-        public LearningProfile ExerciseProfile { get; set; }
+        public ExerciseLearningProfile ExerciseProfile { get; set; }
 
         private string _textBlock1;
 
@@ -47,7 +47,7 @@ namespace P2Project.ViewModel
         {
             CurrentUser = currentUser;
             ImagePaths = new List<string>();
-            ExerciseProfile = new LearningProfile(0,0,0,0);
+            ExerciseProfile = new ExerciseLearningProfile(0, 0, 0, 0, 0, 0);
         }
 
         private ICommand _browseCommandVideo;
@@ -129,17 +129,19 @@ namespace P2Project.ViewModel
         private void ExerciseCreateClick(object param)
         {
             //TRY
-            double sum = ExerciseProfile.Auditory + ExerciseProfile.Kinesthetic + ExerciseProfile.Verbal + ExerciseProfile.Visual;
+            double sum = ExerciseProfile.CalcProfileSum();
             if(sum != 0)
             {
                 ExerciseProfile.Auditory /= sum;
                 ExerciseProfile.Kinesthetic /= sum;
                 ExerciseProfile.Verbal /= sum;
-                ExerciseProfile.Visual /= sum;
+                ExerciseProfile.TextVisual /= sum;
+                ExerciseProfile.ImageVisual /= sum;
+                ExerciseProfile.Tactile /= sum;
             }
 
             ExerciseDescription exDescription = new ExerciseDescription(Description) { AudioPath = this.AudioPath, VideoPath = this.VideoPath, ImagePaths = this.ImagePaths };
-            Exercise exercise = new Exercise(Name, exDescription, ExerciseProfile);
+            Exercise exercise = new Exercise(Name, exDescription, ExerciseProfile, CurrentUser.UserName, DateTime.Now);
             DBConnection.CreateExercise(exercise);
             Navigator.SubNavigationService.GoBack();
         }

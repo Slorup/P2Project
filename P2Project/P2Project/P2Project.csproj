@@ -57,9 +57,11 @@
     </ApplicationDefinition>
     <Compile Include="DAL\DBConnection.cs" />
     <Compile Include="Model\ExerciseDescription.cs" />
+    <Compile Include="Model\ExerciseLearningProfile.cs" />
     <Compile Include="Model\RelayCommand.cs" />
     <Compile Include="Model\SurveyQuestion.cs" />
     <Compile Include="Model\Survey.cs" />
+    <Compile Include="Model\UserLearningProfile.cs" />
     <Compile Include="MVVM\Navigator.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\CreateUserViewModel.cs" />

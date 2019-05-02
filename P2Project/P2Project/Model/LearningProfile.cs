@@ -6,20 +6,18 @@ using System.Threading.Tasks;
 
 namespace P2Project.Model
 {
-    public class LearningProfile
+    public abstract class LearningProfile
     {
-        public double Visual { get; set; }
-        public double Auditory { get; set; }
-        public double Kinesthetic { get; set; }
-        public double Verbal { get; set; }
+        public virtual double TextVisual { get; set; }
+        public virtual double ImageVisual { get; set; }
+        public virtual double Auditory { get; set; }
+        public virtual double Tactile { get; set; }
+        public virtual double Kinesthetic { get; set; }
+        public virtual double Verbal { get; set; }
 
-        public LearningProfile(double visual, double auditory, double kinesthetic, double verbal)
+        public double CalcProfileSum()
         {
-            Visual = visual;
-            Auditory = auditory;
-            Kinesthetic = kinesthetic;
-            Verbal = verbal;
+            return Auditory + Kinesthetic + Verbal + TextVisual + ImageVisual + ImageVisual;
         }
-        //UncertaityCoefficient
     }
 }

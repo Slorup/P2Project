@@ -21,7 +21,7 @@ namespace P2Project.Model
     {
         public string UserName { get; private set; }
         public UserType Type { get; set; }
-        public LearningProfile Profile { get; set; }
+        public UserLearningProfile Profile { get; set; }
         public List<int> CompletedExercisesID { get; set; }
         private Exercise _currentExercise;
 
@@ -35,7 +35,7 @@ namespace P2Project.Model
         }
 
 
-        public User(string username, LearningProfile profile, UserType type, List<int> completedExercisesID)
+        public User(string username, UserLearningProfile profile, UserType type, List<int> completedExercisesID)
         {
             UserName = username;
             Profile = profile;
@@ -72,14 +72,21 @@ namespace P2Project.Model
 
         private int CalcChanceLikeExercise(Exercise exercise)
         {
-            double sum = Profile.Auditory + Profile.Kinesthetic + Profile.Verbal + Profile.Visual;
-            double total = GetAbsDifference(exercise.Profile.Visual, Profile.Visual / sum) + GetAbsDifference(exercise.Profile.Verbal, Profile.Verbal / sum) + GetAbsDifference(exercise.Profile.Kinesthetic, Profile.Kinesthetic / sum) + GetAbsDifference(exercise.Profile.Auditory, Profile.Auditory / sum);
-            return (int)((1 - (total / 4)) * 100); 
+            double sum = Profile.CalcProfileSum();
+            double profileDifferenceSum = CalcProfileDifferenceSum(exercise, sum);
+            return (int)((1 - (profileDifferenceSum / 6)) * 100); 
         }
 
-        private double GetAbsDifference(double a, double b)
+        
+
+        private double CalcProfileDifferenceSum(Exercise exercise, double sum)
         {
-            return Math.Abs(a - b);
+            return Math.Abs(exercise.Profile.TextVisual - Profile.TextVisual / sum) +
+                Math.Abs(exercise.Profile.ImageVisual - Profile.ImageVisual / sum) +
+                Math.Abs(exercise.Profile.Verbal - Profile.Verbal / sum) +
+                Math.Abs(exercise.Profile.Kinesthetic - Profile.Kinesthetic / sum) +
+                Math.Abs(exercise.Profile.Auditory - Profile.Auditory / sum) +
+                Math.Abs(exercise.Profile.Tactile - Profile.Tactile / sum);
         }
 
         public void ExerciseCompleted(Feedback feedback = Feedback.Medium)
@@ -95,7 +102,15 @@ namespace P2Project.Model
 
         private void UpdateProfileValues(Feedback feedback)
         {
-            //TODO
+            double sum = Profile.CalcProfileSum();
+            if (feedback == Feedback.Good)
+            {
+                Profile.Auditory += Math.Abs(Profile.Auditory / sum - CurrentExercise.Profile.Auditory) * 5; //Change 5 to uncertaincy
+            }
+            if (feedback == Feedback.Bad)
+            {
+                Profile.Auditory -= Math.Abs(Profile.Auditory / sum - CurrentExercise.Profile.Auditory) * 5; //Change 5 to uncertaincy
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

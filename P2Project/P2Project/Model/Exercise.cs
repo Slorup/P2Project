@@ -10,15 +10,18 @@ namespace P2Project.Model
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public LearningProfile Profile { get; set; }
+        public ExerciseLearningProfile Profile { get; set; }
         public ExerciseDescription Description { get; set; }
+        public string Creator { get; set; }
+        public DateTime CreationDate { get; set; }
 
-        public Exercise(string name, ExerciseDescription description, LearningProfile profile)
+        public Exercise(string name, ExerciseDescription description, ExerciseLearningProfile profile, string creator, DateTime creationDate)
         {
             Name = name;
             Profile = profile;
             Description = description;
-            //LAV ID
+            Creator = creator;
+            CreationDate = creationDate;
         }
     }
 }
