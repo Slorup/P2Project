@@ -15,38 +15,15 @@ namespace P2Project.ViewModel
 {
     class VideoPlayerViewModel : BaseViewModel
     {
+        private TimeSpan _totalTime;
+        private MediaElement _player;
+
+        public bool IsFullScreen { get; set; }
+
+        public bool IsHolding { get; set; }
+
         public bool IsPlaying { get; set; }
-        public TimeSpan CurrentTime { get; set; }
-        private string _videoPath;
-        private bool _isFullScreen; //Private set property senere
-        private TimeSpan _totaltime;
-
-        private TimeSpan _position;
-
-        public TimeSpan Position
-        {
-            get { return _position; }
-            set { SetProperty(ref _position, value); }
-        }
-
-
-        private Duration _naturalDuration;
-
-        public Duration NaturalDuration
-        {
-            get { return _naturalDuration; }
-            set { SetProperty(ref _naturalDuration, value); }
-        }
-
-        private int myVar;
-
-        public int MyProperty
-        {
-            get { return myVar; }
-            set { myVar = value; }
-        }
-
-
+        
         private double _sliderValue;
 
         public double SliderValue
@@ -54,6 +31,8 @@ namespace P2Project.ViewModel
             get { return _sliderValue; }
             set { SetProperty(ref _sliderValue, value); }
         }
+
+        private string _videoPath;
 
         public string VideoPath
         {
@@ -110,25 +89,33 @@ namespace P2Project.ViewModel
 
         private void FullScreenClick(object param)
         {
-            if (_isFullScreen)
+            if (IsFullScreen)
             {
-                _isFullScreen = false;
+                IsFullScreen = false;
                 Navigator.MainNavigationService.GoBack();
             }
             else
             {
-                _isFullScreen = true;
+                IsFullScreen = true;
                 VideoPlayerPage page = new VideoPlayerPage() { DataContext = this };
                 Navigator.MainNavigationService.Navigate(page);
             }
         }
 
-        public VideoPlayerViewModel(string path, TimeSpan currentTime)
+        public VideoPlayerViewModel(string path)
         {
             VideoPath = path;
-            CurrentTime = currentTime;
-            IsPlaying = false;
-            _isFullScreen = false;
+        }
+        
+        public void Player_MediaOpened(MediaElement player)
+        {
+            _player = player;
+            _totalTime = player.NaturalDuration.TimeSpan;
+
+            _player.Play();
+            IsPlaying = true;
+            if (_totalTime.TotalSeconds > 0)
+                _player.Position = TimeSpan.FromSeconds((SliderValue / 100) * _totalTime.TotalSeconds);
 
             DispatcherTimer timerVideoTime = new DispatcherTimer();
             timerVideoTime.Interval = TimeSpan.FromSeconds(1);
@@ -138,14 +125,22 @@ namespace P2Project.ViewModel
 
         private void timer_tick(object sender, EventArgs e)
         {
-            if (NaturalDuration.TimeSpan.TotalSeconds > 0 && _totaltime.TotalSeconds > 0)
-                SliderValue = Position.TotalSeconds / _totaltime.TotalSeconds;
+            if(!IsHolding)
+                if (_player.NaturalDuration.HasTimeSpan &&_player.NaturalDuration.TimeSpan.TotalSeconds > 0)
+                    if (_totalTime.TotalSeconds > 0)
+                        SliderValue = 100 * _player.Position.TotalSeconds / _totalTime.TotalSeconds;
         }
 
         public void Slider_MouseLeftButtonUp(Slider slider)
         {
-            if (_totaltime.TotalSeconds > 0)
-                Position = TimeSpan.FromSeconds(SliderValue * _totaltime.TotalSeconds);
+            IsHolding = false;
+            if (_totalTime.TotalSeconds > 0)
+                _player.Position = TimeSpan.FromSeconds((SliderValue / 100) * _totalTime.TotalSeconds);
+        }
+
+        public void Slider_MouseLeftButtonDown()
+        {
+            IsHolding = true;
         }
     }
 }

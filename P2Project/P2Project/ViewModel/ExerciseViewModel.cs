@@ -80,7 +80,7 @@ namespace P2Project.ViewModel
                 if (CurrentUser.CurrentExercise.Description.VideoPath != null && CurrentUser.CurrentExercise.Description.VideoPath != "")
                 {
                     VideoPlayerPage videopage = new VideoPlayerPage();
-                    VideoPlayerViewModel videovm = new VideoPlayerViewModel(CurrentUser.CurrentExercise.Description.VideoPath, new TimeSpan(0)); //Remove timespan?
+                    VideoPlayerViewModel videovm = new VideoPlayerViewModel(CurrentUser.CurrentExercise.Description.VideoPath);
                     videopage.DataContext = videovm;
                     VideoFrame = videopage;
                 }

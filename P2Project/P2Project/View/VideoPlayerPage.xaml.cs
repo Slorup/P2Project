@@ -26,10 +26,22 @@ namespace P2Project.View
             InitializeComponent();
         }
 
-        private void Slider_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void Slider_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             Slider slider = sender as Slider;
             ((VideoPlayerViewModel)this.DataContext).Slider_MouseLeftButtonUp(slider);
+        }
+
+        private void VideoPlayer_MediaOpened(object sender, RoutedEventArgs e)
+        {
+            MediaElement player = sender as MediaElement;
+            ((VideoPlayerViewModel)this.DataContext).Player_MediaOpened(player);
+        }
+
+        private void Slider_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Slider slider = sender as Slider;
+            ((VideoPlayerViewModel)this.DataContext).Slider_MouseLeftButtonDown();
         }
     }
 }
