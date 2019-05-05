@@ -17,8 +17,9 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <SolidColorBrush x:Key="Button.Static.Background" Color="#f38120"/>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#834C69"/>
         <SolidColorBrush x:Key="Button.Static.Border" Color="#f38120"/>
+        <SolidColorBrush x:Key="Button.Static.foreground" Color="#010101"/>
         <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#f48d36"/>
         <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#f48d36"/>
         <SolidColorBrush x:Key="Button.Pressed.Background" Color="#da741c"/>
@@ -29,7 +30,7 @@
         <Style x:Key="RoundButton" TargetType="{x:Type Button}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
             <Setter Property="Background" Value="{DynamicResource Button.Static.Background}"/>
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="Foreground" Value="{DynamicResource Button.Static.foreground}"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="Padding" Value="1"/>
@@ -63,7 +64,7 @@
     <Grid RenderTransformOrigin="0.5,0.5">
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="#324c54" Offset="1"/>
+                <GradientStop Color="#36313B" Offset="1"/>
                 <GradientStop Color="#66797f"/>
             </LinearGradientBrush>
         </Grid.Background>
@@ -77,7 +78,7 @@
             <RowDefinition Height="10*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Rectangle Grid.Column="1" Grid.Row="1" Fill="#001c25" OpacityMask="#66000000" RadiusY="15" RadiusX="15" Width="350" Height="350"/>
+        <Rectangle Grid.Column="1" Grid.Row="1" Fill="#3C4F65" RadiusY="15" RadiusX="15" Width="350" Height="350"/>
         <Grid Grid.Column="1" Grid.Row="1" RenderTransformOrigin="0.5,0.5" Width="350" Height="350">
             <Grid.RowDefinitions>
                 <RowDefinition/>
