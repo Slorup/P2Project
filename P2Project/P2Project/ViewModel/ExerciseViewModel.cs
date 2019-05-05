@@ -65,10 +65,12 @@ namespace P2Project.ViewModel
         }
         private MediaPlayer audioPlayer;
 
-
         public ExerciseViewModel(User currentUser)
         {
             CurrentUser = currentUser;
+            bool result = CurrentUser.GiveNewExercise();
+            if (!result)
+                MessageBox.Show("Tillykke! Du har gennemført alle opgaver!");
             UpdateExerciseDesc();
             audioPlayer = new MediaPlayer();
         }
@@ -84,6 +86,10 @@ namespace P2Project.ViewModel
                     videopage.DataContext = videovm;
                     VideoFrame = videopage;
                 }
+                else
+                {
+                    VideoFrame = null;
+                }
 
                 if (CurrentUser.CurrentExercise.Description.ImagePaths != null && CurrentUser.CurrentExercise.Description.ImagePaths.Count != 0)
                 {
@@ -91,6 +97,10 @@ namespace P2Project.ViewModel
                     ImageScrollViewModel imagevm = new ImageScrollViewModel(CurrentUser.CurrentExercise.Description.ImagePaths);
                     imagepage.DataContext = imagevm;
                     ImageFrame = imagepage;
+                }
+                else
+                {
+                    ImageFrame = null;
                 }
 
                 if (CurrentUser.CurrentExercise.Description.AudioPath != null && CurrentUser.CurrentExercise.Description.AudioPath != "")

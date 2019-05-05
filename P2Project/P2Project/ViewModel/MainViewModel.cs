@@ -21,9 +21,8 @@ namespace P2Project.ViewModel
         public MainViewModel(User currentUser)
         {
             CurrentUser = currentUser;
-            ExerciseViewModel exerciseVM = new ExerciseViewModel(CurrentUser);
             ExercisePage exercisePage = new ExercisePage();
-            exercisePage.DataContext = exerciseVM;
+            exercisePage.DataContext = new ExerciseViewModel(CurrentUser);
             Navigator.SubNavigationService.Navigate(exercisePage);
         }
 
@@ -39,9 +38,8 @@ namespace P2Project.ViewModel
 
         private void MenuProfileClick(object param)
         {
-            ProfileViewModel profileVM = new ProfileViewModel(CurrentUser);
             ProfilePage profilePage = new ProfilePage();
-            profilePage.DataContext = profileVM;
+            profilePage.DataContext = new ProfileViewModel(CurrentUser);
             Navigator.SubNavigationService.Navigate(profilePage);
         }
 
@@ -57,9 +55,8 @@ namespace P2Project.ViewModel
 
         private void MenuExerciseClick(object param) //CHECK IF ALREADY IN SUBPAGE
         {
-            ExerciseViewModel exerciseVM = new ExerciseViewModel(CurrentUser);
             ExercisePage exercisePage = new ExercisePage();
-            exercisePage.DataContext = exerciseVM;
+            exercisePage.DataContext = new ExerciseViewModel(CurrentUser);
             Navigator.SubNavigationService.Navigate(exercisePage);
         }
 
@@ -80,9 +77,8 @@ namespace P2Project.ViewModel
 
         private void MenuMakeExerciseClick(object param)
         {
-            MakeExerciseViewModel makeexerciseVM = new MakeExerciseViewModel(CurrentUser);
             MakeExercisePage makeexercisePage = new MakeExercisePage();
-            makeexercisePage.DataContext = makeexerciseVM;
+            makeexercisePage.DataContext = new MakeExerciseViewModel(CurrentUser);
             Navigator.SubNavigationService.Navigate(makeexercisePage);
         }
     }
