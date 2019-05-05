@@ -5,28 +5,200 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:P2Project.View"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="540" d:DesignWidth="960"
       Title="CreateUserPage" Background="White">
+    <Page.Resources>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#834C69"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#f38120"/>
+        <SolidColorBrush x:Key="Button.Static.foreground" Color="#010101"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#f48d36"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#f48d36"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#da741c"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#da741c"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#f7b379"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#f7b379"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#facca5"/>
+        <Style x:Key="RoundButton" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{DynamicResource Button.Static.Background}"/>
+            <Setter Property="Foreground" Value="{DynamicResource Button.Static.foreground}"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Rectangle x:Name="ButtonRect" Fill="{TemplateBinding Background}" RadiusY="20" RadiusX="20"/>
+                            <ContentPresenter x:Name="ButtonName" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True"/>
+                            <Trigger Property="IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Fill" TargetName="ButtonRect" Value="{StaticResource Button.MouseOver.Background}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Fill" TargetName="ButtonRect" Value="{StaticResource Button.Pressed.Background}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Fill" TargetName="ButtonRect" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="ButtonName" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
 
-    <Grid>
+
+    <Grid RenderTransformOrigin="0.5,0.5">
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#36313B" Offset="1"/>
+                <GradientStop Color="#66797f"/>
+            </LinearGradientBrush>
+        </Grid.Background>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="5*"/>
-            <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="15*"/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Button Grid.Column="0" Content="Opret" HorizontalAlignment="Left" Margin="109,329,0,0" VerticalAlignment="Top" Width="75" Command="{Binding CreateUserCommand}"/>
-        <Button Grid.Column="0" Content="Tilbage" HorizontalAlignment="Left" Margin="189,329,0,0" VerticalAlignment="Top" Width="75" Command="{Binding GoBackCommand}"/>
-        <TextBox Grid.Column="0" HorizontalAlignment="Left" Height="23" Margin="109,75,0,0" TextWrapping="Wrap" Text="{Binding UserName}" VerticalAlignment="Top" Width="120"/>
-        <ListBox Grid.Column="0" HorizontalAlignment="Left" Height="100" Margin="109,126,0,0" VerticalAlignment="Top" Width="100" SelectedIndex="{Binding SelectedUserTypeIndex}" >
-            <ListBoxItem Content="Elev"/>
-            <ListBoxItem Content="Lærer"/>
-            <ListBoxItem Content="Admin"/>
-        </ListBox>
-        <Slider Grid.Column="1" HorizontalAlignment="Stretch" Margin="84,152,0,0" VerticalAlignment="Top" Minimum="1" Maximum="50" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Surveys.QuestionList[0].SliderValue}"/>
-        <Slider Grid.Column="1" HorizontalAlignment="Stretch" Margin="84,175,0,0" VerticalAlignment="Top" Minimum="1" Maximum="50" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Surveys.QuestionList[1].SliderValue}"/>
-        <Slider Grid.Column="1" HorizontalAlignment="Stretch" Margin="84,198,0,0" VerticalAlignment="Top" Minimum="1" Maximum="50" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Surveys.QuestionList[2].SliderValue}"/>
-        <Slider Grid.Column="1" HorizontalAlignment="Stretch" Margin="84,221,0,0" VerticalAlignment="Top" Minimum="1" Maximum="50" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Surveys.QuestionList[3].SliderValue}"/>
-        <Slider Grid.Column="1" HorizontalAlignment="Stretch" Margin="84,244,0,0" VerticalAlignment="Top" Minimum="1" Maximum="50" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Surveys.QuestionList[4].SliderValue}"/>
-        <Slider Grid.Column="1" HorizontalAlignment="Stretch" Margin="84,267,0,0" VerticalAlignment="Top" Minimum="1" Maximum="50" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Surveys.QuestionList[5].SliderValue}"/>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="30*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Rectangle Grid.Column="1" Grid.Row="1" Fill="#3C4F65" RadiusY="45" RadiusX="45" Width="600" Height="480"/>
+        <Grid Grid.Column="1" Grid.Row="1" RenderTransformOrigin="0.5,0.5" Width="600" Height="480">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition/>
+                <RowDefinition Height="2.5*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="40*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" Text="OPRET BRUGER" VerticalAlignment="Center" FontSize="48" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Center"/>
+            <Grid Grid.Column="1" Grid.Row="3" RenderTransformOrigin="0.5,0.5">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0" Grid.Row="3" RenderTransformOrigin="0.5,0.5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="5*"/>
+                        <RowDefinition Height="15*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" Text="BRUGERNAVN:" VerticalAlignment="Center" FontSize="24" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
+                    <TextBox Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" Text="{Binding UserName}" VerticalAlignment="Center" Height="25" Width="220"/>
+                    <TextBlock Grid.Column="1" Grid.Row="4" TextWrapping="Wrap" Text="PROFIL TYPE:" VerticalAlignment="Center" FontSize="24" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
+                    <ListBox Grid.Column="0" Grid.Row="5" Height="52" Margin="10,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="100" SelectedIndex="{Binding SelectedUserTypeIndex}" >
+                        <ListBoxItem Content="Elev"/>
+                        <ListBoxItem Content="Lærer"/>
+                        <ListBoxItem Content="Admin"/>
+                    </ListBox>
+                </Grid>
+                <Grid Grid.Column="1" Grid.Row="3" RenderTransformOrigin="0.5,0.5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" Text="SPØRGERSKEMA:" VerticalAlignment="Center" FontSize="16" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
+
+                    <TextBlock Grid.Column="1" Grid.Row="3" Margin="10,0,0,0" TextWrapping="Wrap" Text="1. Jeg lærer godt ved hjælp af tekster" VerticalAlignment="Center" FontSize="12" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
+                    <TextBlock Grid.Column="1" Grid.Row="4" Margin="10,0,0,0" TextWrapping="Wrap" Text="(f.eks. læse i en bog)" VerticalAlignment="Center" FontSize="12" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
+                    <Slider Grid.Column="0" Grid.Row="5" HorizontalAlignment="Stretch" Margin="10,0,0,0" VerticalAlignment="Center" Minimum="1" Maximum="50" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Surveys.QuestionList[0].SliderValue}"/>
+
+                    <TextBlock Grid.Column="1" Grid.Row="7" Margin="10,0,0,0" TextWrapping="Wrap" Text="2. Jeg lærer godt ved hjælp af billeder" VerticalAlignment="Center" FontSize="12" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
+                    <TextBlock Grid.Column="1" Grid.Row="8" Margin="10,0,0,0" TextWrapping="Wrap" Text="(f.eks. diagrammer, grafer og video)" VerticalAlignment="Center" FontSize="12" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
+                    <Slider Grid.Column="0" Grid.Row="9" HorizontalAlignment="Stretch" Margin="10,0,0,0" VerticalAlignment="Center" Minimum="1" Maximum="50" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Surveys.QuestionList[1].SliderValue}"/>
+
+                    <TextBlock Grid.Column="1" Grid.Row="11" Margin="10,0,0,0" TextWrapping="Wrap" Text="3. Jeg lærer godt ved hjælp af at lytte" VerticalAlignment="Center" FontSize="12" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
+                    <TextBlock Grid.Column="1" Grid.Row="12" Margin="10,0,0,0" TextWrapping="Wrap" Text="(f.eks. tavleundervisning)" VerticalAlignment="Center" FontSize="12" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
+                    <Slider Grid.Column="0" Grid.Row="13" HorizontalAlignment="Stretch" Margin="10,0,0,0" VerticalAlignment="Center" Minimum="1" Maximum="50" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Surveys.QuestionList[2].SliderValue}"/>
+
+                    <TextBlock Grid.Column="1" Grid.Row="15" Margin="10,0,0,0" TextWrapping="Wrap" Text="4. Jeg lærer godt ved hjæpl af at tale" VerticalAlignment="Center" FontSize="12" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
+                    <TextBlock Grid.Column="1" Grid.Row="16" Margin="10,0,0,0" TextWrapping="Wrap" Text="(f.eks. læse højt og diskutere)" VerticalAlignment="Center" FontSize="12" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
+                    <Slider Grid.Column="0" Grid.Row="17" HorizontalAlignment="Stretch" Margin="10,0,0,0" VerticalAlignment="Center" Minimum="1" Maximum="50" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Surveys.QuestionList[3].SliderValue}"/>
+
+                    <TextBlock Grid.Column="1" Grid.Row="19" Margin="10,0,0,0" TextWrapping="Wrap" Text="5. Jeg lærer godt ved hjælp af at bruge mine hænder" VerticalAlignment="Center" FontSize="12" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
+                    <TextBlock Grid.Column="1" Grid.Row="20" Margin="10,0,0,0" TextWrapping="Wrap" Text="(f.eks. røre ting, tegne og tage notater)" VerticalAlignment="Center" FontSize="12" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
+                    <Slider Grid.Column="0" Grid.Row="21" HorizontalAlignment="Stretch" Margin="10,0,0,0" VerticalAlignment="Center" Minimum="1" Maximum="50" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Surveys.QuestionList[4].SliderValue}"/>
+
+                    <TextBlock Grid.Column="1" Grid.Row="23" Margin="10,0,0,0" TextWrapping="Wrap" Text="6. Jeg lærer godt ved hjæpl af at være fysisk aktiv" VerticalAlignment="Center" FontSize="12" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
+                    <TextBlock Grid.Column="1" Grid.Row="24" Margin="10,0,0,0" TextWrapping="Wrap" Text="(f.eks. bruge og bevæge hele kroppen)" VerticalAlignment="Center" FontSize="12" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
+                    <Slider Grid.Column="0" Grid.Row="25" HorizontalAlignment="Stretch" Margin="10,0,0,0" VerticalAlignment="Center" Minimum="1" Maximum="50" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Surveys.QuestionList[5].SliderValue}"/>
+
+                </Grid>
+            </Grid>
+            <Grid Grid.Column="1" Grid.Row="5" RenderTransformOrigin="0.5,0.5">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="10*"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Row="0" Content="OPRET BRUGER" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" Width="220" Height="30" Command="{Binding CreateUserCommand}" Style="{DynamicResource RoundButton}"/>
+                <Button Grid.Column="3" Content="Tilbage" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" Width="220" Height="30" Command="{Binding GoBackCommand}" Style="{DynamicResource RoundButton}"/>
+            </Grid>
+        </Grid>
     </Grid>
 </Page>
