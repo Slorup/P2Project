@@ -9,13 +9,6 @@ using System.Windows.Input;
 
 namespace P2Project.ViewModel
 {
-    public enum Feedback
-    {
-        Good,
-        Medium,
-        Bad
-    }
-
     class FeedbackViewModel : BaseViewModel
     {
         private FeedbackWindow _window;

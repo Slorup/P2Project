@@ -46,7 +46,10 @@ namespace P2Project.ViewModel
                 MessageBox.Show("Brugernavnet er optaget!");
         }
 
-        private bool CanCreateUserClick(object param) { return true; } //TODO
+        private bool CanCreateUserClick(object param)
+        {
+            return UserName != "" && UserName != null;
+        } 
 
         public UserLearningProfile StartLearningProfile(Survey Surveys)
         {

@@ -9,22 +9,30 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace P2Project.ViewModel
 {
     class VideoPlayerViewModel : BaseViewModel
     {
-        public bool IsPlaying { get; set; }
-        private TimeSpan _currentTime;
+        private TimeSpan _totalTime;
+        private MediaElement _player;
 
-        public TimeSpan CurrentTime
+        public bool IsFullScreen { get; set; }
+
+        public bool IsHolding { get; set; }
+
+        public bool IsPlaying { get; set; }
+        
+        private double _sliderValue;
+
+        public double SliderValue
         {
-            get { return _currentTime; }
-            set { SetProperty(ref _currentTime, value); }
+            get { return _sliderValue; }
+            set { SetProperty(ref _sliderValue, value); }
         }
 
         private string _videoPath;
-        private bool _isFullScreen; //Private set property senere
 
         public string VideoPath
         {
@@ -81,25 +89,58 @@ namespace P2Project.ViewModel
 
         private void FullScreenClick(object param)
         {
-            if (_isFullScreen)
+            if (IsFullScreen)
             {
-                _isFullScreen = false;
+                IsFullScreen = false;
                 Navigator.MainNavigationService.GoBack();
             }
             else
             {
-                _isFullScreen = true;
+                IsFullScreen = true;
                 VideoPlayerPage page = new VideoPlayerPage() { DataContext = this };
                 Navigator.MainNavigationService.Navigate(page);
             }
         }
 
-        public VideoPlayerViewModel(string path, TimeSpan currentTime)
+        public VideoPlayerViewModel(string path)
         {
             VideoPath = path;
-            CurrentTime = currentTime;
-            IsPlaying = false;
-            _isFullScreen = false;
+        }
+        
+        public void Player_MediaOpened(MediaElement player)
+        {
+            _player = player;
+            _totalTime = player.NaturalDuration.TimeSpan;
+
+            _player.Play();
+            IsPlaying = true;
+            if (_totalTime.TotalSeconds > 0)
+                _player.Position = TimeSpan.FromSeconds((SliderValue / 100) * _totalTime.TotalSeconds);
+
+            DispatcherTimer timerVideoTime = new DispatcherTimer();
+            timerVideoTime.Interval = TimeSpan.FromSeconds(1);
+            timerVideoTime.Tick += new EventHandler(timer_tick);
+            timerVideoTime.Start();
+        }
+
+        private void timer_tick(object sender, EventArgs e)
+        {
+            if(!IsHolding)
+                if (_player.NaturalDuration.HasTimeSpan &&_player.NaturalDuration.TimeSpan.TotalSeconds > 0)
+                    if (_totalTime.TotalSeconds > 0)
+                        SliderValue = 100 * _player.Position.TotalSeconds / _totalTime.TotalSeconds;
+        }
+
+        public void Slider_MouseLeftButtonUp(Slider slider)
+        {
+            IsHolding = false;
+            if (_totalTime.TotalSeconds > 0)
+                _player.Position = TimeSpan.FromSeconds((SliderValue / 100) * _totalTime.TotalSeconds);
+        }
+
+        public void Slider_MouseLeftButtonDown()
+        {
+            IsHolding = true;
         }
     }
 }

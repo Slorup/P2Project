@@ -10,13 +10,6 @@ using System.Threading.Tasks;
 
 namespace P2Project.Model
 {
-    public enum UserType //IT PROB SHOULDNT BE HERE
-    {
-        Pupil,
-        Teacher,
-        Admin
-    }
-
     public class User : INotifyPropertyChanged
     {
         public string UserName { get; private set; }
@@ -34,7 +27,6 @@ namespace P2Project.Model
             }
         }
 
-
         public User(string username, UserLearningProfile profile, UserType type, List<int> completedExercisesID)
         {
             UserName = username;
@@ -44,49 +36,62 @@ namespace P2Project.Model
             GiveNewExercise();
         }
 
-        public void GiveNewExercise()
+        public bool GiveNewExercise() //TODO - Opdeles i flere metoder
         {
-            List<Exercise> exerciselist = DBConnection.GetAllExercises();
-            exerciselist = exerciselist.Where(p => !CompletedExercisesID.Contains(p.ID)).ToList();
+            bool newExerciseFound = false;
+            List<Exercise> exerciseList = GetExercisesNotCompleted();
 
-            var chancelist = exerciselist.GroupBy(p => p).Select(p => new { ExerciseInfo = p.Key, Liking = CalcChanceLikeExercise(p.Key) });
-            int likingsum = 0;
-            foreach (var exercise in chancelist)
-                likingsum += exercise.Liking;
-            Random rnd = new Random();
-            int number = rnd.Next(1, likingsum + 1);
-            foreach (var exercise in chancelist)
+            var chancelist = exerciseList.GroupBy(p => p).Select(p => new { ExerciseInfo = p.Key, Liking = CalcChanceLikeExercise(p.Key) });
+            if (chancelist.Count() != 0)
             {
-                number -= exercise.Liking;
-                if (number <= 0)
+                int likingsum = 0;
+                foreach (var exercise in chancelist)
+                    likingsum += exercise.Liking;
+
+                Random rnd = new Random();
+                int number = rnd.Next(1, likingsum + 1);
+                foreach (var exercise in chancelist)
                 {
-                    CurrentExercise = exerciselist.First(p => p.ID == exercise.ExerciseInfo.ID);
-                    break;
+                    number -= exercise.Liking;
+                    if (number <= 0)
+                    {
+                        CurrentExercise = exerciseList.First(p => p.ID == exercise.ExerciseInfo.ID);
+                        newExerciseFound = true;
+                        break;
+                    }
                 }
             }
+            else
+                CurrentExercise = null;
+            return newExerciseFound;
             //Get all exercises fom DB (maybe where completed ids isnt chosen)
             //(Remove completed ones)
             //Calc chance of liking them
             //Get "random" exercise from chances
         }
 
-        private int CalcChanceLikeExercise(Exercise exercise)
+        private List<Exercise> GetExercisesNotCompleted()
         {
-            double sum = Profile.CalcProfileSum();
-            double profileDifferenceSum = CalcProfileDifferenceSum(exercise, sum);
-            return (int)((1 - (profileDifferenceSum / 6)) * 100); 
+            List<Exercise> exerciselist = DBConnection.GetAllExercises();
+            return exerciselist.Where(p => !CompletedExercisesID.Contains(p.ID)).ToList();
         }
 
-        
-
-        private double CalcProfileDifferenceSum(Exercise exercise, double sum)
+        //Stardardafvigelse: sqrt(1/6 * Sum((E_x - S_x)^2))
+        private int CalcChanceLikeExercise(Exercise exercise)
         {
-            return Math.Abs(exercise.Profile.TextVisual - Profile.TextVisual / sum) +
-                Math.Abs(exercise.Profile.ImageVisual - Profile.ImageVisual / sum) +
-                Math.Abs(exercise.Profile.Verbal - Profile.Verbal / sum) +
-                Math.Abs(exercise.Profile.Kinesthetic - Profile.Kinesthetic / sum) +
-                Math.Abs(exercise.Profile.Auditory - Profile.Auditory / sum) +
-                Math.Abs(exercise.Profile.Tactile - Profile.Tactile / sum);
+            double profileDifferenceSum = CalcProfileDifferenceSum(exercise);
+            return (int)((1 - Math.Sqrt(profileDifferenceSum / 6)) * 100); 
+        }
+
+        private double CalcProfileDifferenceSum(Exercise exercise)
+        {
+            double sum = Profile.CalcProfileSum();
+            return Math.Pow(exercise.Profile.TextVisual - Profile.TextVisual / sum, 2) +
+                Math.Pow(exercise.Profile.ImageVisual - Profile.ImageVisual / sum, 2) +
+                Math.Pow(exercise.Profile.Verbal - Profile.Verbal / sum, 2) +
+                Math.Pow(exercise.Profile.Kinesthetic - Profile.Kinesthetic / sum, 2) +
+                Math.Pow(exercise.Profile.Auditory - Profile.Auditory / sum, 2) +
+                Math.Pow(exercise.Profile.Tactile - Profile.Tactile / sum, 2);
         }
 
         public void ExerciseCompleted(Feedback feedback = Feedback.Medium)
@@ -100,7 +105,7 @@ namespace P2Project.Model
             }
         }
 
-        private void UpdateProfileValues(Feedback feedback)
+        private void UpdateProfileValues(Feedback feedback) //TODO
         {
             double sum = Profile.CalcProfileSum();
             if (feedback == Feedback.Good)
