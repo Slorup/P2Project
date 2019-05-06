@@ -22,11 +22,11 @@
 
         <TextBlock HorizontalAlignment="Left" Margin="10,328,0,0" TextWrapping="Wrap" Text="{Binding TextBlock2}" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="418,67,0,0" TextWrapping="Wrap" Text="{Binding TextBlock3}" VerticalAlignment="Top"/>
-        <Slider HorizontalAlignment="Stretch" Margin="411,70,55,0" VerticalAlignment="Top" Minimum="1" Maximum="100" Interval="1" IsSnapToTickEnabled="True" Value="{Binding ExerciseProfile.TextVisual}"/>
-        <Slider HorizontalAlignment="Stretch" Margin="411,95,55,0" VerticalAlignment="Top" Minimum="1" Maximum="100" Interval="1" IsSnapToTickEnabled="True" Value="{Binding ExerciseProfile.ImageVisual}"/>
-        <Slider HorizontalAlignment="Stretch" Margin="411,116,55,0" VerticalAlignment="Top" Minimum="1" Maximum="100" Interval="1" IsSnapToTickEnabled="True" Value="{Binding ExerciseProfile.Verbal}"/>
-        <Slider HorizontalAlignment="Stretch" Margin="411,139,55,0" VerticalAlignment="Top" Minimum="1" Maximum="100" Interval="1" IsSnapToTickEnabled="True" Value="{Binding ExerciseProfile.Auditory}"/>
-        <Slider HorizontalAlignment="Stretch" Margin="411,162,55,0" VerticalAlignment="Top" Minimum="1" Maximum="100" Interval="1" IsSnapToTickEnabled="True" Value="{Binding ExerciseProfile.Tactile}"/>
-        <Slider HorizontalAlignment="Stretch" Margin="411,185,55,0" VerticalAlignment="Top" Minimum="1" Maximum="100" Interval="1" IsSnapToTickEnabled="True" Value="{Binding ExerciseProfile.Kinesthetic}"/>
+        <Slider HorizontalAlignment="Stretch" Margin="411,120,55,0" VerticalAlignment="Top" Minimum="1" Maximum="100" Interval="1" IsSnapToTickEnabled="True" Value="{Binding TextVisual}"/>
+        <Slider HorizontalAlignment="Stretch" Margin="411,140,55,0" VerticalAlignment="Top" Minimum="1" Maximum="100" Interval="1" IsSnapToTickEnabled="True" Value="{Binding ImageVisual}"/>
+        <Slider HorizontalAlignment="Stretch" Margin="411,160,55,0" VerticalAlignment="Top" Minimum="1" Maximum="100" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Verbal}"/>
+        <Slider HorizontalAlignment="Stretch" Margin="411,180,55,0" VerticalAlignment="Top" Minimum="1" Maximum="100" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Auditory}"/>
+        <Slider HorizontalAlignment="Stretch" Margin="411,200,55,0" VerticalAlignment="Top" Minimum="1" Maximum="100" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Tactile}"/>
+        <Slider HorizontalAlignment="Stretch" Margin="411,220,55,0" VerticalAlignment="Top" Minimum="1" Maximum="100" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Kinesthetic}"/>
     </Grid>
 </Page>

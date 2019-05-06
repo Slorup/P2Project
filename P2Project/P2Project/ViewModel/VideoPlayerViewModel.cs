@@ -15,7 +15,14 @@ namespace P2Project.ViewModel
     class VideoPlayerViewModel : BaseViewModel
     {
         public bool IsPlaying { get; set; }
-        public TimeSpan CurrentTime { get; set; }
+        private TimeSpan _currentTime;
+
+        public TimeSpan CurrentTime
+        {
+            get { return _currentTime; }
+            set { SetProperty(ref _currentTime, value); }
+        }
+
         private string _videoPath;
         private bool _isFullScreen; //Private set property senere
 

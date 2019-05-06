@@ -19,7 +19,12 @@ namespace P2Project.ViewModel
         public string AudioPath { get; set; }
         public string Description { get; set; }
         public string Name { get; set; }
-        public ExerciseLearningProfile ExerciseProfile { get; set; }
+        public double TextVisual { get; set; }
+        public double ImageVisual { get; set; }
+        public double Verbal { get; set; }
+        public double Auditory { get; set; }
+        public double Tactile { get; set; }
+        public double Kinesthetic { get; set; }
 
         private string _textBlock1;
 
@@ -47,7 +52,6 @@ namespace P2Project.ViewModel
         {
             CurrentUser = currentUser;
             ImagePaths = new List<string>();
-            ExerciseProfile = new ExerciseLearningProfile(0, 0, 0, 0, 0, 0);
         }
 
         private ICommand _browseCommandVideo;
@@ -122,26 +126,32 @@ namespace P2Project.ViewModel
         {
             get
             {
-                return _exerciseCreateCommand ?? (_exerciseCreateCommand = new RelayCommand(param => ExerciseCreateClick(param)));
+                return _exerciseCreateCommand ?? (_exerciseCreateCommand = new RelayCommand(param => ExerciseCreateClick(param), param => CanExerciseCreateClick(param)));
             }
+        }
+
+        private bool CanExerciseCreateClick(object param)
+        {
+            return Name != null && Name != "" && Description != null && Description != "";
         }
 
         private void ExerciseCreateClick(object param)
         {
             //TRY
-            double sum = ExerciseProfile.CalcProfileSum();
+            ExerciseLearningProfile profile = new ExerciseLearningProfile(TextVisual, ImageVisual, Verbal, Auditory, Tactile, Kinesthetic);
+            double sum = profile.CalcProfileSum();
             if(sum != 0)
             {
-                ExerciseProfile.Auditory /= sum;
-                ExerciseProfile.Kinesthetic /= sum;
-                ExerciseProfile.Verbal /= sum;
-                ExerciseProfile.TextVisual /= sum;
-                ExerciseProfile.ImageVisual /= sum;
-                ExerciseProfile.Tactile /= sum;
+                profile.Auditory /= sum;
+                profile.Kinesthetic /= sum;
+                profile.Verbal /= sum;
+                profile.TextVisual /= sum;
+                profile.ImageVisual /= sum;
+                profile.Tactile /= sum;
             }
 
             ExerciseDescription exDescription = new ExerciseDescription(Description) { AudioPath = this.AudioPath, VideoPath = this.VideoPath, ImagePaths = this.ImagePaths };
-            Exercise exercise = new Exercise(Name, exDescription, ExerciseProfile, CurrentUser.UserName, DateTime.Now);
+            Exercise exercise = new Exercise(Name, exDescription, profile, CurrentUser.UserName, DateTime.Now);
             DBConnection.CreateExercise(exercise);
             Navigator.SubNavigationService.GoBack();
         }
