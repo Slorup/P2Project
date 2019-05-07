@@ -10,6 +10,10 @@ namespace P2Project.Model
     {
         public int SliderValue { get; set; }
         public string QuestionText { get; set; }
+        public SurveyQuestion()
+        {
+            SliderValue = 3;
+        }
     }
 }
     

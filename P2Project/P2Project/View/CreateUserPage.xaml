@@ -163,27 +163,27 @@
 
                     <TextBlock Grid.Column="1" Grid.Row="3" Margin="10,0,0,0" TextWrapping="Wrap" Text="1. Jeg lærer godt ved hjælp af tekster" VerticalAlignment="Center" FontSize="12" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
                     <TextBlock Grid.Column="1" Grid.Row="4" Margin="10,0,0,0" TextWrapping="Wrap" Text="(f.eks. læse i en bog)" VerticalAlignment="Center" FontSize="12" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
-                    <Slider Grid.Column="0" Grid.Row="5" HorizontalAlignment="Stretch" Margin="10,0,0,0" VerticalAlignment="Center" Minimum="1" Maximum="50" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Surveys.QuestionList[0].SliderValue}"/>
+                    <Slider Grid.Column="0" Grid.Row="5" HorizontalAlignment="Stretch" Margin="10,0,0,0" VerticalAlignment="Center" Minimum="1" Maximum="5" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Surveys.QuestionList[0].SliderValue}"/>
 
                     <TextBlock Grid.Column="1" Grid.Row="7" Margin="10,0,0,0" TextWrapping="Wrap" Text="2. Jeg lærer godt ved hjælp af billeder" VerticalAlignment="Center" FontSize="12" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
                     <TextBlock Grid.Column="1" Grid.Row="8" Margin="10,0,0,0" TextWrapping="Wrap" Text="(f.eks. diagrammer, grafer og video)" VerticalAlignment="Center" FontSize="12" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
-                    <Slider Grid.Column="0" Grid.Row="9" HorizontalAlignment="Stretch" Margin="10,0,0,0" VerticalAlignment="Center" Minimum="1" Maximum="50" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Surveys.QuestionList[1].SliderValue}"/>
+                    <Slider Grid.Column="0" Grid.Row="9" HorizontalAlignment="Stretch" Margin="10,0,0,0" VerticalAlignment="Center" Minimum="1" Maximum="5" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Surveys.QuestionList[1].SliderValue}"/>
 
                     <TextBlock Grid.Column="1" Grid.Row="11" Margin="10,0,0,0" TextWrapping="Wrap" Text="3. Jeg lærer godt ved hjælp af at lytte" VerticalAlignment="Center" FontSize="12" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
                     <TextBlock Grid.Column="1" Grid.Row="12" Margin="10,0,0,0" TextWrapping="Wrap" Text="(f.eks. tavleundervisning)" VerticalAlignment="Center" FontSize="12" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
-                    <Slider Grid.Column="0" Grid.Row="13" HorizontalAlignment="Stretch" Margin="10,0,0,0" VerticalAlignment="Center" Minimum="1" Maximum="50" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Surveys.QuestionList[2].SliderValue}"/>
+                    <Slider Grid.Column="0" Grid.Row="13" HorizontalAlignment="Stretch" Margin="10,0,0,0" VerticalAlignment="Center" Minimum="1" Maximum="5" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Surveys.QuestionList[2].SliderValue}"/>
 
                     <TextBlock Grid.Column="1" Grid.Row="15" Margin="10,0,0,0" TextWrapping="Wrap" Text="4. Jeg lærer godt ved hjæpl af at tale" VerticalAlignment="Center" FontSize="12" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
                     <TextBlock Grid.Column="1" Grid.Row="16" Margin="10,0,0,0" TextWrapping="Wrap" Text="(f.eks. læse højt og diskutere)" VerticalAlignment="Center" FontSize="12" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
-                    <Slider Grid.Column="0" Grid.Row="17" HorizontalAlignment="Stretch" Margin="10,0,0,0" VerticalAlignment="Center" Minimum="1" Maximum="50" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Surveys.QuestionList[3].SliderValue}"/>
+                    <Slider Grid.Column="0" Grid.Row="17" HorizontalAlignment="Stretch" Margin="10,0,0,0" VerticalAlignment="Center" Minimum="1" Maximum="5" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Surveys.QuestionList[3].SliderValue}"/>
 
                     <TextBlock Grid.Column="1" Grid.Row="19" Margin="10,0,0,0" TextWrapping="Wrap" Text="5. Jeg lærer godt ved hjælp af at bruge mine hænder" VerticalAlignment="Center" FontSize="12" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
                     <TextBlock Grid.Column="1" Grid.Row="20" Margin="10,0,0,0" TextWrapping="Wrap" Text="(f.eks. røre ting, tegne og tage notater)" VerticalAlignment="Center" FontSize="12" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
-                    <Slider Grid.Column="0" Grid.Row="21" HorizontalAlignment="Stretch" Margin="10,0,0,0" VerticalAlignment="Center" Minimum="1" Maximum="50" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Surveys.QuestionList[4].SliderValue}"/>
+                    <Slider Grid.Column="0" Grid.Row="21" HorizontalAlignment="Stretch" Margin="10,0,0,0" VerticalAlignment="Center" Minimum="1" Maximum="5" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Surveys.QuestionList[4].SliderValue}"/>
 
                     <TextBlock Grid.Column="1" Grid.Row="23" Margin="10,0,0,0" TextWrapping="Wrap" Text="6. Jeg lærer godt ved hjæpl af at være fysisk aktiv" VerticalAlignment="Center" FontSize="12" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
                     <TextBlock Grid.Column="1" Grid.Row="24" Margin="10,0,0,0" TextWrapping="Wrap" Text="(f.eks. bruge og bevæge hele kroppen)" VerticalAlignment="Center" FontSize="12" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
-                    <Slider Grid.Column="0" Grid.Row="25" HorizontalAlignment="Stretch" Margin="10,0,0,0" VerticalAlignment="Center" Minimum="1" Maximum="50" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Surveys.QuestionList[5].SliderValue}"/>
+                    <Slider Grid.Column="0" Grid.Row="25" HorizontalAlignment="Stretch" Margin="10,0,0,0" VerticalAlignment="Center" Minimum="1" Maximum="5" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Surveys.QuestionList[5].SliderValue}"/>
 
                 </Grid>
             </Grid>

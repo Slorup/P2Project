@@ -149,6 +149,15 @@ namespace P2Project.ViewModel
                 profile.ImageVisual /= sum;
                 profile.Tactile /= sum;
             }
+            else
+            {
+                profile.Auditory = 1 / 6;
+                profile.Kinesthetic = 1 / 6;
+                profile.Verbal = 1 / 6;
+                profile.TextVisual = 1 / 6;
+                profile.ImageVisual = 1 / 6;
+                profile.Tactile = 1 / 6;
+            }
 
             ExerciseDescription exDescription = new ExerciseDescription(Description) { AudioPath = this.AudioPath, VideoPath = this.VideoPath, ImagePaths = this.ImagePaths };
             Exercise exercise = new Exercise(Name, exDescription, profile, CurrentUser.UserName, DateTime.Now);

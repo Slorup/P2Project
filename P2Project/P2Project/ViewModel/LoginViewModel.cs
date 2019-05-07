@@ -28,7 +28,7 @@ namespace P2Project.ViewModel
         private bool CanExecuteLoginClick(object param)
         {
             string username = (string)param;
-            return username.Length == 0 ? false : true;
+            return username != null && username.Length != 0;
         }
 
         private void ExecuteLoginClick(object param)
@@ -49,7 +49,7 @@ namespace P2Project.ViewModel
         {
             get
             {
-                return _createUserCommand ?? (_createUserCommand = new RelayCommand(param => CreateUserClick(param), param => CanCreateUserClick(param)));
+                return _createUserCommand ?? (_createUserCommand = new RelayCommand(param => CreateUserClick(param)));
             }
         }
 
@@ -61,6 +61,5 @@ namespace P2Project.ViewModel
             Navigator.MainNavigationService.Navigate(createUserPage);
         }
 
-        private bool CanCreateUserClick(object param) { return true; }
     }
 }
