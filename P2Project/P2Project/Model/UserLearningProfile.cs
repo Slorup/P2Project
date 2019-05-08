@@ -26,6 +26,8 @@ namespace P2Project.Model
             {
                 if (value < 1)
                     base.TextVisual = 1;
+                else if (value > double.MaxValue / 6)
+                    base.TextVisual = value / 6;
                 else
                     base.TextVisual = value;
             }
@@ -38,6 +40,8 @@ namespace P2Project.Model
             {
                 if (value < 1)
                     base.ImageVisual = 1;
+                else if (value > double.MaxValue / 6)
+                    base.ImageVisual = value / 6;
                 else
                     base.ImageVisual = value;
             }
@@ -50,6 +54,8 @@ namespace P2Project.Model
             {
                 if (value < 1)
                     base.Auditory = 1;
+                else if (value > double.MaxValue / 6)
+                    base.Auditory = value / 6;
                 else
                     base.Auditory = value;
             }
@@ -62,6 +68,8 @@ namespace P2Project.Model
             {
                 if (value < 1)
                     base.Tactile = 1;
+                else if (value > double.MaxValue / 6)
+                    base.Tactile = value / 6;
                 else
                     base.Tactile = value;
             }
@@ -74,6 +82,8 @@ namespace P2Project.Model
             {
                 if (value < 1)
                     base.Kinesthetic = 1;
+                else if (value > double.MaxValue / 6)
+                    base.Kinesthetic = value / 6;
                 else
                     base.Kinesthetic = value;
             }
@@ -86,6 +96,8 @@ namespace P2Project.Model
             {
                 if (value < 1)
                     base.Verbal = 1;
+                else if (value > double.MaxValue / 6)
+                    base.Verbal = value / 6;
                 else
                     base.Verbal = value;
             }
