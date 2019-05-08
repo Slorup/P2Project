@@ -76,11 +76,11 @@ namespace P2Project.Model
             return exerciselist.Where(p => !CompletedExercisesID.Contains(p.ID)).ToList();
         }
 
-        //Stardardafvigelse: sqrt(1/6 * Sum((E_x - S_x)^2))
+        //Stardardafvigelse: sqrt(1/2 * Sum((E_x - S_x)^2))
         private int CalcChanceLikeExercise(Exercise exercise)
         {
             double profileDifferenceSum = CalcProfileDifferenceSum(exercise);
-            return (int)((1 - Math.Sqrt(profileDifferenceSum / 6)) * 100); 
+            return (int)((1 - Math.Sqrt(profileDifferenceSum / 2)) * 100); 
         }
 
         private double CalcProfileDifferenceSum(Exercise exercise)

@@ -22,7 +22,7 @@ namespace P2Project.ViewModel
 
         public CreateUserViewModel()
         {
-            Surveys = new Survey(8);
+            Surveys = new Survey(6);
         }
 
         private ICommand _createUserCommand;

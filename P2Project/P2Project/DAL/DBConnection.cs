@@ -52,6 +52,7 @@ namespace P2Project.DAL
                     Exercise exercise = new Exercise(reader[1].ToString(), desc, profile, reader[3].ToString(), Convert.ToDateTime(reader[2])) { ID = Convert.ToInt32(reader[0]) };
                     exerciselist.Add(exercise);
                 }
+                //TODO - IMAGEPATH
             }
             return exerciselist;
         }
