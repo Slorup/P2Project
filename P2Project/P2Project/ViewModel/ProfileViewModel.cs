@@ -18,7 +18,14 @@ namespace P2Project.ViewModel
     class ProfileViewModel : BaseViewModel
     {
         public User CurrentUser { get; set; }
-        
+
+        public string TextVisual { get; set; }
+        public string ImageVisual { get; set; }
+        public string Auditory { get; set; }
+        public string Tactile { get; set; }
+        public string Kinesthetic { get; set; }
+        public string Verbal { get; set; }
+
         private string _username;
 
         public string Username
@@ -26,6 +33,7 @@ namespace P2Project.ViewModel
             get { return _username; }
             set { SetProperty(ref _username, value); }
         }
+
         private string _numberofExercises;
 
         public string NumberofExercises
@@ -48,6 +56,23 @@ namespace P2Project.ViewModel
             Username = CurrentUser.UserName;
             NumberofExercises = "Du har lavet " + CurrentUser.CompletedExercisesID.Count.ToString() + " opgave(r)";
             DanishUserType = "Bruger type: " + Danishtype(CurrentUser.Type);
+            UpdateProfileStrings();
+        }
+
+        private void UpdateProfileStrings()
+        {
+            double sum = CurrentUser.Profile.CalcProfileSum();
+            TextVisual = ConvertProfileToString(CurrentUser.Profile.TextVisual, sum);
+            ImageVisual = ConvertProfileToString(CurrentUser.Profile.ImageVisual, sum);
+            Auditory = ConvertProfileToString(CurrentUser.Profile.Auditory, sum);
+            Tactile = ConvertProfileToString(CurrentUser.Profile.Tactile, sum);
+            Kinesthetic = ConvertProfileToString(CurrentUser.Profile.Kinesthetic, sum);
+            Verbal = ConvertProfileToString(CurrentUser.Profile.Verbal, sum);
+        }
+
+        private string ConvertProfileToString(double stat, double sum)
+        {
+            return Math.Round(100 * stat / sum).ToString() + "%";
         }
 
         private string Danishtype(UserType usertype)

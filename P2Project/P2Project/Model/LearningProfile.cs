@@ -17,7 +17,7 @@ namespace P2Project.Model
 
         public double CalcProfileSum()
         {
-            return Auditory + Kinesthetic + Verbal + TextVisual + ImageVisual + ImageVisual;
+            return Auditory + Kinesthetic + Verbal + TextVisual + ImageVisual + Tactile;
         }
     }
 }

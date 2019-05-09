@@ -13,6 +13,11 @@
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding CurrentUser.Username}" VerticalAlignment="Top" Margin="363,255,0,0"/>
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding NumberofExercises}" VerticalAlignment="Top" Margin="363,298,0,0"/>
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding DanishUserType}" VerticalAlignment="Top" Margin="363,364,0,0"/>
-
+        <TextBox HorizontalAlignment="Left" IsReadOnly="True" Height="23" Margin="589,100,0,0" TextWrapping="Wrap" Text="{Binding TextVisual}" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" IsReadOnly="True" Height="23" Margin="589,125,0,0" TextWrapping="Wrap" Text="{Binding ImageVisual}" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" IsReadOnly="True" Height="23" Margin="589,150,0,0" TextWrapping="Wrap" Text="{Binding Auditory}" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" IsReadOnly="True" Height="23" Margin="589,175,0,0" TextWrapping="Wrap" Text="{Binding Tactile}" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" IsReadOnly="True" Height="23" Margin="589,200,0,0" TextWrapping="Wrap" Text="{Binding Kinesthetic}" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" IsReadOnly="True" Height="23" Margin="589,225,0,0" TextWrapping="Wrap" Text="{Binding Verbal}" VerticalAlignment="Top" Width="120"/>
     </Grid>
 </Page>
