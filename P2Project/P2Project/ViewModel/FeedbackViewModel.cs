@@ -38,6 +38,7 @@ namespace P2Project.ViewModel
                 UserFeedback = Feedback.Bad;
             else
                 UserFeedback = Feedback.Medium;
+            _window.DialogResult = true;
             _window.Close();
         }
     }

@@ -110,11 +110,21 @@ namespace P2Project.Model
             double sum = Profile.CalcProfileSum();
             if (feedback == Feedback.Good)
             {
-                Profile.Auditory += Math.Abs(Profile.Auditory / sum - CurrentExercise.Profile.Auditory) * 5; //Change 5 to uncertaincy
+                Profile.TextVisual += Math.Abs((Profile.TextVisual / sum) - CurrentExercise.Profile.TextVisual) * 5;
+                Profile.ImageVisual += Math.Abs((Profile.ImageVisual / sum) - CurrentExercise.Profile.ImageVisual) * 5;
+                Profile.Auditory += Math.Abs((Profile.Auditory / sum) - CurrentExercise.Profile.Auditory) * 5;
+                Profile.Tactile += Math.Abs((Profile.Tactile / sum) - CurrentExercise.Profile.Tactile) * 5;
+                Profile.Kinesthetic += Math.Abs((Profile.Kinesthetic / sum) - CurrentExercise.Profile.Kinesthetic) * 5;
+                Profile.Verbal += Math.Abs((Profile.Verbal / sum) - CurrentExercise.Profile.Verbal) * 5;
             }
             if (feedback == Feedback.Bad)
             {
-                Profile.Auditory -= Math.Abs(Profile.Auditory / sum - CurrentExercise.Profile.Auditory) * 5; //Change 5 to uncertaincy
+                Profile.TextVisual -= Math.Abs((Profile.TextVisual / sum) - CurrentExercise.Profile.TextVisual) * 5;
+                Profile.ImageVisual -= Math.Abs((Profile.ImageVisual / sum) - CurrentExercise.Profile.ImageVisual) * 5;
+                Profile.Auditory -= Math.Abs((Profile.Auditory / sum) - CurrentExercise.Profile.Auditory) * 5;
+                Profile.Tactile -= Math.Abs((Profile.Tactile / sum) - CurrentExercise.Profile.Tactile) * 5;
+                Profile.Kinesthetic -= Math.Abs((Profile.Kinesthetic / sum) - CurrentExercise.Profile.Kinesthetic) * 5;
+                Profile.Verbal -= Math.Abs((Profile.Verbal / sum) - CurrentExercise.Profile.Verbal) * 5;
             }
         }
 
