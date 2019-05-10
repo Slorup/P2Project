@@ -17,8 +17,8 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Row="0" Grid.ColumnSpan="3" Text="Hvad synes den om denne opgave?"/>
-        <Button Content="-1" Grid.Row="1" Grid.Column="0" Background="White" BorderThickness="0" Command="{Binding FeedbackClickCommand}" CommandParameter="-1"/>
-        <Button Content="0" Grid.Row="1" Grid.Column="1" Background="White" BorderThickness="0" Command="{Binding FeedbackClickCommand}" CommandParameter="0"/>
-        <Button Content="1" Grid.Row="1" Grid.Column="2" Background="White" BorderThickness="0" Command="{Binding FeedbackClickCommand}" CommandParameter="1"/>
+        <Button Content="😡" Grid.Row="1" Grid.Column="0" Background="White" BorderThickness="0" Command="{Binding FeedbackClickCommand}" CommandParameter="-1"/>
+        <Button Content="😐" Grid.Row="1" Grid.Column="1" Background="White" BorderThickness="0" Command="{Binding FeedbackClickCommand}" CommandParameter="0"/>
+        <Button Content="🙂" Grid.Row="1" Grid.Column="2" Background="White" BorderThickness="0" Command="{Binding FeedbackClickCommand}" CommandParameter="1"/>
     </Grid>
 </Window>
