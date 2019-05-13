@@ -237,7 +237,7 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" Text="SPØRGERSKEMA:" VerticalAlignment="Center" FontSize="16" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
+                    <TextBlock Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" Text="SPØRGESKEMA:" VerticalAlignment="Center" FontSize="16" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
 
                     <TextBlock Grid.Column="1" Grid.Row="3" Margin="10,0,0,0" TextWrapping="Wrap" Text="1. Jeg lærer godt ved hjælp af tekster" VerticalAlignment="Center" FontSize="12" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
                     <TextBlock Grid.Column="1" Grid.Row="4" Margin="10,0,0,0" TextWrapping="Wrap" Text="(f.eks. læse i en bog)" VerticalAlignment="Center" FontSize="12" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>

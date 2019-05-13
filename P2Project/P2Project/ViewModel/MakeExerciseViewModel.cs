@@ -16,12 +16,14 @@ namespace P2Project.ViewModel
     {
         public User CurrentUser { get; set; }
 
-        private ObservableCollection<string> _imagePaths;
+        public List<string> ImagePaths { get; set; }
 
-        public ObservableCollection<string> ImagePaths
+        private string _displayImagePaths;
+
+        public string DisplayImagePaths
         {
-            get { return _imagePaths; }
-            set { SetProperty(ref _imagePaths, value); }
+            get { return _displayImagePaths; }
+            set { SetProperty(ref _displayImagePaths, value); }
         }
 
         private string _videoPath;
@@ -82,7 +84,7 @@ namespace P2Project.ViewModel
         public MakeExerciseViewModel(User currentUser)
         {
             CurrentUser = currentUser;
-            ImagePaths = new ObservableCollection<string>();
+            ImagePaths = new List<string>();
         }
 
         private ICommand _browseCommandSolution;
@@ -163,14 +165,14 @@ namespace P2Project.ViewModel
 
             fileDialog.ShowDialog();
             ImagePaths.Clear();
-            //TextBlock3 = "";
+            DisplayImagePaths = "";
             foreach (string filename in fileDialog.FileNames) //CHECK IF DIALOG OK
                 ImagePaths.Add(filename);
 
-            /*foreach (string ImagePaths in ImagePaths)
+            foreach (string ImagePaths in ImagePaths)
             {
-                TextBlock3 += ImagePaths + "\n";
-            }*/
+                DisplayImagePaths += ImagePaths + "\n";
+            }
             
         }
 
@@ -212,7 +214,7 @@ namespace P2Project.ViewModel
                 profile.Tactile = 1 / 6;
             }
 
-            ExerciseDescription exDescription = new ExerciseDescription(Description) { AudioPath = this.AudioPath, VideoPath = this.VideoPath, ImagePaths = this.ImagePaths.ToList(), SolutionPath = this.SolutionPath };
+            ExerciseDescription exDescription = new ExerciseDescription(Description) { AudioPath = this.AudioPath, VideoPath = this.VideoPath, ImagePaths = this.ImagePaths, SolutionPath = this.SolutionPath };
             Exercise exercise = new Exercise(Name, exDescription, profile, CurrentUser.UserName, DateTime.Now);
             DBConnection.CreateExercise(exercise);
             Navigator.SubNavigationService.GoBack();

@@ -239,7 +239,7 @@
                                     <ColumnDefinition Width="2*"/>
                                 </Grid.ColumnDefinitions>
                                 <Button Content="Gennemse" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Margin="1,1,1,1" Command="{Binding BrowseCommandImage}" Style="{DynamicResource RoundButton2}"/>
-                                <TextBlock HorizontalAlignment="Left" Grid.Column="1" TextWrapping="Wrap" Text="{Binding ImagePaths, Converter={StaticResource converter}}" VerticalAlignment="Top" Foreground="Black"/>
+                                <TextBlock HorizontalAlignment="Left" Grid.Column="1" TextWrapping="Wrap" Text="{Binding DisplayImagePaths}" VerticalAlignment="Top" Foreground="Black"/>
                             </Grid>
                         </Grid>
                     </Border>
