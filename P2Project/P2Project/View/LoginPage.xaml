@@ -17,16 +17,16 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <SolidColorBrush x:Key="Button.Static.Background" Color="#834C69"/>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFFF7B10"/>
         <SolidColorBrush x:Key="Button.Static.Border" Color="#f38120"/>
         <SolidColorBrush x:Key="Button.Static.foreground" Color="#010101"/>
-        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#f48d36"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FF953F"/>
         <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#f48d36"/>
-        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#da741c"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFFF7B10"/>
         <SolidColorBrush x:Key="Button.Pressed.Border" Color="#da741c"/>
         <SolidColorBrush x:Key="Button.Disabled.Background" Color="#f7b379"/>
         <SolidColorBrush x:Key="Button.Disabled.Border" Color="#f7b379"/>
-        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#facca5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#404040"/>
         <Style x:Key="RoundButton" TargetType="{x:Type Button}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
             <Setter Property="Background" Value="{DynamicResource Button.Static.Background}"/>
