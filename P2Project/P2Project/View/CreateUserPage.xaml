@@ -17,16 +17,16 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <SolidColorBrush x:Key="Button.Static.Background" Color="#834C69"/>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFFF7B10"/>
         <SolidColorBrush x:Key="Button.Static.Border" Color="#f38120"/>
         <SolidColorBrush x:Key="Button.Static.foreground" Color="#010101"/>
-        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#f48d36"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FF953F"/>
         <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#f48d36"/>
-        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#da741c"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFFF7B10"/>
         <SolidColorBrush x:Key="Button.Pressed.Border" Color="#da741c"/>
-        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#f7b379"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#ff9844"/>
         <SolidColorBrush x:Key="Button.Disabled.Border" Color="#f7b379"/>
-        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#facca5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#404040"/>
         <Style x:Key="RoundButton" TargetType="{x:Type Button}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
             <Setter Property="Background" Value="{DynamicResource Button.Static.Background}"/>
@@ -58,6 +58,79 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+        </Style>
+
+        <Style x:Key="SliderRepeatButton" TargetType="RepeatButton">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="IsTabStop" Value="false" />
+            <Setter Property="Focusable" Value="false" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RepeatButton">
+                        <Border Background="Black" Height="3"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SliderRepeatButton1" TargetType="RepeatButton">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RepeatButton">
+                        <Border SnapsToDevicePixels="True" Background="#834c69" Height="3"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SliderThumb" TargetType="Thumb">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Thumb">
+                        <Rectangle Height="15" Width="5" Fill="#834c69" RadiusY="2.5" RadiusX="2.5">
+                        </Rectangle>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <ControlTemplate x:Key="Slider"  TargetType="Slider">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" MinHeight="{TemplateBinding MinHeight}" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Track Grid.Row="1" x:Name="PART_Track"   >
+                    <Track.DecreaseRepeatButton>
+                        <RepeatButton Style="{StaticResource SliderRepeatButton1}"  Command="Slider.DecreaseLarge" />
+                    </Track.DecreaseRepeatButton>
+                    <Track.Thumb>
+                        <Thumb Style="{StaticResource SliderThumb}"  />
+                    </Track.Thumb>
+                    <Track.IncreaseRepeatButton>
+                        <RepeatButton Style="{StaticResource SliderRepeatButton}" Command="Slider.IncreaseLarge" />
+                    </Track.IncreaseRepeatButton>
+                </Track>
+            </Grid>
+        </ControlTemplate>
+
+        <Style x:Key="CustomSlider1" TargetType="Slider">
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Style.Triggers>
+                <Trigger Property="Orientation" Value="Horizontal">
+                    <Setter Property="MinHeight" Value="21" />
+                    <Setter Property="MinWidth" Value="104" />
+                    <Setter Property="Template" Value="{StaticResource Slider}" />
+                </Trigger>
+            </Style.Triggers>
         </Style>
     </Page.Resources>
 
@@ -120,10 +193,15 @@
                     <TextBlock Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" Text="BRUGERNAVN:" VerticalAlignment="Center" FontSize="24" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
                     <TextBox Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" Text="{Binding UserName}" VerticalAlignment="Center" Height="25" Width="220"/>
                     <TextBlock Grid.Column="1" Grid.Row="4" TextWrapping="Wrap" Text="PROFIL TYPE:" VerticalAlignment="Center" FontSize="24" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
-                    <ListBox Grid.Column="0" Grid.Row="5" Height="80" Margin="10,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="100" SelectedIndex="{Binding SelectedUserTypeIndex}" >
-                        <ListBoxItem Content="Elev"/>
-                        <ListBoxItem Content="Underviser"/>
-                        <ListBoxItem Content="Admin"/>
+                    <ListBox Grid.Column="0" Grid.Row="5" Height="30" Margin="10,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Width="220" SelectedIndex="{Binding SelectedUserTypeIndex}" >
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <ListBoxItem Content="Elev" Width="70" HorizontalAlignment="Center"/>
+                        <ListBoxItem Content="Underviser" Width="70" HorizontalAlignment="Center"/>
+                        <ListBoxItem Content="Admin" Width="70" HorizontalAlignment="Center"/>
                     </ListBox>
                 </Grid>
                 <Grid Grid.Column="1" Grid.Row="3" RenderTransformOrigin="0.5,0.5">
@@ -163,27 +241,27 @@
 
                     <TextBlock Grid.Column="1" Grid.Row="3" Margin="10,0,0,0" TextWrapping="Wrap" Text="1. Jeg lærer godt ved hjælp af tekster" VerticalAlignment="Center" FontSize="12" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
                     <TextBlock Grid.Column="1" Grid.Row="4" Margin="10,0,0,0" TextWrapping="Wrap" Text="(f.eks. læse i en bog)" VerticalAlignment="Center" FontSize="12" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
-                    <Slider Grid.Column="0" Grid.Row="5" HorizontalAlignment="Stretch" Margin="10,0,0,0" VerticalAlignment="Center" Minimum="1" Maximum="5" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Surveys.QuestionList[0].SliderValue}"/>
+                    <Slider Grid.Column="0" Grid.Row="5" HorizontalAlignment="Stretch" Margin="10,0,0,0" VerticalAlignment="Center" Minimum="1" Maximum="5" Interval="1" IsSnapToTickEnabled="True" Style="{StaticResource CustomSlider1}" Value="{Binding Surveys.QuestionList[0].SliderValue}"/>
 
                     <TextBlock Grid.Column="1" Grid.Row="7" Margin="10,0,0,0" TextWrapping="Wrap" Text="2. Jeg lærer godt ved hjælp af billeder" VerticalAlignment="Center" FontSize="12" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
                     <TextBlock Grid.Column="1" Grid.Row="8" Margin="10,0,0,0" TextWrapping="Wrap" Text="(f.eks. diagrammer, grafer og video)" VerticalAlignment="Center" FontSize="12" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
-                    <Slider Grid.Column="0" Grid.Row="9" HorizontalAlignment="Stretch" Margin="10,0,0,0" VerticalAlignment="Center" Minimum="1" Maximum="5" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Surveys.QuestionList[1].SliderValue}"/>
+                    <Slider Grid.Column="0" Grid.Row="9" HorizontalAlignment="Stretch" Margin="10,0,0,0" VerticalAlignment="Center" Minimum="1" Maximum="5" Interval="1" IsSnapToTickEnabled="True" Style="{StaticResource CustomSlider1}" Value="{Binding Surveys.QuestionList[1].SliderValue}"/>
 
                     <TextBlock Grid.Column="1" Grid.Row="11" Margin="10,0,0,0" TextWrapping="Wrap" Text="3. Jeg lærer godt ved hjælp af at lytte" VerticalAlignment="Center" FontSize="12" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
                     <TextBlock Grid.Column="1" Grid.Row="12" Margin="10,0,0,0" TextWrapping="Wrap" Text="(f.eks. tavleundervisning)" VerticalAlignment="Center" FontSize="12" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
-                    <Slider Grid.Column="0" Grid.Row="13" HorizontalAlignment="Stretch" Margin="10,0,0,0" VerticalAlignment="Center" Minimum="1" Maximum="5" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Surveys.QuestionList[2].SliderValue}"/>
+                    <Slider Grid.Column="0" Grid.Row="13" HorizontalAlignment="Stretch" Margin="10,0,0,0" VerticalAlignment="Center" Minimum="1" Maximum="5" Interval="1" IsSnapToTickEnabled="True" Style="{StaticResource CustomSlider1}" Value="{Binding Surveys.QuestionList[2].SliderValue}"/>
 
                     <TextBlock Grid.Column="1" Grid.Row="15" Margin="10,0,0,0" TextWrapping="Wrap" Text="4. Jeg lærer godt ved hjælp af at tale" VerticalAlignment="Center" FontSize="12" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
                     <TextBlock Grid.Column="1" Grid.Row="16" Margin="10,0,0,0" TextWrapping="Wrap" Text="(f.eks. læse højt og diskutere)" VerticalAlignment="Center" FontSize="12" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
-                    <Slider Grid.Column="0" Grid.Row="17" HorizontalAlignment="Stretch" Margin="10,0,0,0" VerticalAlignment="Center" Minimum="1" Maximum="5" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Surveys.QuestionList[3].SliderValue}"/>
+                    <Slider Grid.Column="0" Grid.Row="17" HorizontalAlignment="Stretch" Margin="10,0,0,0" VerticalAlignment="Center" Minimum="1" Maximum="5" Interval="1" IsSnapToTickEnabled="True" Style="{StaticResource CustomSlider1}" Value="{Binding Surveys.QuestionList[3].SliderValue}"/>
 
                     <TextBlock Grid.Column="1" Grid.Row="19" Margin="10,0,0,0" TextWrapping="Wrap" Text="5. Jeg lærer godt ved hjælp af at bruge mine hænder" VerticalAlignment="Center" FontSize="12" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
                     <TextBlock Grid.Column="1" Grid.Row="20" Margin="10,0,0,0" TextWrapping="Wrap" Text="(f.eks. røre ting, tegne og tage notater)" VerticalAlignment="Center" FontSize="12" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
-                    <Slider Grid.Column="0" Grid.Row="21" HorizontalAlignment="Stretch" Margin="10,0,0,0" VerticalAlignment="Center" Minimum="1" Maximum="5" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Surveys.QuestionList[4].SliderValue}"/>
+                    <Slider Grid.Column="0" Grid.Row="21" HorizontalAlignment="Stretch" Margin="10,0,0,0" VerticalAlignment="Center" Minimum="1" Maximum="5" Interval="1" IsSnapToTickEnabled="True" Style="{StaticResource CustomSlider1}" Value="{Binding Surveys.QuestionList[4].SliderValue}"/>
 
                     <TextBlock Grid.Column="1" Grid.Row="23" Margin="10,0,0,0" TextWrapping="Wrap" Text="6. Jeg lærer godt ved hjælp af at være fysisk aktiv" VerticalAlignment="Center" FontSize="12" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
                     <TextBlock Grid.Column="1" Grid.Row="24" Margin="10,0,0,0" TextWrapping="Wrap" Text="(f.eks. bruge og bevæge hele kroppen)" VerticalAlignment="Center" FontSize="12" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
-                    <Slider Grid.Column="0" Grid.Row="25" HorizontalAlignment="Stretch" Margin="10,0,0,0" VerticalAlignment="Center" Minimum="1" Maximum="5" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Surveys.QuestionList[5].SliderValue}"/>
+                    <Slider Grid.Column="0" Grid.Row="25" HorizontalAlignment="Stretch" Margin="10,0,0,0" VerticalAlignment="Center" Minimum="1" Maximum="5" Interval="1" IsSnapToTickEnabled="True" Style="{StaticResource CustomSlider1}" Value="{Binding Surveys.QuestionList[5].SliderValue}"/>
 
                 </Grid>
             </Grid>
