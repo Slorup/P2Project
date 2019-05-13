@@ -149,6 +149,14 @@ namespace P2Project.ViewModel
             }
         }
 
+        private float _butRot;
+
+        public float ButRot
+        {
+            get { return _butRot; }
+            set { SetProperty(ref _butRot, value); }
+        }
+
         private ICommand _panelShowCommand;
 
         public ICommand PanelShowCommand
@@ -162,9 +170,15 @@ namespace P2Project.ViewModel
         private void PanelShowClick(object param)
         {
             if (PanelVisibility == Visibility.Collapsed)
+            {
                 PanelVisibility = Visibility.Visible;
+                ButRot = 0;
+            }
             else
+            {
                 PanelVisibility = Visibility.Collapsed;
+                ButRot = 180;
+            }
         }
 
         private ICommand _finishedExerciseCommand;

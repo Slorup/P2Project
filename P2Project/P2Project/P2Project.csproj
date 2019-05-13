@@ -180,5 +180,31 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\VectorArrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\VectorMediaMaximizePlayer.png" />
+    <Resource Include="Resources\VectorMediaStopPlayer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\VectorMediaPausePlayer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\VectorMediaPauseHoverPlayer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\VectorMediaMaximizeHoverPlayer.png" />
+    <Resource Include="Resources\VectorMediaStopHoverPlayer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\VectorMediaPlayHoverPlayer.png" />
+    <Resource Include="Resources\VectorMediaPlayPlayer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\VectorAngrySmiley.png" />
+    <Resource Include="Resources\VectorHappySmiley.png" />
+    <Resource Include="Resources\VectorMediumSmiley.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

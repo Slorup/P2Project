@@ -49,6 +49,22 @@ namespace P2Project.ViewModel
             }
         }
 
+        private Visibility _PauseVisibility;
+
+        public Visibility PauseVisibility
+        {
+            get { return _PauseVisibility; }
+            set { SetProperty(ref _PauseVisibility, value); }
+        }
+
+        private Visibility _playVisibility;
+
+        public Visibility PlayVisibility
+        {
+            get { return _playVisibility; }
+            set { SetProperty(ref _playVisibility, value); }
+        }
+
         private ICommand _pauseCommand;
         public ICommand PauseCommand
         {
@@ -64,11 +80,15 @@ namespace P2Project.ViewModel
             {
                 ((MediaElement)param).Pause();
                 IsPlaying = false;
+                PlayVisibility = Visibility.Collapsed;
+                PauseVisibility = Visibility.Visible;
             }
             else
             {
                 ((MediaElement)param).Play();
                 IsPlaying = true;
+                PlayVisibility = Visibility.Visible;
+                PauseVisibility = Visibility.Collapsed;
             }
         }
 
@@ -105,6 +125,7 @@ namespace P2Project.ViewModel
         public VideoPlayerViewModel(string path)
         {
             VideoPath = path;
+            PauseVisibility = Visibility.Collapsed;
         }
         
         public void Player_MediaOpened(MediaElement player)

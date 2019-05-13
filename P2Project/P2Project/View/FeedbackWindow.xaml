@@ -6,19 +6,121 @@
         xmlns:local="clr-namespace:P2Project.View"
         mc:Ignorable="d"
         Title="Feedback" Height="150" Width="300" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
+    <Window.Resources>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#00000000"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#00000000"/>
+        <SolidColorBrush x:Key="Button.Static.foreground" Color="#010101"/>
+        <ImageBrush x:Key="Button.Static.ImageHappy" ImageSource="/P2Project;component/Resources/VectorHappySmiley.png" Stretch="Uniform"/>
+        <ImageBrush x:Key="Button.Static.ImageMedium" ImageSource="/P2Project;component/Resources/VectorMediumSmiley.png" Stretch="Uniform"/>
+        <ImageBrush x:Key="Button.Static.ImageAngry" ImageSource="/P2Project;component/Resources/VectorAngrySmiley.png" Stretch="Uniform"/>
+        
+        <Style x:Key="HappyButton" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{DynamicResource Button.Static.Background}"/>
+            <Setter Property="Foreground" Value="{DynamicResource Button.Static.foreground}"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Rectangle x:Name="ButtonRect" Fill="{TemplateBinding Background}"/>
+                            <ContentPresenter x:Name="ButtonName" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            <Rectangle Margin="10,10,10,10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="{StaticResource Button.Static.ImageHappy}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True"/>
+                            <Trigger Property="IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="true"/>
+                            <Trigger Property="IsPressed" Value="true"/>
+                            <Trigger Property="IsEnabled" Value="false"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <Style x:Key="MediumButton" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{DynamicResource Button.Static.Background}"/>
+            <Setter Property="Foreground" Value="{DynamicResource Button.Static.foreground}"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Rectangle x:Name="ButtonRect" Fill="{TemplateBinding Background}"/>
+                            <ContentPresenter x:Name="ButtonName" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            <Rectangle Margin="10,10,10,10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="{StaticResource Button.Static.ImageMedium}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True"/>
+                            <Trigger Property="IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="true"/>
+                            <Trigger Property="IsPressed" Value="true"/>
+                            <Trigger Property="IsEnabled" Value="false"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="AngryButton" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{DynamicResource Button.Static.Background}"/>
+            <Setter Property="Foreground" Value="{DynamicResource Button.Static.foreground}"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Rectangle x:Name="ButtonRect" Fill="{TemplateBinding Background}"/>
+                            <ContentPresenter x:Name="ButtonName" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            <Rectangle Margin="10,10,10,10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="{StaticResource Button.Static.ImageAngry}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True"/>
+                            <Trigger Property="IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="true"/>
+                            <Trigger Property="IsPressed" Value="true"/>
+                            <Trigger Property="IsEnabled" Value="false"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="3*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <TextBlock Grid.Row="0" Grid.ColumnSpan="3" Text="Hvad synes den om denne opgave?"/>
-        <Button Content="😡" Grid.Row="1" Grid.Column="0" Background="White" BorderThickness="0" Command="{Binding FeedbackClickCommand}" CommandParameter="-1"/>
-        <Button Content="😐" Grid.Row="1" Grid.Column="1" Background="White" BorderThickness="0" Command="{Binding FeedbackClickCommand}" CommandParameter="0"/>
-        <Button Content="🙂" Grid.Row="1" Grid.Column="2" Background="White" BorderThickness="0" Command="{Binding FeedbackClickCommand}" CommandParameter="1"/>
+        <Rectangle Fill="#33313b"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0" Grid.ColumnSpan="3" Text="Hvad synes den om denne opgave?"/>
+            <Button Content="😡" Grid.Row="1" Grid.Column="0" BorderThickness="0" Command="{Binding FeedbackClickCommand}" CommandParameter="-1" Style="{StaticResource AngryButton}"/>
+            <Button Content="😐" Grid.Row="1" Grid.Column="1" BorderThickness="0" Command="{Binding FeedbackClickCommand}" CommandParameter="0" Style="{StaticResource MediumButton}"/>
+            <Button Content="🙂" Grid.Row="1" Grid.Column="2" BorderThickness="0" Command="{Binding FeedbackClickCommand}" CommandParameter="1" Style="{StaticResource HappyButton}"/>
+        </Grid>
     </Grid>
 </Window>

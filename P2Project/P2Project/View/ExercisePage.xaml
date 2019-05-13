@@ -5,8 +5,107 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:P2Project.View"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="ExercisePage" Background="HotPink">
+      d:DesignHeight="540" d:DesignWidth="960"
+      Title="ExercisePage" Background="#33313b">
+    <Page.Resources>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFFF7B10"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#f38120"/>
+        <SolidColorBrush x:Key="Button.Static.foreground" Color="#010101"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FF953F"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#f48d36"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFFF7B10"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#da741c"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#f7b379"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#f7b379"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#404040"/>
+        
+        <SolidColorBrush x:Key="SqButton.Static.Background" Color="#3c4f65"/>
+        <SolidColorBrush x:Key="SqButton.Static.Border" Color="#3c4f65"/>
+        <SolidColorBrush x:Key="SqButton.Static.foreground" Color="#e6f5ff"/>
+        <SolidColorBrush x:Key="SqButton.MouseOver.Background" Color="#4e5966"/>
+        <SolidColorBrush x:Key="SqButton.MouseOver.Border" Color="#4e5966"/>
+        <SolidColorBrush x:Key="SqButton.Pressed.Background" Color="#3c4f65"/>
+        <SolidColorBrush x:Key="SqButton.Pressed.Border" Color="#3c4f65"/>
+        <SolidColorBrush x:Key="SqButton.Disabled.Background" Color="#3c4f65"/>
+        <SolidColorBrush x:Key="SqButton.Disabled.Border" Color="#3c4f65"/>
+        <SolidColorBrush x:Key="SqButton.Disabled.Foreground" Color="#404040"/>
+        
+        <Style x:Key="SquareFlatButton" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{DynamicResource SqButton.Static.Background}"/>
+            <Setter Property="Foreground" Value="{DynamicResource SqButton.Static.foreground}"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Rectangle x:Name="ButtonRect" Fill="{TemplateBinding Background}"/>
+                            <ContentPresenter x:Name="ButtonName" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True"/>
+                            <Trigger Property="IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Fill" TargetName="ButtonRect" Value="{StaticResource SqButton.MouseOver.Background}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Fill" TargetName="ButtonRect" Value="{StaticResource SqButton.Pressed.Background}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Fill" TargetName="ButtonRect" Value="{StaticResource SqButton.Disabled.Background}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="ButtonName" Value="{StaticResource SqButton.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="RoundButton" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{DynamicResource Button.Static.Background}"/>
+            <Setter Property="Foreground" Value="{DynamicResource Button.Static.foreground}"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Rectangle x:Name="ButtonRect" Fill="{TemplateBinding Background}" RadiusY="20" RadiusX="20"/>
+                            <ContentPresenter x:Name="ButtonName" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True"/>
+                            <Trigger Property="IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Fill" TargetName="ButtonRect" Value="{StaticResource Button.MouseOver.Background}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Fill" TargetName="ButtonRect" Value="{StaticResource Button.Pressed.Background}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Fill" TargetName="ButtonRect" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="ButtonName" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -14,19 +113,36 @@
             <ColumnDefinition Width="7*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0" Orientation="Horizontal">
-            <StackPanel Width="300" Background="AliceBlue" Orientation="Vertical" VerticalAlignment="Stretch" Visibility="{Binding PanelVisibility}">
-                <TextBlock TextWrapping="Wrap" Text="{Binding CurrentUser.CurrentExercise.Description.TextDescription}"/>
+            <StackPanel Width="300" Background="#3c4f65" Orientation="Vertical" VerticalAlignment="Stretch" Visibility="{Binding PanelVisibility}">
+                <ScrollViewer Grid.Column="1" Margin="0,0,5,2">
+                    <TextBlock TextWrapping="Wrap" Text="{Binding CurrentUser.CurrentExercise.Description.TextDescription}" Height="50"/>
+                </ScrollViewer>
                 <Frame Height="140" Width="120" Content="{Binding ImageFrame}"/>
                 <Frame Height="100" Width="160" Content="{Binding VideoFrame}"/>
                 <StackPanel Orientation="Horizontal" Height="100">
-                    <Button Content="Vis Løsning" Width="70" Height="30" Command="{Binding ShowSolutionCommand}"/>
+                    <Button Content="Vis Løsning" Width="100" Height="30" Command="{Binding ShowSolutionCommand}" Style="{StaticResource RoundButton}"/>
                     <Frame Width="120" HorizontalAlignment="Center" Content="{Binding SolutionFrame}" Visibility="{Binding SolutionVisibility}"/>
                 </StackPanel>
-                <Button Content="🎤" Width="30" Height="30" HorizontalAlignment="Left" Command="{Binding PlayAudioCommand}" />
-                <Button Content="Færdig" Command="{Binding FinishedExerciseCommand}"/>
-                <Button Content="Spring over" Command="{Binding SkipExerciseCommand}"/>
+                <Button Content="🎤" Width="30" Height="30" HorizontalAlignment="Left" Command="{Binding PlayAudioCommand}" Style="{StaticResource RoundButton}" Margin="0,10,0,0"/>
+                <Button Content="Færdig" Command="{Binding FinishedExerciseCommand}" Style="{StaticResource RoundButton}" Width="250" Height="30" Margin="0,10,0,0"/>
+                <Button Content="Spring over" Command="{Binding SkipExerciseCommand}" Style="{StaticResource RoundButton}" Width="250" Height="30" Margin="0,10,0,0"/>
             </StackPanel>
-            <Button Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Width="15" Height="50" Command="{Binding PanelShowCommand}"/>
-    </StackPanel>
+            <Button Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Width="23" Height="60" Command="{Binding PanelShowCommand}" Style="{StaticResource SquareFlatButton}">
+                <Rectangle Height="60" Width="20">
+                    <Rectangle.Fill>
+                        <ImageBrush ImageSource="/P2Project;component/Resources/VectorArrow.png" Stretch="Uniform">
+                            <ImageBrush.RelativeTransform>
+                                <TransformGroup>
+                                    <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                    <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                    <RotateTransform Angle="{Binding ButRot}" CenterY="0.5" CenterX="0.5"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </ImageBrush.RelativeTransform>
+                        </ImageBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Button>
+        </StackPanel>
     </Grid>
 </Page>

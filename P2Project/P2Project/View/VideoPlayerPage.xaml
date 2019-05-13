@@ -6,25 +6,274 @@
       xmlns:local="clr-namespace:P2Project.View"
       mc:Ignorable="d" 
       Title="VideoPlayerPage" MinHeight="100" MinWidth="160">
-    
+
+    <Page.Resources>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#00000000"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#00000000"/>
+        <SolidColorBrush x:Key="Button.Static.foreground" Color="#010101"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#00000000"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#00000000"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#00000000"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#00000000"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#00000000"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#00000000"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#00000000"/>
+        <ImageBrush x:Key="Button.Static.ImagePause" ImageSource="/P2Project;component/Resources/VectorMediaPausePlayer.png" Stretch="Uniform"/>
+        <ImageBrush x:Key="Button.MouseOver.ImagePause" ImageSource="/P2Project;component/Resources/VectorMediaPauseHoverPlayer.png" Stretch="Uniform"/>
+        <ImageBrush x:Key="Button.Static.ImagePlay" ImageSource="/P2Project;component/Resources/VectorMediaPlayPlayer.png" Stretch="Uniform"/>
+        <ImageBrush x:Key="Button.MouseOver.ImagePlay" ImageSource="/P2Project;component/Resources/VectorMediaPlayHoverPlayer.png" Stretch="Uniform"/>
+        <ImageBrush x:Key="Button.Static.ImageStop" ImageSource="/P2Project;component/Resources/VectorMediaStopPlayer.png" Stretch="Uniform"/>
+        <ImageBrush x:Key="Button.MouseOver.ImageStop" ImageSource="/P2Project;component/Resources/VectorMediaStopHoverPlayer.png" Stretch="Uniform"/>
+        <ImageBrush x:Key="Button.Static.ImageMax" ImageSource="/P2Project;component/Resources/VectorMediaMaximizePlayer.png" Stretch="Uniform"/>
+        <ImageBrush x:Key="Button.MouseOver.ImageMax" ImageSource="/P2Project;component/Resources/VectorMediaMaximizeHoverPlayer.png" Stretch="Uniform"/>
+        <Style x:Key="PauseButton" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{DynamicResource Button.Static.Background}"/>
+            <Setter Property="Foreground" Value="{DynamicResource Button.Static.foreground}"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Rectangle x:Name="ButtonRect" Fill="{TemplateBinding Background}"/>
+                            <ContentPresenter x:Name="ButtonName" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            <Rectangle x:Name="MediaBut" Margin="2,2,2,2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="{StaticResource Button.Static.ImagePause}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True"/>
+                            <Trigger Property="IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Fill" TargetName="ButtonRect" Value="{StaticResource Button.MouseOver.Background}"/>
+                                <Setter Property="Fill" TargetName="MediaBut" Value="{StaticResource Button.MouseOver.ImagePause}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Fill" TargetName="ButtonRect" Value="{StaticResource Button.Pressed.Background}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Fill" TargetName="ButtonRect" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="ButtonName" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <Style x:Key="PlayButton" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{DynamicResource Button.Static.Background}"/>
+            <Setter Property="Foreground" Value="{DynamicResource Button.Static.foreground}"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Rectangle x:Name="ButtonRect" Fill="{TemplateBinding Background}"/>
+                            <ContentPresenter x:Name="ButtonName" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            <Rectangle x:Name="MediaBut" Margin="1,1,1,1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="{StaticResource Button.Static.ImagePlay}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True"/>
+                            <Trigger Property="IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Fill" TargetName="ButtonRect" Value="{StaticResource Button.MouseOver.Background}"/>
+                                <Setter Property="Fill" TargetName="MediaBut" Value="{StaticResource Button.MouseOver.ImagePlay}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Fill" TargetName="ButtonRect" Value="{StaticResource Button.Pressed.Background}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Fill" TargetName="ButtonRect" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="ButtonName" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="StopButton" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{DynamicResource Button.Static.Background}"/>
+            <Setter Property="Foreground" Value="{DynamicResource Button.Static.foreground}"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Rectangle x:Name="ButtonRect" Fill="{TemplateBinding Background}"/>
+                            <ContentPresenter x:Name="ButtonName" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            <Rectangle x:Name="MediaBut" Margin="1,1,1,1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="{StaticResource Button.Static.ImageStop}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True"/>
+                            <Trigger Property="IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Fill" TargetName="ButtonRect" Value="{StaticResource Button.MouseOver.Background}"/>
+                                <Setter Property="Fill" TargetName="MediaBut" Value="{StaticResource Button.MouseOver.ImageStop}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Fill" TargetName="ButtonRect" Value="{StaticResource Button.Pressed.Background}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Fill" TargetName="ButtonRect" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="ButtonName" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="MaxButton" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{DynamicResource Button.Static.Background}"/>
+            <Setter Property="Foreground" Value="{DynamicResource Button.Static.foreground}"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Rectangle x:Name="ButtonRect" Fill="{TemplateBinding Background}"/>
+                            <ContentPresenter x:Name="ButtonName" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            <Rectangle x:Name="MediaBut" Margin="1,1,1,1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="{StaticResource Button.Static.ImageMax}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True"/>
+                            <Trigger Property="IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Fill" TargetName="ButtonRect" Value="{StaticResource Button.MouseOver.Background}"/>
+                                <Setter Property="Fill" TargetName="MediaBut" Value="{StaticResource Button.MouseOver.ImageMax}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Fill" TargetName="ButtonRect" Value="{StaticResource Button.Pressed.Background}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Fill" TargetName="ButtonRect" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="ButtonName" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SliderRepeatButton" TargetType="RepeatButton">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="IsTabStop" Value="false" />
+            <Setter Property="Focusable" Value="false" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RepeatButton">
+                        <Border Background="Black" Height="3"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SliderRepeatButton1" TargetType="RepeatButton">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RepeatButton">
+                        <Border SnapsToDevicePixels="True" Background="#834c69" Height="3"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SliderThumb" TargetType="Thumb">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Thumb">
+                        <Rectangle Height="15" Width="5" Fill="#834c69" RadiusY="2.5" RadiusX="2.5">
+                        </Rectangle>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <ControlTemplate x:Key="Slider"  TargetType="Slider">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" MinHeight="{TemplateBinding MinHeight}" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Track Grid.Row="1" x:Name="PART_Track"   >
+                    <Track.DecreaseRepeatButton>
+                        <RepeatButton Style="{StaticResource SliderRepeatButton1}"  Command="Slider.DecreaseLarge" />
+                    </Track.DecreaseRepeatButton>
+                    <Track.Thumb>
+                        <Thumb Style="{StaticResource SliderThumb}"  />
+                    </Track.Thumb>
+                    <Track.IncreaseRepeatButton>
+                        <RepeatButton Style="{StaticResource SliderRepeatButton}" Command="Slider.IncreaseLarge" />
+                    </Track.IncreaseRepeatButton>
+                </Track>
+            </Grid>
+        </ControlTemplate>
+
+        <Style x:Key="CustomSlider1" TargetType="Slider">
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Style.Triggers>
+                <Trigger Property="Orientation" Value="Horizontal">
+                    <Setter Property="MinHeight" Value="21" />
+                    <Setter Property="MinWidth" Value="104" />
+                    <Setter Property="Template" Value="{StaticResource Slider}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+
     <Grid>
+        <Rectangle Fill="#33313b"/>
+        <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="15*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
             <MediaElement LoadedBehavior="Manual" Grid.Row="0" Name="VideoPlayer" Source="{Binding VideoPath}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" MediaOpened="VideoPlayer_MediaOpened"/>
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="10*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Command="{Binding PauseCommand}" CommandParameter="{Binding ElementName=VideoPlayer}"/>
-            <Slider Grid.Column="1" VerticalAlignment="Center" Maximum="100" IsSnapToTickEnabled="False" PreviewMouseLeftButtonUp="Slider_PreviewMouseLeftButtonUp" PreviewMouseLeftButtonDown="Slider_PreviewMouseLeftButtonDown" Value="{Binding SliderValue}" />
-            <Button Grid.Column="2"  Command="{Binding ResetCommand}" CommandParameter="{Binding ElementName=VideoPlayer}"/>
-            <Button Grid.Column="3" Command="{Binding FullScreenCommand}" />
+            <Grid Grid.Row="1">
+            <Rectangle Fill="#FF33313A"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="10*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Command="{Binding PauseCommand}" CommandParameter="{Binding ElementName=VideoPlayer}" Style="{StaticResource PauseButton}" Visibility="{Binding PauseVisibility}"/>
+                    <Button Grid.Column="0" Command="{Binding PauseCommand}" CommandParameter="{Binding ElementName=VideoPlayer}" Style="{StaticResource PlayButton}" Visibility="{Binding PlayVisibility}"/>
+                    <Slider Grid.Column="1" VerticalAlignment="Center" Maximum="100" IsSnapToTickEnabled="False" PreviewMouseLeftButtonUp="Slider_PreviewMouseLeftButtonUp" PreviewMouseLeftButtonDown="Slider_PreviewMouseLeftButtonDown" Value="{Binding SliderValue}" Style="{StaticResource CustomSlider1}"/>
+                    <Button Grid.Column="2"  Command="{Binding ResetCommand}" CommandParameter="{Binding ElementName=VideoPlayer}" Style="{StaticResource StopButton}"/>
+                    <Button Grid.Column="3" Command="{Binding FullScreenCommand}" Style="{StaticResource MaxButton}"/>
+            </Grid>
         </Grid>
-            
+
+        </Grid>
     </Grid>
 </Page>
