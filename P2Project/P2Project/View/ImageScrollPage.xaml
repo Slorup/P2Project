@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:P2Project.View"
       mc:Ignorable="d" 
-      MinHeight="180" MinWidth="160"
+      MinHeight="140" MinWidth="120"
       Title="ImageScrollPage">
 
     <Grid>
@@ -16,7 +16,7 @@
         <Button Grid.Row="0" Background="AliceBlue" BorderThickness="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Command="{Binding ImageClickCommand}">
             <Image VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Source="{Binding CurrentImagePath}"/>
         </Button>
-        <Button Grid.Row="1" Height="20" Width="50" Content="Forrige" HorizontalAlignment="Left" Command="{Binding GoLeftCommand}"/>
-        <Button Grid.Row="1" Height="20" Width="50" Content="Næste" HorizontalAlignment="Right" Command="{Binding GoRightCommand}"/>
+        <Button Grid.Row="1" Height="20" Width="50" Content="Forrige" HorizontalAlignment="Left" Command="{Binding GoLeftCommand}" Visibility="{Binding ButtonVisibility}"/>
+        <Button Grid.Row="1" Height="20" Width="50" Content="Næste" HorizontalAlignment="Right" Command="{Binding GoRightCommand}" Visibility="{Binding ButtonVisibility}"/>
     </Grid>
 </Page>

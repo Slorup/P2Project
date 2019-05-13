@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -13,6 +14,14 @@ namespace P2Project.ViewModel
 {
     class ImageScrollViewModel : BaseViewModel
     {
+        private Visibility _buttonVisibility;
+
+        public Visibility ButtonVisibility
+        {
+            get { return _buttonVisibility; }
+            set { SetProperty(ref _buttonVisibility, value); }
+        }
+
         private string _currentImagePath;
 
         public string CurrentImagePath
@@ -40,6 +49,8 @@ namespace P2Project.ViewModel
                 ImagePaths = imagepaths;
                 CurrentImagePath = ImagePaths[_imageindex];
             }
+            if (imagepaths.Count < 2)
+                ButtonVisibility = Visibility.Hidden;
         }
 
         private ICommand _goLeftCommand;

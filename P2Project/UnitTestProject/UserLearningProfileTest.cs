@@ -16,8 +16,7 @@ namespace UnitTestProject
         public void CalcProfileSum_ReturnsCorrectSum()
         {
             //Arrange
-            double uncertainty = 1;
-            UserLearningProfile profile = new UserLearningProfile(1.2, 3, 3.2, 4, 3, 2, uncertainty);
+            UserLearningProfile profile = new UserLearningProfile(1.2, 3, 3.2, 4, 3, 2);
             double expected = 16.4;
 
             //Act
@@ -31,8 +30,7 @@ namespace UnitTestProject
         public void CalcProfileSum_ValuesZero_ReturnsCorrectSum()
         {
             //Arrange
-            double uncertainty = 1;
-            UserLearningProfile profile = new UserLearningProfile(0, 0, 0, 0, 0, 0, uncertainty);
+            UserLearningProfile profile = new UserLearningProfile(0, 0, 0, 0, 0, 0);
             double expected = 6;
 
             //Act
@@ -46,8 +44,7 @@ namespace UnitTestProject
         public void CalcProfileSum_ValuesNegative_ReturnsCorrectSum()
         {
             //Arrange
-            double uncertainty = 1;
-            UserLearningProfile profile = new UserLearningProfile(-3, -5, -1, -1.2, -2.6, -6.8, uncertainty);
+            UserLearningProfile profile = new UserLearningProfile(-3, -5, -1, -1.2, -2.6, -6.8);
             double expected = 6;
 
             //Act
@@ -61,8 +58,7 @@ namespace UnitTestProject
         public void CalcProfileSum_MaxValues_ReturnsCorrectSum()
         {
             //Arrange
-            double uncertainty = 1;
-            UserLearningProfile profile = new UserLearningProfile(double.MaxValue, double.MaxValue, double.MaxValue, double.MaxValue, double.MaxValue, double.MaxValue, uncertainty);
+            UserLearningProfile profile = new UserLearningProfile(double.MaxValue, double.MaxValue, double.MaxValue, double.MaxValue, double.MaxValue, double.MaxValue);
             double expected = double.MaxValue;
 
             //Act
@@ -76,8 +72,7 @@ namespace UnitTestProject
         public void CalcProfileSum_MinValues_ReturnsCorrectSum()
         {
             //Arrange
-            double uncertainty = 1;
-            UserLearningProfile profile = new UserLearningProfile(double.MinValue, double.MinValue, double.MinValue, double.MinValue, double.MinValue, double.MinValue, uncertainty);
+            UserLearningProfile profile = new UserLearningProfile(double.MinValue, double.MinValue, double.MinValue, double.MinValue, double.MinValue, double.MinValue);
             double expected = 6;
 
             //Act

@@ -18,7 +18,6 @@ namespace P2Project.ViewModel
     class ProfileViewModel : BaseViewModel
     {
         public User CurrentUser { get; set; }
-
         public string TextVisual { get; set; }
         public string ImageVisual { get; set; }
         public string Auditory { get; set; }
@@ -80,7 +79,7 @@ namespace P2Project.ViewModel
             if (usertype == UserType.Pupil)
                 return "Elev";
             else if (usertype == UserType.Teacher)
-                return "Lærer";
+                return "Underviser";
             else if (usertype == UserType.Admin)
                 return "Admin";
             else

@@ -4,6 +4,7 @@ using P2Project.Model;
 using P2Project.MVVM;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,9 +15,39 @@ namespace P2Project.ViewModel
     class MakeExerciseViewModel : BaseViewModel
     {
         public User CurrentUser { get; set; }
-        public List<string> ImagePaths { get; set; }
-        public string VideoPath { get; set; }
-        public string AudioPath { get; set; }
+
+        private ObservableCollection<string> _imagePaths;
+
+        public ObservableCollection<string> ImagePaths
+        {
+            get { return _imagePaths; }
+            set { SetProperty(ref _imagePaths, value); }
+        }
+
+        private string _videoPath;
+
+        public string VideoPath
+        {
+            get { return _videoPath; }
+            set { SetProperty(ref _videoPath, value); }
+        }
+
+        private string _audioPath;
+
+        public string AudioPath
+        {
+            get { return _audioPath; }
+            set { SetProperty(ref _audioPath, value); }
+        }
+
+        private string _solutionPath;
+
+        public string SolutionPath
+        {
+            get { return _solutionPath; }
+            set { SetProperty(ref _solutionPath, value); }
+        }
+
         public string Description { get; set; }
         public string Name { get; set; }
         public double TextVisual { get; set; }
@@ -26,7 +57,7 @@ namespace P2Project.ViewModel
         public double Tactile { get; set; }
         public double Kinesthetic { get; set; }
 
-        private string _textBlock1;
+        /*private string _textBlock1;
 
         public  string TextBlock1
         {
@@ -46,12 +77,32 @@ namespace P2Project.ViewModel
         {
             get { return _textBlock3; }
             set { SetProperty(ref _textBlock3, value); }
-        }
+        }*/
 
         public MakeExerciseViewModel(User currentUser)
         {
             CurrentUser = currentUser;
-            ImagePaths = new List<string>();
+            ImagePaths = new ObservableCollection<string>();
+        }
+
+        private ICommand _browseCommandSolution;
+
+        public ICommand BrowseCommandSolution
+        {
+            get
+            {
+                return _browseCommandSolution ?? (_browseCommandSolution = new RelayCommand(param => BrowseCommandSolutionClick(param)));
+            }
+        }
+
+        private void BrowseCommandSolutionClick(object param)
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            fileDialog.Multiselect = false;
+            fileDialog.Filter = "Image files (.jpg, .jpeg, .png)|*.jpg; *.jpeg; *.png";
+
+            fileDialog.ShowDialog();
+            SolutionPath = fileDialog.FileName;
         }
 
         private ICommand _browseCommandVideo;
@@ -66,10 +117,11 @@ namespace P2Project.ViewModel
         private void BrowseCommandVideoClick(object param)
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
+            fileDialog.Multiselect = false;
             fileDialog.Filter = "Video files (.mp4)|*.mp4";
 
             fileDialog.ShowDialog();
-            TextBlock1 = fileDialog.FileName;
+            //TextBlock1 = fileDialog.FileName;
             VideoPath = fileDialog.FileName;
         }
 
@@ -85,11 +137,12 @@ namespace P2Project.ViewModel
         private void BrowseCommandSoundClick(object param)
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
+            fileDialog.Multiselect = false;
             fileDialog.DefaultExt = ".mp3";
             fileDialog.Filter = "Audio File (.mp3)|*.mp3"; 
 
             fileDialog.ShowDialog();
-            TextBlock2 = fileDialog.FileName;
+            //TextBlock2 = fileDialog.FileName;
             AudioPath = fileDialog.FileName;
         }
 
@@ -110,14 +163,14 @@ namespace P2Project.ViewModel
 
             fileDialog.ShowDialog();
             ImagePaths.Clear();
-            TextBlock3 = "";
+            //TextBlock3 = "";
             foreach (string filename in fileDialog.FileNames) //CHECK IF DIALOG OK
                 ImagePaths.Add(filename);
 
-            foreach (string ImagePaths in ImagePaths)
+            /*foreach (string ImagePaths in ImagePaths)
             {
                 TextBlock3 += ImagePaths + "\n";
-            }
+            }*/
             
         }
 
@@ -159,7 +212,7 @@ namespace P2Project.ViewModel
                 profile.Tactile = 1 / 6;
             }
 
-            ExerciseDescription exDescription = new ExerciseDescription(Description) { AudioPath = this.AudioPath, VideoPath = this.VideoPath, ImagePaths = this.ImagePaths };
+            ExerciseDescription exDescription = new ExerciseDescription(Description) { AudioPath = this.AudioPath, VideoPath = this.VideoPath, ImagePaths = this.ImagePaths.ToList(), SolutionPath = this.SolutionPath };
             Exercise exercise = new Exercise(Name, exDescription, profile, CurrentUser.UserName, DateTime.Now);
             DBConnection.CreateExercise(exercise);
             Navigator.SubNavigationService.GoBack();

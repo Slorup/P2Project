@@ -16,9 +16,13 @@
         <StackPanel Grid.Column="0" Orientation="Horizontal">
             <StackPanel Width="300" Background="AliceBlue" Orientation="Vertical" VerticalAlignment="Stretch" Visibility="{Binding PanelVisibility}">
                 <TextBlock TextWrapping="Wrap" Text="{Binding CurrentUser.CurrentExercise.Description.TextDescription}"/>
-                <Frame Height="180" Width="160" Content="{Binding ImageFrame}"/>
-                <Frame Height="150" Width="200" Content="{Binding VideoFrame}"/>
-                <Button Width="30" Height="30" HorizontalAlignment="Left" Command="{Binding PlayAudioCommand}" />
+                <Frame Height="140" Width="120" Content="{Binding ImageFrame}"/>
+                <Frame Height="100" Width="160" Content="{Binding VideoFrame}"/>
+                <StackPanel Orientation="Horizontal" Height="100">
+                    <Button Content="Vis Løsning" Width="70" Height="30" Command="{Binding ShowSolutionCommand}"/>
+                    <Frame Width="120" HorizontalAlignment="Center" Content="{Binding SolutionFrame}" Visibility="{Binding SolutionVisibility}"/>
+                </StackPanel>
+                <Button Content="🎤" Width="30" Height="30" HorizontalAlignment="Left" Command="{Binding PlayAudioCommand}" />
                 <Button Content="Færdig" Command="{Binding FinishedExerciseCommand}"/>
                 <Button Content="Spring over" Command="{Binding SkipExerciseCommand}"/>
             </StackPanel>

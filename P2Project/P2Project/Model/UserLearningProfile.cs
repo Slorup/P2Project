@@ -8,7 +8,7 @@ namespace P2Project.Model
 {
     public class UserLearningProfile : LearningProfile
     {
-        public UserLearningProfile(double textvisual, double imagevisual, double verbal, double auditory, double tactile, double kinesthetic, double uncertainty)
+        public UserLearningProfile(double textvisual, double imagevisual, double verbal, double auditory, double tactile, double kinesthetic)
         {
             TextVisual = textvisual;
             ImageVisual = imagevisual;
@@ -16,7 +16,6 @@ namespace P2Project.Model
             Tactile = tactile;
             Kinesthetic = kinesthetic;
             Verbal = verbal;
-            UncertaintyCoefficient = uncertainty;
         }
 
         public override double TextVisual
@@ -102,7 +101,5 @@ namespace P2Project.Model
                     base.Verbal = value;
             }
         }
-
-        public double UncertaintyCoefficient { get; set; }
     }
 }

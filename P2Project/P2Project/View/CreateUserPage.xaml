@@ -111,7 +111,7 @@
                         <RowDefinition Height="3*"/>
                         <RowDefinition/>
                         <RowDefinition Height="2*"/>
-                        <RowDefinition Height="5*"/>
+                        <RowDefinition Height="6*"/>
                         <RowDefinition Height="15*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
@@ -120,9 +120,9 @@
                     <TextBlock Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" Text="BRUGERNAVN:" VerticalAlignment="Center" FontSize="24" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
                     <TextBox Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" Text="{Binding UserName}" VerticalAlignment="Center" Height="25" Width="220"/>
                     <TextBlock Grid.Column="1" Grid.Row="4" TextWrapping="Wrap" Text="PROFIL TYPE:" VerticalAlignment="Center" FontSize="24" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
-                    <ListBox Grid.Column="0" Grid.Row="5" Height="52" Margin="10,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="100" SelectedIndex="{Binding SelectedUserTypeIndex}" >
+                    <ListBox Grid.Column="0" Grid.Row="5" Height="80" Margin="10,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="100" SelectedIndex="{Binding SelectedUserTypeIndex}" >
                         <ListBoxItem Content="Elev"/>
-                        <ListBoxItem Content="Lærer"/>
+                        <ListBoxItem Content="Underviser"/>
                         <ListBoxItem Content="Admin"/>
                     </ListBox>
                 </Grid>
@@ -173,7 +173,7 @@
                     <TextBlock Grid.Column="1" Grid.Row="12" Margin="10,0,0,0" TextWrapping="Wrap" Text="(f.eks. tavleundervisning)" VerticalAlignment="Center" FontSize="12" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
                     <Slider Grid.Column="0" Grid.Row="13" HorizontalAlignment="Stretch" Margin="10,0,0,0" VerticalAlignment="Center" Minimum="1" Maximum="5" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Surveys.QuestionList[2].SliderValue}"/>
 
-                    <TextBlock Grid.Column="1" Grid.Row="15" Margin="10,0,0,0" TextWrapping="Wrap" Text="4. Jeg lærer godt ved hjæpl af at tale" VerticalAlignment="Center" FontSize="12" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
+                    <TextBlock Grid.Column="1" Grid.Row="15" Margin="10,0,0,0" TextWrapping="Wrap" Text="4. Jeg lærer godt ved hjælp af at tale" VerticalAlignment="Center" FontSize="12" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
                     <TextBlock Grid.Column="1" Grid.Row="16" Margin="10,0,0,0" TextWrapping="Wrap" Text="(f.eks. læse højt og diskutere)" VerticalAlignment="Center" FontSize="12" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
                     <Slider Grid.Column="0" Grid.Row="17" HorizontalAlignment="Stretch" Margin="10,0,0,0" VerticalAlignment="Center" Minimum="1" Maximum="5" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Surveys.QuestionList[3].SliderValue}"/>
 
@@ -181,7 +181,7 @@
                     <TextBlock Grid.Column="1" Grid.Row="20" Margin="10,0,0,0" TextWrapping="Wrap" Text="(f.eks. røre ting, tegne og tage notater)" VerticalAlignment="Center" FontSize="12" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
                     <Slider Grid.Column="0" Grid.Row="21" HorizontalAlignment="Stretch" Margin="10,0,0,0" VerticalAlignment="Center" Minimum="1" Maximum="5" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Surveys.QuestionList[4].SliderValue}"/>
 
-                    <TextBlock Grid.Column="1" Grid.Row="23" Margin="10,0,0,0" TextWrapping="Wrap" Text="6. Jeg lærer godt ved hjæpl af at være fysisk aktiv" VerticalAlignment="Center" FontSize="12" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
+                    <TextBlock Grid.Column="1" Grid.Row="23" Margin="10,0,0,0" TextWrapping="Wrap" Text="6. Jeg lærer godt ved hjælp af at være fysisk aktiv" VerticalAlignment="Center" FontSize="12" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
                     <TextBlock Grid.Column="1" Grid.Row="24" Margin="10,0,0,0" TextWrapping="Wrap" Text="(f.eks. bruge og bevæge hele kroppen)" VerticalAlignment="Center" FontSize="12" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
                     <Slider Grid.Column="0" Grid.Row="25" HorizontalAlignment="Stretch" Margin="10,0,0,0" VerticalAlignment="Center" Minimum="1" Maximum="5" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Surveys.QuestionList[5].SliderValue}"/>
 
@@ -197,7 +197,7 @@
                     <ColumnDefinition Width="10*"/>
                 </Grid.ColumnDefinitions>
                 <Button Grid.Row="0" Content="OPRET BRUGER" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" Width="220" Height="30" Command="{Binding CreateUserCommand}" Style="{DynamicResource RoundButton}"/>
-                <Button Grid.Column="3" Content="Tilbage" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" Width="220" Height="30" Command="{Binding GoBackCommand}" Style="{DynamicResource RoundButton}"/>
+                <Button Grid.Column="3" Content="TILBAGE" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" Width="220" Height="30" Command="{Binding GoBackCommand}" Style="{DynamicResource RoundButton}"/>
             </Grid>
         </Grid>
     </Grid>

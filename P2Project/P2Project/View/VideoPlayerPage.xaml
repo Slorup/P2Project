@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:P2Project.View"
       mc:Ignorable="d" 
-      Title="VideoPlayerPage" MinHeight="130" MinWidth="180">
+      Title="VideoPlayerPage" MinHeight="100" MinWidth="160">
     
     <Grid>
         <Grid.RowDefinitions>

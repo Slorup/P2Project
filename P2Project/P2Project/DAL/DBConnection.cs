@@ -12,15 +12,14 @@ namespace P2Project.DAL
 {
     static class DBConnection
     {
-
         static string connString = "Server=p2project-server.database.windows.net; Database=P2ProjectDB; User Id=Slorup; Password=Password123";
 
         public static void CreateUser(User user)
         {
             using(SqlConnection conn = new SqlConnection(connString))
             {
-                SqlCommand cmd = new SqlCommand("INSERT INTO [User] (username, usertype, textvisualpref, imagevisualpref, verbalpref, auditorypref, tactilepref, kinestheticpref, uncertaintycoef) " +
-                    "VALUES (@username, @usertype, @textvisualpref, @imagevisualpref, @verbalpref, @auditorypref, @tactilepref, @kinestheticpref, @uncertaintycoef)", conn); 
+                SqlCommand cmd = new SqlCommand("INSERT INTO [User] (username, usertype, textvisualpref, imagevisualpref, verbalpref, auditorypref, tactilepref, kinestheticpref) " +
+                    "VALUES (@username, @usertype, @textvisualpref, @imagevisualpref, @verbalpref, @auditorypref, @tactilepref, @kinestheticpref)", conn); 
                 cmd.Parameters.AddWithValue("@username", user.UserName);
                 cmd.Parameters.AddWithValue("@usertype", (int)user.Type);
                 cmd.Parameters.AddWithValue("@textvisualpref", user.Profile.TextVisual);
@@ -29,7 +28,6 @@ namespace P2Project.DAL
                 cmd.Parameters.AddWithValue("@auditorypref", user.Profile.Auditory);
                 cmd.Parameters.AddWithValue("@tactilepref", user.Profile.Tactile);
                 cmd.Parameters.AddWithValue("@kinestheticpref", user.Profile.Kinesthetic);
-                cmd.Parameters.AddWithValue("uncertaintycoef", 0);
                 //TRY CATCH
                 conn.Open();
                 cmd.ExecuteNonQuery();
@@ -48,7 +46,7 @@ namespace P2Project.DAL
                 while (reader.Read())
                 {
                     ExerciseLearningProfile profile = new ExerciseLearningProfile(Convert.ToDouble(reader[4]), Convert.ToDouble(reader[5]), Convert.ToDouble(reader[6]), Convert.ToDouble(reader[7]), Convert.ToDouble(reader[8]), Convert.ToDouble(reader[9]));
-                    ExerciseDescription desc = new ExerciseDescription(reader[10].ToString()) { VideoPath = reader[11].ToString(), AudioPath = reader[12].ToString() };
+                    ExerciseDescription desc = new ExerciseDescription(reader[10].ToString()) { VideoPath = reader[11].ToString(), AudioPath = reader[12].ToString(), SolutionPath = reader[13].ToString() };
                     Exercise exercise = new Exercise(reader[1].ToString(), desc, profile, reader[3].ToString(), Convert.ToDateTime(reader[2])) { ID = Convert.ToInt32(reader[0]) };
                     exerciselist.Add(exercise);
                 }
@@ -91,7 +89,7 @@ namespace P2Project.DAL
                 SqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
                 {
-                    UserLearningProfile profile = new UserLearningProfile(Convert.ToDouble(reader[2]), Convert.ToDouble(reader[3]), Convert.ToDouble(reader[4]), Convert.ToDouble(reader[5]), Convert.ToDouble(reader[6]), Convert.ToDouble(reader[7]), Convert.ToDouble(reader[8]));
+                    UserLearningProfile profile = new UserLearningProfile(Convert.ToDouble(reader[2]), Convert.ToDouble(reader[3]), Convert.ToDouble(reader[4]), Convert.ToDouble(reader[5]), Convert.ToDouble(reader[6]), Convert.ToDouble(reader[7]));
                     user = new User(reader[0].ToString(), profile, (UserType)reader[1], ids);
                 }
             }
@@ -117,8 +115,8 @@ namespace P2Project.DAL
             int id = 0;
             using(SqlConnection conn = new SqlConnection(connString))
             {
-                SqlCommand cmd = new SqlCommand("INSERT INTO Exercise([name], creationdate, creator, textvisualpref, imagevisualpref, verbalpref, auditorypref, tactilepref, kinestheticpref, [description], videopath, audiopath) " + 
-                    "OUTPUT INSERTED.id VALUES(@name, @creationdate, @creator, @textvisual, @imagevisual, @verbal, @auditory, @tactile, @kinesthetic, @description, @videopath, @audiopath)", conn);
+                SqlCommand cmd = new SqlCommand("INSERT INTO Exercise([name], creationdate, creator, textvisualpref, imagevisualpref, verbalpref, auditorypref, tactilepref, kinestheticpref, [description], videopath, audiopath, solutionpath) " + 
+                    "OUTPUT INSERTED.id VALUES(@name, @creationdate, @creator, @textvisual, @imagevisual, @verbal, @auditory, @tactile, @kinesthetic, @description, @videopath, @audiopath, @solutionpath)", conn);
                 cmd.Parameters.AddWithValue("@name", exercise.Name);
                 cmd.Parameters.AddWithValue("@creationdate", exercise.CreationDate);
                 cmd.Parameters.AddWithValue("@creator", exercise.Creator);
@@ -131,6 +129,7 @@ namespace P2Project.DAL
                 cmd.Parameters.AddWithValue("@description", exercise.Description.TextDescription);
                 cmd.Parameters.AddWithValue("@videopath", (object)exercise.Description.VideoPath ?? DBNull.Value);
                 cmd.Parameters.AddWithValue("@audiopath", (object)exercise.Description.AudioPath ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@solutionpath", (object)exercise.Description.SolutionPath ?? DBNull.Value);
                 //TRYCATCH
                 conn.Open();
                 id = (int)cmd.ExecuteScalar();
@@ -158,7 +157,7 @@ namespace P2Project.DAL
                 if (reader.Read())
                 {
                     ExerciseLearningProfile profile = new ExerciseLearningProfile(Convert.ToDouble(reader[4]), Convert.ToDouble(reader[5]), Convert.ToDouble(reader[6]), Convert.ToDouble(reader[7]), Convert.ToDouble(reader[8]), Convert.ToDouble(reader[9]));
-                    ExerciseDescription desc = new ExerciseDescription(reader[10].ToString()) { VideoPath = reader[11].ToString(), AudioPath = reader[12].ToString() };
+                    ExerciseDescription desc = new ExerciseDescription(reader[10].ToString()) { VideoPath = reader[11].ToString(), AudioPath = reader[12].ToString(), SolutionPath = reader[13].ToString() };
                     exercise = new Exercise(reader[1].ToString(), desc, profile, reader[3].ToString(), Convert.ToDateTime(reader[2])) { ID = Convert.ToInt32(reader[0]) };
                 }
                 conn.Close();

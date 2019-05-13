@@ -55,7 +55,7 @@ namespace P2Project.ViewModel
         {
             UserLearningProfile Lp = new UserLearningProfile(Surveys.QuestionList[0].SliderValue, Surveys.QuestionList[1].SliderValue,
                 Surveys.QuestionList[2].SliderValue, Surveys.QuestionList[3].SliderValue,
-                Surveys.QuestionList[4].SliderValue, Surveys.QuestionList[5].SliderValue, 10);
+                Surveys.QuestionList[4].SliderValue, Surveys.QuestionList[5].SliderValue);
             return Lp;
         }
 

@@ -23,12 +23,36 @@ namespace P2Project.ViewModel
             set { SetProperty(ref _currentUser, value); }
         }
 
+        /*private string _solutionPath;
+
+        public string SolutionPath
+        {
+            get { return _solutionPath; }
+            set { SetProperty(ref _solutionPath, value); }
+        }*/
+
+        private Visibility _solutionVisibility;
+
+        public Visibility SolutionVisibility
+        {
+            get { return _solutionVisibility; }
+            set { SetProperty(ref _solutionVisibility, value); }
+        }
+
         private Page _videoFrame;
 
         public Page VideoFrame
         {
             get { return _videoFrame; }
             set{ SetProperty(ref _videoFrame, value); }
+        }
+
+        private Page _solutionFrame;
+
+        public Page SolutionFrame
+        {
+            get { return _solutionFrame; }
+            set { SetProperty(ref _solutionFrame, value); }
         }
 
         /*private bool _videoVisible;
@@ -73,6 +97,7 @@ namespace P2Project.ViewModel
                 MessageBox.Show("Tillykke! Du har gennemført alle opgaver!");
             UpdateExerciseDesc();
             audioPlayer = new MediaPlayer();
+            SolutionVisibility = Visibility.Hidden;
         }
 
         private void UpdateExerciseDesc()
@@ -101,6 +126,20 @@ namespace P2Project.ViewModel
                 else
                 {
                     ImageFrame = null;
+                }
+
+                if(CurrentUser.CurrentExercise.Description.SolutionPath != null && CurrentUser.CurrentExercise.Description.SolutionPath != "")
+                {
+                    List<string> solutions = new List<string>();
+                    solutions.Add(CurrentUser.CurrentExercise.Description.SolutionPath);
+                    ImageScrollPage page = new ImageScrollPage();
+                    ImageScrollViewModel vm = new ImageScrollViewModel(solutions);
+                    page.DataContext = vm;
+                    SolutionFrame = page;
+                }
+                else
+                {
+                    SolutionFrame = null;
                 }
 
                 if (CurrentUser.CurrentExercise.Description.AudioPath != null && CurrentUser.CurrentExercise.Description.AudioPath != "")
@@ -136,6 +175,29 @@ namespace P2Project.ViewModel
             {
                 return _finishedExerciseCommand ?? (_finishedExerciseCommand = new RelayCommand(param => FinishedExerciseClick(param), param => CanFinishedExerciseClick(param)));
             }
+        }
+
+        private ICommand _showSolutionCommand;
+
+        public ICommand ShowSolutionCommand
+        {
+            get
+            {
+                return _showSolutionCommand ?? (_showSolutionCommand = new RelayCommand(param => ShowSolutionClick(param), param => CanShowSolutionClick(param)));
+            }
+        }
+
+        private bool CanShowSolutionClick(object param)
+        {
+            return CurrentUser.CurrentExercise != null && CurrentUser.CurrentExercise.Description.SolutionPath != null && CurrentUser.CurrentExercise.Description.SolutionPath != "";
+        }
+
+        private void ShowSolutionClick(object param)
+        {
+            if (SolutionVisibility == Visibility.Visible)
+                SolutionVisibility = Visibility.Hidden;
+            else
+                SolutionVisibility = Visibility.Visible;
         }
 
         private bool CanFinishedExerciseClick(object param)
