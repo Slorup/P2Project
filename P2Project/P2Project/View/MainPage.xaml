@@ -80,20 +80,20 @@
                     <Setter Property="Visibility" TargetName="Icon" Value="Collapsed"/>
                 </Trigger>
                 <Trigger Property="IsHighlighted" Value="True">
-                    <Setter Property="Background" TargetName="templateRoot" Value="Blue"/>
+                    <Setter Property="Background" TargetName="templateRoot" Value="#3c4f65"/>
                     <!--<Setter Property="BorderBrush" TargetName="templateRoot" Value="Yellow"/>-->
                 </Trigger>
                 <Trigger Property="IsEnabled" Value="False">
                     <Setter Property="TextElement.Foreground" TargetName="templateRoot" Value="#FF707070"/>
-                    <Setter Property="Fill" TargetName="Glyph" Value="#FF707070"/>
+                    <Setter Property="Fill" TargetName="Glyph" Value="#33313b"/>
                 </Trigger>
                 <MultiTrigger>
                     <MultiTrigger.Conditions>
                         <Condition Property="IsHighlighted" Value="True"/>
                         <Condition Property="IsEnabled" Value="False"/>
                     </MultiTrigger.Conditions>
-                    <Setter Property="Background" TargetName="templateRoot" Value="#0A000000"/>
-                    <Setter Property="BorderBrush" TargetName="templateRoot" Value="#21000000"/>
+                    <Setter Property="Background" TargetName="templateRoot" Value="#33313b"/>
+                    <Setter Property="BorderBrush" TargetName="templateRoot" Value="#33313b"/>
                 </MultiTrigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>
@@ -134,7 +134,7 @@
                     <Setter Property="Visibility" TargetName="Icon" Value="Collapsed"/>
                 </Trigger>
                 <Trigger Property="IsHighlighted" Value="True">
-                    <Setter Property="Background" TargetName="templateRoot" Value="Blue"/>
+                    <Setter Property="Background" TargetName="templateRoot" Value="#3c4f65"/>
                     <!--<Setter Property="BorderBrush" TargetName="templateRoot" Value="#FF26A0DA"/>-->
                 </Trigger>
                 <Trigger Property="IsEnabled" Value="False">
@@ -151,11 +151,11 @@
     <Grid>
         <DockPanel>
             <Menu DockPanel.Dock="Top" Height="30" FontSize="15" FontWeight="DemiBold" Background="#33313b">
-                <MenuItem Header="Opgaver" Style="{StaticResource menuParentStyle}" ItemContainerStyle="{DynamicResource MenuItemStyle1}" Template="{DynamicResource MenuItemControlTemplate2}" Width="100">
+                <MenuItem Header="Opgaver" FontSize="18" Style="{StaticResource menuParentStyle}" ItemContainerStyle="{DynamicResource MenuItemStyle1}" Template="{DynamicResource MenuItemControlTemplate2}" Width="100">
                     <MenuItem Header="Løs opgave" Command="{Binding MenuExerciseCommand}"/>
                     <MenuItem Header="Opret opgave" Command="{Binding MenuMakeExerciseCommand}"/>
                 </MenuItem>
-                <MenuItem Header="Profil" Command="{Binding MenuProfileCommand}" Style="{StaticResource menuParentStyle}" Width="100"/>
+                <MenuItem Header="Profil" FontSize="18" Command="{Binding MenuProfileCommand}" Style="{StaticResource menuParentStyle}" ItemContainerStyle="{DynamicResource MenuItemStyle1}" Template="{DynamicResource MenuItemControlTemplate2}" Width="100"/>
             </Menu>
             <Frame Name="SubNavigationFrame" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" NavigationUIVisibility="Hidden"/>
         </DockPanel>

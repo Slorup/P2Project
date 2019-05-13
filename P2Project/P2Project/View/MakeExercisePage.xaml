@@ -6,32 +6,374 @@
       xmlns:local="clr-namespace:P2Project.View"
       xmlns:c="clr-namespace:P2Project.View.Converter"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="540" d:DesignWidth="960"
       Title="MakeExercisePage" Background="Cyan">
     <Page.Resources>
         <c:ObservableCollectionToStringConverter x:Key="converter"/>
+
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFFF7B10"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#f38120"/>
+        <SolidColorBrush x:Key="Button.Static.foreground" Color="#010101"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FF953F"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#f48d36"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFFF7B10"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#da741c"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#ff9844"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#f7b379"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#404040"/>
+        <Style x:Key="RoundButton" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{DynamicResource Button.Static.Background}"/>
+            <Setter Property="Foreground" Value="{DynamicResource Button.Static.foreground}"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Rectangle x:Name="ButtonRect" Fill="{TemplateBinding Background}" RadiusY="20" RadiusX="20"/>
+                            <ContentPresenter x:Name="ButtonName" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True"/>
+                            <Trigger Property="IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Fill" TargetName="ButtonRect" Value="{StaticResource Button.MouseOver.Background}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Fill" TargetName="ButtonRect" Value="{StaticResource Button.Pressed.Background}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Fill" TargetName="ButtonRect" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="ButtonName" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="RoundButton2" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{DynamicResource Button.Static.Background}"/>
+            <Setter Property="Foreground" Value="{DynamicResource Button.Static.foreground}"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Rectangle x:Name="ButtonRect" Fill="{TemplateBinding Background}" RadiusY="7" RadiusX="7"/>
+                            <ContentPresenter x:Name="ButtonName" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True"/>
+                            <Trigger Property="IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Fill" TargetName="ButtonRect" Value="{StaticResource Button.MouseOver.Background}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Fill" TargetName="ButtonRect" Value="{StaticResource Button.Pressed.Background}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Fill" TargetName="ButtonRect" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="ButtonName" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SliderRepeatButton" TargetType="RepeatButton">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="IsTabStop" Value="false" />
+            <Setter Property="Focusable" Value="false" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RepeatButton">
+                        <Border Background="Black" Height="3"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SliderRepeatButton1" TargetType="RepeatButton">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RepeatButton">
+                        <Border SnapsToDevicePixels="True" Background="#834c69" Height="3"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SliderThumb" TargetType="Thumb">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Thumb">
+                        <Rectangle Height="15" Width="5" Fill="#834c69" RadiusY="2.5" RadiusX="2.5">
+                        </Rectangle>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <ControlTemplate x:Key="Slider"  TargetType="Slider">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" MinHeight="{TemplateBinding MinHeight}" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Track Grid.Row="1" x:Name="PART_Track"   >
+                    <Track.DecreaseRepeatButton>
+                        <RepeatButton Style="{StaticResource SliderRepeatButton1}"  Command="Slider.DecreaseLarge" />
+                    </Track.DecreaseRepeatButton>
+                    <Track.Thumb>
+                        <Thumb Style="{StaticResource SliderThumb}"  />
+                    </Track.Thumb>
+                    <Track.IncreaseRepeatButton>
+                        <RepeatButton Style="{StaticResource SliderRepeatButton}" Command="Slider.IncreaseLarge" />
+                    </Track.IncreaseRepeatButton>
+                </Track>
+            </Grid>
+        </ControlTemplate>
+
+        <Style x:Key="CustomSlider1" TargetType="Slider">
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Style.Triggers>
+                <Trigger Property="Orientation" Value="Horizontal">
+                    <Setter Property="MinHeight" Value="21" />
+                    <Setter Property="MinWidth" Value="104" />
+                    <Setter Property="Template" Value="{StaticResource Slider}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </Page.Resources>
-    <Grid>
-        <Button Content="Gennemse" HorizontalAlignment="Left" Margin="84,80,0,0" VerticalAlignment="Top" Width="75" Command="{Binding BrowseCommandVideo}"/>
-        <Button Content="Gennemse" HorizontalAlignment="Left" Margin="10,291,0,0" VerticalAlignment="Top" Width="75" Command="{Binding BrowseCommandSound}"/>
-        <Button Content="Gennemse" HorizontalAlignment="Left" Margin="54,366,0,0" VerticalAlignment="Top" Width="75" Command="{Binding BrowseCommandImage}"/>
-        <Button Content="Gennemse" HorizontalAlignment="Left" Margin="208,27,0,0" VerticalAlignment="Top" Width="75" Command="{Binding BrowseCommandSolution}"/>
-        <Label Margin="182,80,576,339">Video</Label>
-        <Label Margin="110,282,596,134">Lyd</Label>
-        <Label Margin="141,363,565,53.6">Billeder</Label>
-        <Label Margin="283,24,423,392.6">Løsning</Label>
-        <Button Content="Opret" HorizontalAlignment="Left" Margin="257,198,0,0" VerticalAlignment="Top" Width="75" Command="{Binding ExerciseCreateCommand}"/>
-        <TextBox HorizontalAlignment="Left" Height="145" Margin="470,282,0,0" TextWrapping="Wrap" Text="{Binding Description}" VerticalAlignment="Top" Width="275"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="470,254,0,0" TextWrapping="Wrap" Text="{Binding Name}" VerticalAlignment="Top" Width="120"/>
-        <TextBlock HorizontalAlignment="Left" Margin="145,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="{Binding VideoPath}" Width="90" Height="20"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,328,0,0" TextWrapping="Wrap" Text="{Binding AudioPath}" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="50,400,0,0" TextWrapping="Wrap" Text="{Binding ImagePaths, Converter={StaticResource converter}}" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="218,60,0,0" TextWrapping="Wrap" Text="{Binding SolutionPath}" VerticalAlignment="Top"/>
-        <Slider HorizontalAlignment="Stretch" Margin="411,120,55,0" VerticalAlignment="Top" Minimum="1" Maximum="100" Interval="1" IsSnapToTickEnabled="True" Value="{Binding TextVisual}"/>
-        <Slider HorizontalAlignment="Stretch" Margin="411,140,55,0" VerticalAlignment="Top" Minimum="1" Maximum="100" Interval="1" IsSnapToTickEnabled="True" Value="{Binding ImageVisual}"/>
-        <Slider HorizontalAlignment="Stretch" Margin="411,160,55,0" VerticalAlignment="Top" Minimum="1" Maximum="100" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Verbal}"/>
-        <Slider HorizontalAlignment="Stretch" Margin="411,180,55,0" VerticalAlignment="Top" Minimum="1" Maximum="100" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Auditory}"/>
-        <Slider HorizontalAlignment="Stretch" Margin="411,200,55,0" VerticalAlignment="Top" Minimum="1" Maximum="100" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Tactile}"/>
-        <Slider HorizontalAlignment="Stretch" Margin="411,220,55,0" VerticalAlignment="Top" Minimum="1" Maximum="100" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Kinesthetic}"/>
+    <Grid RenderTransformOrigin="0.5,0.5">
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#36313B" Offset="1"/>
+                <GradientStop Color="#66797f"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="15*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="30*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Rectangle Grid.Column="1" Grid.Row="1" Fill="#3C4F65" RadiusY="45" RadiusX="45" Width="630" Height="480"/>
+        <Grid Grid.Column="1" Grid.Row="1" Width="600" Height="480">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition/>
+                <RowDefinition Height="14*"/>
+                <RowDefinition/>
+                <RowDefinition Height="7*"/>
+                <RowDefinition/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" Text="OPRET OPGAVE" VerticalAlignment="Center" FontSize="48" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Center"/>
+
+            <Grid Grid.Column="1" Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="6*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBox HorizontalAlignment="Left" Grid.Row="0" Height="23" TextWrapping="Wrap" Text="{Binding Name}" VerticalAlignment="Top" Width="280" Background="#e6f5ff"/>
+                    <TextBox HorizontalAlignment="Left" Grid.Row="1" Height="160" TextWrapping="Wrap" Text="{Binding Description}" VerticalAlignment="Top" Width="280" Background="#e6f5ff"/>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="4*"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="3*"/>
+                    </Grid.RowDefinitions>
+                    <Border BorderBrush="#834c69" BorderThickness="3" Grid.Row="0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition Height="2*"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Text="Opgave Billedfil" Margin="2,0,0,0"/>
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="2*"/>
+                                </Grid.ColumnDefinitions>
+                                <Button Content="Gennemse" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Margin="1,1,1,1" Command="{Binding BrowseCommandImage}" Style="{DynamicResource RoundButton2}"/>
+                                <TextBlock HorizontalAlignment="Left" Grid.Column="1" TextWrapping="Wrap" Text="{Binding ImagePaths, Converter={StaticResource converter}}" VerticalAlignment="Top" Foreground="Black"/>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                    <Border BorderBrush="#834c69" BorderThickness="3" Grid.Row="2">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Text="Opgave Videofil" Margin="2,0,0,0"/>
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="2*"/>
+                                </Grid.ColumnDefinitions>
+                                <Button Content="Gennemse" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Margin="1,1,1,1" Command="{Binding BrowseCommandVideo}" Style="{DynamicResource RoundButton2}"/>
+                                <TextBlock HorizontalAlignment="Left" Grid.Column="1" TextWrapping="Wrap" Text="{Binding VideoPath}" VerticalAlignment="Top" Foreground="Black"/>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                    <Border BorderBrush="#834c69" BorderThickness="3" Grid.Row="4">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Text="Opgave Lydfil" Margin="2,0,0,0"/>
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="2*"/>
+                                </Grid.ColumnDefinitions>
+                                <Button Content="Gennemse" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Margin="1,1,1,1" Command="{Binding BrowseCommandSound}" Style="{DynamicResource RoundButton2}"/>
+                                <TextBlock HorizontalAlignment="Left" Grid.Column="1" TextWrapping="Wrap" Text="{Binding AudioPath}" VerticalAlignment="Top" Foreground="Black"/>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                    <Border BorderBrush="#834c69" BorderThickness="3" Grid.Row="6">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Text="Opgave Løsnings Billedfil" Margin="2,0,0,0"/>
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="2*"/>
+                                </Grid.ColumnDefinitions>
+                                <Button Content="Gennemse" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Margin="1,1,1,1" Command="{Binding BrowseCommandSolution}" Style="{DynamicResource RoundButton2}"/>
+                                <TextBlock HorizontalAlignment="Left" Grid.Column="1" TextWrapping="Wrap" Text="{Binding SolutionPath}" VerticalAlignment="Top" Foreground="Black"/>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Column="1" Grid.Row="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="50*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="10*"/>
+                </Grid.RowDefinitions>
+
+                <Border BorderBrush="#834c69" BorderThickness="3" Grid.Row="0" Grid.Column="0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="Tekst Visuel:" Margin="2,0,0,0" VerticalAlignment="Center"/>
+                        <Slider HorizontalAlignment="Stretch" Grid.Column="1" Margin="2,0,5,0" VerticalAlignment="Center" Minimum="1" Maximum="100" Interval="1" IsSnapToTickEnabled="True" Value="{Binding TextVisual}" Style="{StaticResource CustomSlider1}"/>
+                    </Grid>
+                </Border>
+                <Border BorderBrush="#834c69" BorderThickness="3" Grid.Row="0" Grid.Column="2">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="Billed Visuel:" Margin="2,0,0,0" VerticalAlignment="Center"/>
+                        <Slider HorizontalAlignment="Stretch" Grid.Column="1" Margin="2,0,5,0" VerticalAlignment="Center" Minimum="1" Maximum="100" Interval="1" IsSnapToTickEnabled="True" Value="{Binding TextVisual}" Style="{StaticResource CustomSlider1}"/>
+                    </Grid>
+                </Border>
+                <Border BorderBrush="#834c69" BorderThickness="3" Grid.Row="2" Grid.Column="0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="Verbal:" Margin="2,0,0,0" VerticalAlignment="Center"/>
+                        <Slider HorizontalAlignment="Stretch" Grid.Column="1" Margin="2,0,5,0" VerticalAlignment="Center" Minimum="1" Maximum="100" Interval="1" IsSnapToTickEnabled="True" Value="{Binding TextVisual}" Style="{StaticResource CustomSlider1}"/>
+                    </Grid>
+                </Border>
+                <Border BorderBrush="#834c69" BorderThickness="3" Grid.Row="2" Grid.Column="2">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="Auditiv:" Margin="2,0,0,0" VerticalAlignment="Center"/>
+                        <Slider HorizontalAlignment="Stretch" Grid.Column="1" Margin="2,0,5,0" VerticalAlignment="Center" Minimum="1" Maximum="100" Interval="1" IsSnapToTickEnabled="True" Value="{Binding TextVisual}" Style="{StaticResource CustomSlider1}"/>
+                    </Grid>
+                </Border>
+                <Border BorderBrush="#834c69" BorderThickness="3" Grid.Row="4" Grid.Column="0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="Taktil:" Margin="2,0,0,0" VerticalAlignment="Center"/>
+                        <Slider HorizontalAlignment="Stretch" Grid.Column="1" Margin="2,0,5,0" VerticalAlignment="Center" Minimum="1" Maximum="100" Interval="1" IsSnapToTickEnabled="True" Value="{Binding TextVisual}" Style="{StaticResource CustomSlider1}"/>
+                    </Grid>
+                </Border>
+                <Border BorderBrush="#834c69" BorderThickness="3" Grid.Row="4" Grid.Column="2">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="Kinæstetisk:" Margin="2,0,0,0" VerticalAlignment="Center"/>
+                        <Slider HorizontalAlignment="Stretch" Grid.Column="1" Margin="2,0,5,0" VerticalAlignment="Center" Minimum="1" Maximum="100" Interval="1" IsSnapToTickEnabled="True" Value="{Binding TextVisual}" Style="{StaticResource CustomSlider1}"/>
+                    </Grid>
+                </Border>
+            </Grid>
+
+            <Button Content="Opret" FontSize="20" Grid.Column="1" Grid.Row="7" HorizontalAlignment="Center" VerticalAlignment="Center" Width="220" Height="30" Command="{Binding ExerciseCreateCommand}" Style="{DynamicResource RoundButton}"/>
+        </Grid>
     </Grid>
 </Page>
