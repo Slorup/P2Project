@@ -120,12 +120,12 @@
                 <Frame Height="140" Width="120" Content="{Binding ImageFrame}"/>
                 <Frame Height="100" Width="160" Content="{Binding VideoFrame}"/>
                 <StackPanel Orientation="Horizontal" Height="100">
-                    <Button Content="Vis Løsning" Width="100" Height="30" Command="{Binding ShowSolutionCommand}" Style="{StaticResource RoundButton}"/>
+                    <Button Content="VIS LØSNING" Width="100" Height="30" Command="{Binding ShowSolutionCommand}" Style="{StaticResource RoundButton}"/>
                     <Frame Width="120" HorizontalAlignment="Center" Content="{Binding SolutionFrame}" Visibility="{Binding SolutionVisibility}"/>
                 </StackPanel>
                 <Button Content="🎤" Width="30" Height="30" HorizontalAlignment="Left" Command="{Binding PlayAudioCommand}" Style="{StaticResource RoundButton}" Margin="0,10,0,0"/>
-                <Button Content="Færdig" Command="{Binding FinishedExerciseCommand}" Style="{StaticResource RoundButton}" Width="250" Height="30" Margin="0,10,0,0"/>
-                <Button Content="Spring over" Command="{Binding SkipExerciseCommand}" Style="{StaticResource RoundButton}" Width="250" Height="30" Margin="0,10,0,0"/>
+                <Button Content="FÆRDIG" Command="{Binding FinishedExerciseCommand}" Style="{StaticResource RoundButton}" Width="250" Height="30" Margin="0,10,0,0"/>
+                <Button Content="SPRING OVER" Command="{Binding SkipExerciseCommand}" Style="{StaticResource RoundButton}" Width="250" Height="30" Margin="0,10,0,0"/>
             </StackPanel>
             <Button Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Width="23" Height="60" Command="{Binding PanelShowCommand}" Style="{StaticResource SquareFlatButton}">
                 <Rectangle Height="60" Width="20">

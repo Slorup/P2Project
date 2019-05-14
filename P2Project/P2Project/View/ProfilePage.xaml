@@ -171,7 +171,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" Text="PROFIL MENU" VerticalAlignment="Center" FontSize="36" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" Text="PROFIL" VerticalAlignment="Center" FontSize="36" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Center"/>
 
             <Grid Grid.Column="1" Grid.Row="3">
                 <Grid.RowDefinitions>
@@ -210,7 +210,7 @@
                             <ColumnDefinition/>
                             <ColumnDefinition Width="3*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="Tekst Visuel:" Margin="2,0,0,0" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Column="0" Text="Tekstvisuel:" Margin="2,0,0,0" VerticalAlignment="Center"/>
                         <TextBox HorizontalAlignment="Left" Grid.Column="1" IsReadOnly="True" Height="23" TextWrapping="Wrap" Text="{Binding TextVisual}" VerticalAlignment="Center" Width="215" Background="#e6f5ff" BorderBrush="#e6f5ff"/>
                     </Grid>
                 </Border>
@@ -220,7 +220,7 @@
                             <ColumnDefinition/>
                             <ColumnDefinition Width="3*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="Billed Visuel:" Margin="2,0,0,0" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Column="0" Text="Billedvisuel:" Margin="2,0,0,0" VerticalAlignment="Center"/>
                         <TextBox HorizontalAlignment="Left" Grid.Column="1" IsReadOnly="True" Height="23" TextWrapping="Wrap" Text="{Binding ImageVisual}" VerticalAlignment="Center" Width="215" Background="#e6f5ff" BorderBrush="#e6f5ff"/>
                     </Grid>
                 </Border>
@@ -230,7 +230,7 @@
                             <ColumnDefinition/>
                             <ColumnDefinition Width="3*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="Verbal:" Margin="2,0,0,0" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Column="0" Text="Auditiv-Verbal:" Margin="2,0,0,0" VerticalAlignment="Center"/>
                         <TextBox HorizontalAlignment="Left" Grid.Column="1" IsReadOnly="True" Height="23" TextWrapping="Wrap" Text="{Binding Verbal}" VerticalAlignment="Center" Width="215" Background="#e6f5ff" BorderBrush="#e6f5ff"/>
                     </Grid>
                 </Border>
@@ -266,7 +266,7 @@
                 </Border>
             </Grid>
 
-            <Button Grid.Column="1" Grid.Row="7" Content="Log af" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Width="250" Height="25" Command="{Binding LogofCommand}" Style="{StaticResource RoundButton}"/>
+            <Button Grid.Column="1" Grid.Row="7" Content="LOG AF" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Width="250" Height="25" Command="{Binding LogofCommand}" Style="{StaticResource RoundButton}"/>
         </Grid>
     </Grid>
 </Page>
