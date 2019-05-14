@@ -50,7 +50,18 @@ namespace P2Project.DAL
                     Exercise exercise = new Exercise(reader[1].ToString(), desc, profile, reader[3].ToString(), Convert.ToDateTime(reader[2])) { ID = Convert.ToInt32(reader[0]) };
                     exerciselist.Add(exercise);
                 }
-                //TODO - IMAGEPATH
+                conn.Close();
+
+                foreach (Exercise exercise in exerciselist)
+                {
+                    SqlCommand imagecmd = new SqlCommand("select * from ImagePath where exerciseid = @id", conn);
+                    imagecmd.Parameters.AddWithValue("@id", exercise.ID);
+                    conn.Open();
+                    reader = imagecmd.ExecuteReader();
+                    while (reader.Read())
+                        exercise.Description.ImagePaths.Add(reader[1].ToString());
+                    conn.Close();
+                }
             }
             return exerciselist;
         }

@@ -4,13 +4,10 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:P2Project.View"
-      xmlns:c="clr-namespace:P2Project.View.Converter"
       mc:Ignorable="d" 
       d:DesignHeight="540" d:DesignWidth="960"
       Title="MakeExercisePage" Background="Cyan">
     <Page.Resources>
-        <c:ObservableCollectionToStringConverter x:Key="converter"/>
-
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
                 <Setter.Value>
@@ -318,7 +315,7 @@
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
-                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="2.5*"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" Text="Tekstvisuel:" Margin="2,0,0,0" VerticalAlignment="Center"/>
                         <Slider HorizontalAlignment="Stretch" Grid.Column="1" Margin="2,0,5,0" VerticalAlignment="Center" Minimum="1" Maximum="100" Interval="1" IsSnapToTickEnabled="True" Value="{Binding TextVisual}" Style="{StaticResource CustomSlider1}"/>
@@ -328,7 +325,7 @@
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
-                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="2.5*"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" Text="Billedvisuel:" Margin="2,0,0,0" VerticalAlignment="Center"/>
                         <Slider HorizontalAlignment="Stretch" Grid.Column="1" Margin="2,0,5,0" VerticalAlignment="Center" Minimum="1" Maximum="100" Interval="1" IsSnapToTickEnabled="True" Value="{Binding TextVisual}" Style="{StaticResource CustomSlider1}"/>
@@ -338,7 +335,7 @@
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
-                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="2.5*"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" Text="Auditiv-Verbal:" Margin="2,0,0,0" VerticalAlignment="Center"/>
                         <Slider HorizontalAlignment="Stretch" Grid.Column="1" Margin="2,0,5,0" VerticalAlignment="Center" Minimum="1" Maximum="100" Interval="1" IsSnapToTickEnabled="True" Value="{Binding TextVisual}" Style="{StaticResource CustomSlider1}"/>
@@ -348,7 +345,7 @@
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
-                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="2.5*"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" Text="Auditiv:" Margin="2,0,0,0" VerticalAlignment="Center"/>
                         <Slider HorizontalAlignment="Stretch" Grid.Column="1" Margin="2,0,5,0" VerticalAlignment="Center" Minimum="1" Maximum="100" Interval="1" IsSnapToTickEnabled="True" Value="{Binding TextVisual}" Style="{StaticResource CustomSlider1}"/>
@@ -358,7 +355,7 @@
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
-                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="2.5*"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" Text="Taktil:" Margin="2,0,0,0" VerticalAlignment="Center"/>
                         <Slider HorizontalAlignment="Stretch" Grid.Column="1" Margin="2,0,5,0" VerticalAlignment="Center" Minimum="1" Maximum="100" Interval="1" IsSnapToTickEnabled="True" Value="{Binding TextVisual}" Style="{StaticResource CustomSlider1}"/>
@@ -368,7 +365,7 @@
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
-                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="2.5*"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" Text="Kinæstetisk:" Margin="2,0,0,0" VerticalAlignment="Center"/>
                         <Slider HorizontalAlignment="Stretch" Grid.Column="1" Margin="2,0,5,0" VerticalAlignment="Center" Minimum="1" Maximum="100" Interval="1" IsSnapToTickEnabled="True" Value="{Binding TextVisual}" Style="{StaticResource CustomSlider1}"/>
