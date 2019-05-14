@@ -54,7 +54,7 @@ namespace P2Project.ViewModel
             CurrentUser = currentUser;
             Username = CurrentUser.UserName;
             NumberofExercises = "Du har lavet " + CurrentUser.CompletedExercisesID.Count.ToString() + " opgave(r)";
-            DanishUserType = "Bruger type: " + Danishtype(CurrentUser.Type);
+            DanishUserType = "Brugertype: " + Danishtype(CurrentUser.Type);
             UpdateProfileStrings();
         }
 
