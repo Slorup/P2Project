@@ -193,25 +193,17 @@ namespace P2Project.ViewModel
         private void ExerciseCreateClick(object param)
         {
             //TRY
-            ExerciseLearningProfile profile = new ExerciseLearningProfile(TextVisual, ImageVisual, Verbal, Auditory, Tactile, Kinesthetic);
-            double sum = profile.CalcProfileSum();
+            List<double> profile = new List<double>() { TextVisual, ImageVisual, Verbal, Auditory, Tactile, Kinesthetic };
+            double sum = profile.Sum();
             if(sum != 0)
             {
-                profile.Auditory /= sum;
-                profile.Kinesthetic /= sum;
-                profile.Verbal /= sum;
-                profile.TextVisual /= sum;
-                profile.ImageVisual /= sum;
-                profile.Tactile /= sum;
+                for (int i = 0; i < profile.Count; i++)
+                    profile[i] /= sum;
             }
             else
             {
-                profile.Auditory = 1 / 6;
-                profile.Kinesthetic = 1 / 6;
-                profile.Verbal = 1 / 6;
-                profile.TextVisual = 1 / 6;
-                profile.ImageVisual = 1 / 6;
-                profile.Tactile = 1 / 6;
+                for (int i = 0; i < profile.Count; i++)
+                    profile[i] = 1 / profile.Count;
             }
 
             ExerciseDescription exDescription = new ExerciseDescription(Description) { AudioPath = this.AudioPath, VideoPath = this.VideoPath, ImagePaths = this.ImagePaths, SolutionPath = this.SolutionPath };

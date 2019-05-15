@@ -87,7 +87,8 @@ namespace P2Project.ViewModel
             get { return _panelVisibility; }
             set { SetProperty(ref _panelVisibility, value); }
         }
-        private MediaPlayer audioPlayer;
+
+        private MediaPlayer _audioPlayer;
 
         public ExerciseViewModel(User currentUser)
         {
@@ -96,7 +97,7 @@ namespace P2Project.ViewModel
             if (!result)
                 MessageBox.Show("Tillykke! Du har gennemført alle opgaver!");
             UpdateExerciseDesc();
-            audioPlayer = new MediaPlayer();
+            _audioPlayer = new MediaPlayer();
             SolutionVisibility = Visibility.Hidden;
         }
 
@@ -143,9 +144,12 @@ namespace P2Project.ViewModel
                 }
 
                 if (CurrentUser.CurrentExercise.Description.AudioPath != null && CurrentUser.CurrentExercise.Description.AudioPath != "")
-                    audioPlayer.Open(new Uri(CurrentUser.CurrentExercise.Description.AudioPath));
+                {
+                    _audioPlayer = new MediaPlayer();
+                    _audioPlayer.Open(new Uri(CurrentUser.CurrentExercise.Description.AudioPath));
+                }
                 else
-                    audioPlayer = null;
+                    _audioPlayer = null;
             }
         }
 
@@ -263,12 +267,12 @@ namespace P2Project.ViewModel
 
         private bool CanPlayAudioClick(object param)
         {
-            return audioPlayer != null && CurrentUser.CurrentExercise != null && CurrentUser.CurrentExercise.Description.AudioPath != null && CurrentUser.CurrentExercise.Description.AudioPath != "";
+            return _audioPlayer != null && CurrentUser.CurrentExercise != null && CurrentUser.CurrentExercise.Description.AudioPath != null && CurrentUser.CurrentExercise.Description.AudioPath != "";
         }
 
         private void PlayAudioClick(object param)
         {
-            audioPlayer.Play();
+            _audioPlayer.Play();
         }
     }
 }

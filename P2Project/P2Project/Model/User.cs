@@ -14,7 +14,7 @@ namespace P2Project.Model
     {
         public string UserName { get; private set; }
         public UserType Type { get; set; }
-        public UserLearningProfile Profile { get; set; }
+        public List<double> Profile { get; set; }
         public List<int> CompletedExercisesID { get; set; }
         private Exercise _currentExercise;
 
@@ -27,7 +27,7 @@ namespace P2Project.Model
             }
         }
 
-        public User(string username, UserLearningProfile profile, UserType type, List<int> completedExercisesID)
+        public User(string username, List<double> profile, UserType type, List<int> completedExercisesID)
         {
             UserName = username;
             Profile = profile;
@@ -85,13 +85,10 @@ namespace P2Project.Model
 
         private double CalcProfileDifferenceSum(Exercise exercise)
         {
-            double sum = Profile.CalcProfileSum();
-            return Math.Pow(exercise.Profile.TextVisual - Profile.TextVisual / sum, 2) +
-                Math.Pow(exercise.Profile.ImageVisual - Profile.ImageVisual / sum, 2) +
-                Math.Pow(exercise.Profile.Verbal - Profile.Verbal / sum, 2) +
-                Math.Pow(exercise.Profile.Kinesthetic - Profile.Kinesthetic / sum, 2) +
-                Math.Pow(exercise.Profile.Auditory - Profile.Auditory / sum, 2) +
-                Math.Pow(exercise.Profile.Tactile - Profile.Tactile / sum, 2);
+            double sum = 0;
+            for (int i = 0; i < Profile.Count; i++)
+                sum += Math.Pow(exercise.Profile[i] - Profile[i], 2);
+            return sum;
         }
 
         public void ExerciseCompleted(Feedback feedback = Feedback.Medium)
@@ -107,25 +104,12 @@ namespace P2Project.Model
 
         private void UpdateProfileValues(Feedback feedback) //TODO
         {
-            double sum = Profile.CalcProfileSum();
             if (feedback == Feedback.Good)
-            {
-                Profile.TextVisual += Math.Abs((Profile.TextVisual / sum) - CurrentExercise.Profile.TextVisual) * 5;
-                Profile.ImageVisual += Math.Abs((Profile.ImageVisual / sum) - CurrentExercise.Profile.ImageVisual) * 5;
-                Profile.Auditory += Math.Abs((Profile.Auditory / sum) - CurrentExercise.Profile.Auditory) * 5;
-                Profile.Tactile += Math.Abs((Profile.Tactile / sum) - CurrentExercise.Profile.Tactile) * 5;
-                Profile.Kinesthetic += Math.Abs((Profile.Kinesthetic / sum) - CurrentExercise.Profile.Kinesthetic) * 5;
-                Profile.Verbal += Math.Abs((Profile.Verbal / sum) - CurrentExercise.Profile.Verbal) * 5;
-            }
+                for (int i = 0; i < Profile.Count; i++)
+                    Profile[i] += (CurrentExercise.Profile[i] - Profile[i]) / 20;
             if (feedback == Feedback.Bad)
-            {
-                Profile.TextVisual -= Math.Abs((Profile.TextVisual / sum) - CurrentExercise.Profile.TextVisual) * 5;
-                Profile.ImageVisual -= Math.Abs((Profile.ImageVisual / sum) - CurrentExercise.Profile.ImageVisual) * 5;
-                Profile.Auditory -= Math.Abs((Profile.Auditory / sum) - CurrentExercise.Profile.Auditory) * 5;
-                Profile.Tactile -= Math.Abs((Profile.Tactile / sum) - CurrentExercise.Profile.Tactile) * 5;
-                Profile.Kinesthetic -= Math.Abs((Profile.Kinesthetic / sum) - CurrentExercise.Profile.Kinesthetic) * 5;
-                Profile.Verbal -= Math.Abs((Profile.Verbal / sum) - CurrentExercise.Profile.Verbal) * 5;
-            }
+                for (int i = 0; i < Profile.Count; i++)
+                    Profile[i] -= (CurrentExercise.Profile[i] - Profile[i]) / 20;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

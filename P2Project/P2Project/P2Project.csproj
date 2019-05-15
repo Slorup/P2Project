@@ -58,11 +58,9 @@
     <Compile Include="DAL\DBConnection.cs" />
     <Compile Include="Model\Enums.cs" />
     <Compile Include="Model\ExerciseDescription.cs" />
-    <Compile Include="Model\ExerciseLearningProfile.cs" />
     <Compile Include="Model\RelayCommand.cs" />
     <Compile Include="Model\SurveyQuestion.cs" />
     <Compile Include="Model\Survey.cs" />
-    <Compile Include="Model\UserLearningProfile.cs" />
     <Compile Include="MVVM\Navigator.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\CreateUserViewModel.cs" />
@@ -74,6 +72,8 @@
     <Compile Include="ViewModel\MakeExerciseViewModel.cs" />
     <Compile Include="ViewModel\ProfileViewModel.cs" />
     <Compile Include="ViewModel\VideoPlayerViewModel.cs" />
+    <Compile Include="View\Converter\DoubleToPercentageConverter.cs" />
+    <Compile Include="View\Converter\UserTypeConverter.cs" />
     <Compile Include="View\CreateUserPage.xaml.cs">
       <DependentUpon>CreateUserPage.xaml</DependentUpon>
     </Compile>
@@ -152,7 +152,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Exercise.cs" />
-    <Compile Include="Model\LearningProfile.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

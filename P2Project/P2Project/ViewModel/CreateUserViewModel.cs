@@ -51,12 +51,16 @@ namespace P2Project.ViewModel
             return UserName != "" && UserName != null;
         } 
 
-        public UserLearningProfile StartLearningProfile(Survey Surveys)
+        public List<double> StartLearningProfile(Survey Surveys)
         {
-            UserLearningProfile Lp = new UserLearningProfile(Surveys.QuestionList[0].SliderValue, Surveys.QuestionList[1].SliderValue,
-                Surveys.QuestionList[2].SliderValue, Surveys.QuestionList[3].SliderValue,
-                Surveys.QuestionList[4].SliderValue, Surveys.QuestionList[5].SliderValue);
-            return Lp;
+            List<double> lp = new List<double>();
+            double sliderSum = 0;
+            for (int i = 0; i < 6; i++)
+                sliderSum += Surveys.QuestionList[i].SliderValue;
+
+            for (int i = 0; i < 6; i++)
+                lp.Add(Surveys.QuestionList[i].SliderValue / sliderSum);
+            return lp;
         }
 
         private ICommand _goBackCommand;

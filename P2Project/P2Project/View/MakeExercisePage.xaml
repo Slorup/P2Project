@@ -328,7 +328,7 @@
                             <ColumnDefinition Width="2.5*"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" Text="Billedvisuel:" Margin="2,0,0,0" VerticalAlignment="Center"/>
-                        <Slider HorizontalAlignment="Stretch" Grid.Column="1" Margin="2,0,5,0" VerticalAlignment="Center" Minimum="1" Maximum="100" Interval="1" IsSnapToTickEnabled="True" Value="{Binding TextVisual}" Style="{StaticResource CustomSlider1}"/>
+                        <Slider HorizontalAlignment="Stretch" Grid.Column="1" Margin="2,0,5,0" VerticalAlignment="Center" Minimum="1" Maximum="100" Interval="1" IsSnapToTickEnabled="True" Value="{Binding ImageVisual}" Style="{StaticResource CustomSlider1}"/>
                     </Grid>
                 </Border>
                 <Border BorderBrush="#834c69" BorderThickness="3" Grid.Row="2" Grid.Column="0">
@@ -338,7 +338,7 @@
                             <ColumnDefinition Width="2.5*"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" Text="Auditiv-Verbal:" Margin="2,0,0,0" VerticalAlignment="Center"/>
-                        <Slider HorizontalAlignment="Stretch" Grid.Column="1" Margin="2,0,5,0" VerticalAlignment="Center" Minimum="1" Maximum="100" Interval="1" IsSnapToTickEnabled="True" Value="{Binding TextVisual}" Style="{StaticResource CustomSlider1}"/>
+                        <Slider HorizontalAlignment="Stretch" Grid.Column="1" Margin="2,0,5,0" VerticalAlignment="Center" Minimum="1" Maximum="100" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Verbal}" Style="{StaticResource CustomSlider1}"/>
                     </Grid>
                 </Border>
                 <Border BorderBrush="#834c69" BorderThickness="3" Grid.Row="2" Grid.Column="2">
@@ -348,7 +348,7 @@
                             <ColumnDefinition Width="2.5*"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" Text="Auditiv:" Margin="2,0,0,0" VerticalAlignment="Center"/>
-                        <Slider HorizontalAlignment="Stretch" Grid.Column="1" Margin="2,0,5,0" VerticalAlignment="Center" Minimum="1" Maximum="100" Interval="1" IsSnapToTickEnabled="True" Value="{Binding TextVisual}" Style="{StaticResource CustomSlider1}"/>
+                        <Slider HorizontalAlignment="Stretch" Grid.Column="1" Margin="2,0,5,0" VerticalAlignment="Center" Minimum="1" Maximum="100" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Auditory}" Style="{StaticResource CustomSlider1}"/>
                     </Grid>
                 </Border>
                 <Border BorderBrush="#834c69" BorderThickness="3" Grid.Row="4" Grid.Column="0">
@@ -358,7 +358,7 @@
                             <ColumnDefinition Width="2.5*"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" Text="Taktil:" Margin="2,0,0,0" VerticalAlignment="Center"/>
-                        <Slider HorizontalAlignment="Stretch" Grid.Column="1" Margin="2,0,5,0" VerticalAlignment="Center" Minimum="1" Maximum="100" Interval="1" IsSnapToTickEnabled="True" Value="{Binding TextVisual}" Style="{StaticResource CustomSlider1}"/>
+                        <Slider HorizontalAlignment="Stretch" Grid.Column="1" Margin="2,0,5,0" VerticalAlignment="Center" Minimum="1" Maximum="100" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Tactile}" Style="{StaticResource CustomSlider1}"/>
                     </Grid>
                 </Border>
                 <Border BorderBrush="#834c69" BorderThickness="3" Grid.Row="4" Grid.Column="2">
@@ -368,7 +368,7 @@
                             <ColumnDefinition Width="2.5*"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" Text="Kinæstetisk:" Margin="2,0,0,0" VerticalAlignment="Center"/>
-                        <Slider HorizontalAlignment="Stretch" Grid.Column="1" Margin="2,0,5,0" VerticalAlignment="Center" Minimum="1" Maximum="100" Interval="1" IsSnapToTickEnabled="True" Value="{Binding TextVisual}" Style="{StaticResource CustomSlider1}"/>
+                        <Slider HorizontalAlignment="Stretch" Grid.Column="1" Margin="2,0,5,0" VerticalAlignment="Center" Minimum="1" Maximum="100" Interval="1" IsSnapToTickEnabled="True" Value="{Binding Kinesthetic}" Style="{StaticResource CustomSlider1}"/>
                     </Grid>
                 </Border>
             </Grid>

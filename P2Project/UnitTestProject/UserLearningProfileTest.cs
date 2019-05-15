@@ -12,7 +12,7 @@ namespace UnitTestProject
     public class UserLearningProfileTest
     {
 
-        [TestMethod]
+        /*[TestMethod]
         public void CalcProfileSum_ReturnsCorrectSum()
         {
             //Arrange
@@ -80,7 +80,7 @@ namespace UnitTestProject
 
             //Assert
             Assert.AreEqual(expected, result);
-        }
+        }*/
 
         /*[TestMethod]
         [ExpectedException(typeof(ArgumentException), "No exception thrown on null values")]
