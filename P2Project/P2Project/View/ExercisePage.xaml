@@ -111,7 +111,7 @@
         <DockPanel>
             <StackPanel Grid.Column="0" Width="300" Background="#3c4f65" Orientation="Vertical" VerticalAlignment="Stretch" Visibility="{Binding PanelVisibility}">
                 <ScrollViewer Grid.Column="1" Margin="0,0,5,2">
-                    <TextBlock TextWrapping="Wrap" Text="{Binding CurrentUser.CurrentExercise.Description.TextDescription}" Height="50"/>
+                    <TextBox IsReadOnly="True" Background="#3c4f65" BorderBrush="#3c4f65" TextWrapping="Wrap" Text="{Binding CurrentUser.CurrentExercise.Description.TextDescription}" Height="50"/>
                 </ScrollViewer>
                 <Frame Height="140" Width="120" Content="{Binding ImageFrame}"/>
                 <Frame Height="100" Width="160" Content="{Binding VideoFrame}"/>
