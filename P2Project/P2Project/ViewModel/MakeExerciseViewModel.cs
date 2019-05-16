@@ -53,7 +53,7 @@ namespace P2Project.ViewModel
 
         public string Description { get; set; }
         public string Name { get; set; }
-        public string URLAdress { get; set; }
+        public string URI { get; set; }
         public double TextVisual { get; set; }
         public double ImageVisual { get; set; }
         public double Verbal { get; set; }
@@ -209,7 +209,7 @@ namespace P2Project.ViewModel
             }
 
             ExerciseDescription exDescription = new ExerciseDescription(Description) { AudioPath = this.AudioPath, VideoPath = this.VideoPath, ImagePaths = this.ImagePaths, SolutionPath = this.SolutionPath };
-            Exercise exercise = new Exercise(Name, exDescription, profile, CurrentUser.UserName, DateTime.Now);
+            Exercise exercise = new Exercise(Name, exDescription, profile, CurrentUser.UserName, DateTime.Now, URI);
             DBConnection.CreateExercise(exercise);
 
             MakeExercisePage makeexercisePage = new MakeExercisePage();

@@ -14,14 +14,16 @@ namespace P2Project.Model
         public ExerciseDescription Description { get; set; }
         public string Creator { get; set; }
         public DateTime CreationDate { get; set; }
+        public string URI { get; set; }
 
-        public Exercise(string name, ExerciseDescription description, List<double> profile, string creator, DateTime creationDate)
+        public Exercise(string name, ExerciseDescription description, List<double> profile, string creator, DateTime creationDate, string uri)
         {
             Name = name;
             Profile = profile;
             Description = description;
             Creator = creator;
             CreationDate = creationDate;
+            URI = uri;
         }
     }
 }
