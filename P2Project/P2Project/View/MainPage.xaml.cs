@@ -26,7 +26,6 @@ namespace P2Project.View
         {
             InitializeComponent();
             Navigator.SubNavigationService = SubNavigationFrame.NavigationService; //TODO, Skal flyttes
-
         }
     }
 }

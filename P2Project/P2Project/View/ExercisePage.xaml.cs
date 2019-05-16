@@ -24,6 +24,7 @@ namespace P2Project.View
         public ExercisePage()
         {
             InitializeComponent();
+            this.Unloaded += (s, e) => { ExerciseViewer.Dispose(); };
         }
 
         private void ExerciseViewer_Navigating(object sender, NavigatingCancelEventArgs e)
