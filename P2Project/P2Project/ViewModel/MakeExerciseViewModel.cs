@@ -53,6 +53,7 @@ namespace P2Project.ViewModel
 
         public string Description { get; set; }
         public string Name { get; set; }
+        public string URLAdress { get; set; }
         public double TextVisual { get; set; }
         public double ImageVisual { get; set; }
         public double Verbal { get; set; }
