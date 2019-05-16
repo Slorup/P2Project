@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:P2Project.View"
       mc:Ignorable="d" 
-      d:DesignHeight="540" d:DesignWidth="960"
+      d:DesignHeight="1080" d:DesignWidth="1920"
       Title="ExercisePage" Background="#33313b">
     <Page.Resources>
         <Style x:Key="FocusVisual">
@@ -109,20 +109,39 @@
 
     <Grid>
         <DockPanel>
-            <StackPanel Grid.Column="0" Width="300" Background="#3c4f65" Orientation="Vertical" VerticalAlignment="Stretch" Visibility="{Binding PanelVisibility}">
-                <ScrollViewer Grid.Column="1" Margin="0,0,5,2">
-                    <TextBox IsReadOnly="True" Background="#3c4f65" BorderBrush="#3c4f65" TextWrapping="Wrap" Text="{Binding CurrentUser.CurrentExercise.Description.TextDescription}" Height="50"/>
-                </ScrollViewer>
-                <Frame Height="140" Width="120" Content="{Binding ImageFrame}"/>
-                <Frame Height="100" Width="160" Content="{Binding VideoFrame}"/>
-                <StackPanel Orientation="Horizontal" Height="100">
-                    <Button Content="VIS LØSNING" Width="100" Height="30" Command="{Binding ShowSolutionCommand}" Style="{StaticResource RoundButton}"/>
-                    <Frame Width="120" HorizontalAlignment="Center" Content="{Binding SolutionFrame}" Visibility="{Binding SolutionVisibility}"/>
+            <Grid Width="300" Background="#3c4f65" VerticalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="50*"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Column="1" Grid.Row="1">
+                    <ScrollViewer Grid.Column="1" Margin="0,0,5,2">
+                        <TextBox IsReadOnly="True" Background="#3c4f65" BorderBrush="#3c4f65" TextWrapping="Wrap" Text="{Binding CurrentUser.CurrentExercise.Description.TextDescription}" Height="300"/>
+                    </ScrollViewer>
+                    <Frame Height="240" Width="220" Content="{Binding ImageFrame}" Margin="0,10,0,0"/>
+                    <Frame Height="200" Width="260" Content="{Binding VideoFrame}" Margin="00,10,0,0"/>
+                    <StackPanel Orientation="Horizontal" Height="100">
+                        <Button Content="VIS LØSNING" Width="100" Height="30" Command="{Binding ShowSolutionCommand}" Style="{StaticResource RoundButton}"/>
+                        <Frame Width="120" HorizontalAlignment="Center" Content="{Binding SolutionFrame}" Visibility="{Binding SolutionVisibility}"/>
+                    </StackPanel>
+                    <Button Content="🎤" Width="30" Height="30" HorizontalAlignment="Left" Command="{Binding PlayAudioCommand}" Style="{StaticResource RoundButton}" Margin="0,10,0,0"/>
                 </StackPanel>
-                <Button Content="🎤" Width="30" Height="30" HorizontalAlignment="Left" Command="{Binding PlayAudioCommand}" Style="{StaticResource RoundButton}" Margin="0,10,0,0"/>
-                <Button Content="FÆRDIG" Command="{Binding FinishedExerciseCommand}" Style="{StaticResource RoundButton}" Width="250" Height="30" Margin="0,10,0,0"/>
-                <Button Content="SPRING OVER" Command="{Binding SkipExerciseCommand}" Style="{StaticResource RoundButton}" Width="250" Height="30" Margin="0,10,0,0"/>
-            </StackPanel>
+
+                <Button Content="FÆRDIG" Grid.Column="1" Grid.Row="3" Command="{Binding FinishedExerciseCommand}" Style="{StaticResource RoundButton}" Width="250" Height="30"/>
+                <Button Content="SPRING OVER" Grid.Column="1" Grid.Row="5" Command="{Binding SkipExerciseCommand}" Style="{StaticResource RoundButton}" Width="250" Height="30"/>
+            </Grid>
+            
             <WebBrowser x:Name="ExerciseViewer" Source="https://makecode.microbit.org/#editor" Navigating="ExerciseViewer_Navigating"/>
         </DockPanel>
     </Grid>
