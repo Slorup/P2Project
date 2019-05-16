@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,6 +24,15 @@ namespace P2Project.View
         public ExercisePage()
         {
             InitializeComponent();
+        }
+
+        private void ExerciseViewer_Navigating(object sender, NavigatingCancelEventArgs e)
+        {
+            dynamic activeX = this.ExerciseViewer.GetType().InvokeMember("ActiveXInstance",
+                BindingFlags.GetProperty | BindingFlags.Instance | BindingFlags.NonPublic,
+                null, this.ExerciseViewer, new object[] { });
+
+            activeX.Silent = true;
         }
     }
 }
