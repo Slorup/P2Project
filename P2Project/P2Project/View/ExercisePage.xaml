@@ -127,7 +127,7 @@
 
                 <StackPanel Grid.Column="1" Grid.Row="1">
                     <ScrollViewer Grid.Column="1" Margin="0,0,5,2">
-                        <TextBox IsReadOnly="True" Background="#3c4f65" BorderBrush="#3c4f65" TextWrapping="Wrap" Text="{Binding CurrentUser.CurrentExercise.Description.TextDescription}" Height="300"/>
+                        <TextBox IsReadOnly="True" Background="#3c4f65" BorderBrush="#3c4f65" TextWrapping="Wrap" Text="{Binding CurrentUser.CurrentExercise.Description.TextDescription}" Height="250"/>
                     </ScrollViewer>
                     <Frame Height="240" Width="220" Content="{Binding ImageFrame}" Margin="0,10,0,0"/>
                     <Frame Height="200" Width="260" Content="{Binding VideoFrame}" Margin="00,10,0,0"/>
