@@ -123,7 +123,7 @@
                 <Button Content="FÆRDIG" Command="{Binding FinishedExerciseCommand}" Style="{StaticResource RoundButton}" Width="250" Height="30" Margin="0,10,0,0"/>
                 <Button Content="SPRING OVER" Command="{Binding SkipExerciseCommand}" Style="{StaticResource RoundButton}" Width="250" Height="30" Margin="0,10,0,0"/>
             </StackPanel>
-            <WebBrowser x:Name="ExerciseViewer" Source="https://makecode.microbit.org/#editor"/>
+            <WebBrowser x:Name="ExerciseViewer" Source="https://makecode.microbit.org/#editor" Navigating="ExerciseViewer_Navigating"/>
         </DockPanel>
     </Grid>
 </Page>

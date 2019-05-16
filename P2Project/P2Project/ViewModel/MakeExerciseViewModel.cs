@@ -2,6 +2,7 @@
 using P2Project.DAL;
 using P2Project.Model;
 using P2Project.MVVM;
+using P2Project.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -209,7 +210,10 @@ namespace P2Project.ViewModel
             ExerciseDescription exDescription = new ExerciseDescription(Description) { AudioPath = this.AudioPath, VideoPath = this.VideoPath, ImagePaths = this.ImagePaths, SolutionPath = this.SolutionPath };
             Exercise exercise = new Exercise(Name, exDescription, profile, CurrentUser.UserName, DateTime.Now);
             DBConnection.CreateExercise(exercise);
-            Navigator.SubNavigationService.GoBack();
+
+            MakeExercisePage makeexercisePage = new MakeExercisePage();
+            makeexercisePage.DataContext = new MakeExerciseViewModel(CurrentUser);
+            Navigator.SubNavigationService.Navigate(makeexercisePage);
         }
     }
 }
