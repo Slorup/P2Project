@@ -141,7 +141,7 @@
                 <Button Content="FÆRDIG" Grid.Column="1" Grid.Row="3" Command="{Binding FinishedExerciseCommand}" Style="{StaticResource RoundButton}" Width="250" Height="30"/>
                 <Button Content="SPRING OVER" Grid.Column="1" Grid.Row="5" Command="{Binding SkipExerciseCommand}" Style="{StaticResource RoundButton}" Width="250" Height="30"/>
             </Grid>
-            
+
             <WebBrowser x:Name="ExerciseViewer" Source="https://makecode.microbit.org/#editor" Navigating="ExerciseViewer_Navigating"/>
         </DockPanel>
     </Grid>

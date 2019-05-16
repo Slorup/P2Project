@@ -89,6 +89,14 @@ namespace P2Project.ViewModel
             set { SetProperty(ref _panelVisibility, value); }
         }
 
+        private string _uriSource;
+
+        public string URISource
+        {
+            get { return _uriSource; }
+            set { SetProperty(ref _uriSource, value); }
+        }
+
         private MediaPlayer _audioPlayer;
 
         public ExerciseViewModel(User currentUser)
@@ -151,6 +159,11 @@ namespace P2Project.ViewModel
                 }
                 else
                     _audioPlayer = null;
+
+                if (CurrentUser.CurrentExercise.URI != null && CurrentUser.CurrentExercise.URI != "")
+                    URISource = CurrentUser.CurrentExercise.URI;
+                else
+                    URISource = "";
             }
         }
 
