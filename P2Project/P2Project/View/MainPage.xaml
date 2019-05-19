@@ -151,11 +151,11 @@
     <Grid>
         <DockPanel>
             <Menu DockPanel.Dock="Top" Height="30" FontSize="15" FontWeight="DemiBold" Background="#33313b">
-                <MenuItem Header="Opgaver" FontSize="18" Style="{StaticResource menuParentStyle}" ItemContainerStyle="{DynamicResource MenuItemStyle1}" Template="{DynamicResource MenuItemControlTemplate2}" Width="100">
+                <MenuItem Header="Opgaver" Height="30" FontSize="18" Style="{StaticResource menuParentStyle}" ItemContainerStyle="{DynamicResource MenuItemStyle1}" Template="{DynamicResource MenuItemControlTemplate2}" Width="100">
                     <MenuItem Header="Løs opgave" Command="{Binding MenuExerciseCommand}"/>
                     <MenuItem Header="Opret opgave" Command="{Binding MenuMakeExerciseCommand}"/>
                 </MenuItem>
-                <MenuItem Header="Profil" FontSize="18" Command="{Binding MenuProfileCommand}" Style="{StaticResource menuParentStyle}" ItemContainerStyle="{DynamicResource MenuItemStyle1}" Template="{DynamicResource MenuItemControlTemplate2}" Width="100"/>
+                <MenuItem Header="Profil" Height="30" FontSize="18" Command="{Binding MenuProfileCommand}" Style="{StaticResource menuParentStyle}" ItemContainerStyle="{DynamicResource MenuItemStyle1}" Template="{DynamicResource MenuItemControlTemplate2}" Width="100"/>
             </Menu>
             <Frame Name="SubNavigationFrame" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" NavigationUIVisibility="Hidden"/>
         </DockPanel>

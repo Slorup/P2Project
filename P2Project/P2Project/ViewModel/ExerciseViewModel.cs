@@ -48,6 +48,14 @@ namespace P2Project.ViewModel
             set{ SetProperty(ref _videoFrame, value); }
         }
 
+        private Page _audioFrame;
+
+        public Page AudioFrame
+        {
+            get { return _audioFrame; }
+            set { SetProperty(ref _audioFrame, value); }
+        }
+
         private Page _solutionFrame;
 
         public Page SolutionFrame
@@ -97,7 +105,7 @@ namespace P2Project.ViewModel
             set { SetProperty(ref _uriSource, value); }
         }
 
-        private MediaPlayer _audioPlayer;
+        //private MediaPlayer _audioPlayer;
 
         public ExerciseViewModel(User currentUser)
         {
@@ -106,7 +114,7 @@ namespace P2Project.ViewModel
             if (!result)
                 MessageBox.Show("Tillykke! Du har gennemført alle opgaver!");
             UpdateExerciseDesc();
-            _audioPlayer = new MediaPlayer();
+            //_audioPlayer = new MediaPlayer();
             SolutionVisibility = Visibility.Hidden;
         }
 
@@ -117,7 +125,7 @@ namespace P2Project.ViewModel
                 if (CurrentUser.CurrentExercise.Description.VideoPath != null && CurrentUser.CurrentExercise.Description.VideoPath != "")
                 {
                     VideoPlayerPage videopage = new VideoPlayerPage();
-                    VideoPlayerViewModel videovm = new VideoPlayerViewModel(CurrentUser.CurrentExercise.Description.VideoPath);
+                    VideoPlayerViewModel videovm = new VideoPlayerViewModel(CurrentUser.CurrentExercise.Description.VideoPath, false);
                     videopage.DataContext = videovm;
                     VideoFrame = videopage;
                 }
@@ -154,20 +162,32 @@ namespace P2Project.ViewModel
 
                 if (CurrentUser.CurrentExercise.Description.AudioPath != null && CurrentUser.CurrentExercise.Description.AudioPath != "")
                 {
+                    VideoPlayerPage page = new VideoPlayerPage();
+                    VideoPlayerViewModel vm = new VideoPlayerViewModel(CurrentUser.CurrentExercise.Description.AudioPath, true);
+                    page.DataContext = vm;
+                    AudioFrame = page;
+                }
+                else
+                {
+                    AudioFrame = null;
+                }
+
+                /*if (CurrentUser.CurrentExercise.Description.AudioPath != null && CurrentUser.CurrentExercise.Description.AudioPath != "")
+                {
                     _audioPlayer = new MediaPlayer();
                     _audioPlayer.Open(new Uri(CurrentUser.CurrentExercise.Description.AudioPath));
                 }
                 else
-                    _audioPlayer = null;
+                    _audioPlayer = null;*/
 
                 if (CurrentUser.CurrentExercise.URI != null && CurrentUser.CurrentExercise.URI != "")
                     URISource = CurrentUser.CurrentExercise.URI;
                 else
-                    URISource = "";
+                    URISource = null;
             }
         }
 
-        private float _butRot;
+       /* private float _butRot;
 
         public float ButRot
         {
@@ -197,7 +217,7 @@ namespace P2Project.ViewModel
                 PanelVisibility = Visibility.Collapsed;
                 ButRot = 180;
             }
-        }
+        }*/
 
         private ICommand _finishedExerciseCommand;
 
@@ -250,7 +270,6 @@ namespace P2Project.ViewModel
             CurrentUser.ExerciseCompleted(feedback);
             UpdateExerciseDesc();
             //TODO
-
         }
 
         private ICommand _skipExerciseCommand;
@@ -270,7 +289,7 @@ namespace P2Project.ViewModel
             //TODO
         }
 
-        private ICommand _playAudioCommand;
+        /*private ICommand _playAudioCommand;
 
         public ICommand PlayAudioCommand
         {
@@ -288,6 +307,6 @@ namespace P2Project.ViewModel
         private void PlayAudioClick(object param)
         {
             _audioPlayer.Play();
-        }
+        }*/
     }
 }

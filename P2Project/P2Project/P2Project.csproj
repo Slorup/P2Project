@@ -101,6 +101,7 @@
     <Compile Include="View\VideoPlayerPage.xaml.cs">
       <DependentUpon>VideoPlayerPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\WebBrowserHelper.cs" />
     <Page Include="View\ExercisePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

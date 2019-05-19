@@ -135,14 +135,15 @@
                         <Button Content="VIS LØSNING" Width="100" Height="30" Command="{Binding ShowSolutionCommand}" Style="{StaticResource RoundButton}"/>
                         <Frame Width="120" HorizontalAlignment="Center" Content="{Binding SolutionFrame}" Visibility="{Binding SolutionVisibility}"/>
                     </StackPanel>
-                    <Button Content="🎤" Width="30" Height="30" HorizontalAlignment="Left" Command="{Binding PlayAudioCommand}" Style="{StaticResource RoundButton}" Margin="0,10,0,0"/>
+                    <Frame Height="35" Width="260" Content="{Binding AudioFrame}"/>
+                    <!--<Button Content="🎤" Width="30" Height="30" HorizontalAlignment="Left" Command="{Binding PlayAudioCommand}" Style="{StaticResource RoundButton}" Margin="0,10,0,0"/>-->
                 </StackPanel>
 
                 <Button Content="FÆRDIG" Grid.Column="1" Grid.Row="3" Command="{Binding FinishedExerciseCommand}" Style="{StaticResource RoundButton}" Width="250" Height="30"/>
                 <Button Content="SPRING OVER" Grid.Column="1" Grid.Row="5" Command="{Binding SkipExerciseCommand}" Style="{StaticResource RoundButton}" Width="250" Height="30"/>
             </Grid>
 
-            <WebBrowser x:Name="ExerciseViewer" Source="https://makecode.microbit.org/#editor" Navigating="ExerciseViewer_Navigating"/>
+            <WebBrowser x:Name="ExerciseViewer" local:WebBrowserHelper.BindableSource="{Binding URISource}" Navigating="ExerciseViewer_Navigating"/>
         </DockPanel>
     </Grid>
 </Page>
