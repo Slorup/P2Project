@@ -6,16 +6,31 @@ using P2Project.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace P2Project.ViewModel
 {
-    class MakeExerciseViewModel : BaseViewModel
+    class MakeExerciseViewModel : BaseViewModel, IDataErrorInfo
     {
         public User CurrentUser { get; set; }
+
+        private bool _isValidating;
+
+        public bool IsValidating
+        {
+            get { return _isValidating; }
+            set
+            {
+                SetProperty(ref _isValidating, value);
+                OnPropertyChanged("Name");
+                OnPropertyChanged("Description");
+            }
+        }
 
         public List<string> ImagePaths { get; set; }
 
@@ -51,8 +66,22 @@ namespace P2Project.ViewModel
             set { SetProperty(ref _solutionPath, value); }
         }
 
-        public string Description { get; set; }
-        public string Name { get; set; }
+        private string _description;
+
+        public string Description
+        {
+            get { return _description; }
+            set { SetProperty(ref _description, value); }
+        }
+
+        private string _name;
+
+        public string Name
+        {
+            get { return _name; }
+            set { SetProperty(ref _name, value); }
+        }
+
         public string URI { get; set; }
         public double TextVisual { get; set; }
         public double ImageVisual { get; set; }
@@ -61,30 +90,10 @@ namespace P2Project.ViewModel
         public double Tactile { get; set; }
         public double Kinesthetic { get; set; }
 
-        /*private string _textBlock1;
-
-        public  string TextBlock1
-        {
-            get { return _textBlock1; }
-            set { SetProperty(ref _textBlock1, value); }
-        }
-        private string _textBlock2;
-
-        public string TextBlock2
-        {
-            get { return _textBlock2; }
-            set { SetProperty(ref _textBlock2, value); }
-        }
-        private string _textBlock3;
-
-        public string TextBlock3
-        {
-            get { return _textBlock3; }
-            set { SetProperty(ref _textBlock3, value); }
-        }*/
-
         public MakeExerciseViewModel(User currentUser)
         {
+            Name = string.Empty;
+            Description = string.Empty;
             CurrentUser = currentUser;
             ImagePaths = new List<string>();
         }
@@ -125,7 +134,6 @@ namespace P2Project.ViewModel
             fileDialog.Filter = "Video files (.mp4)|*.mp4";
 
             fileDialog.ShowDialog();
-            //TextBlock1 = fileDialog.FileName;
             VideoPath = fileDialog.FileName;
         }
 
@@ -146,7 +154,6 @@ namespace P2Project.ViewModel
             fileDialog.Filter = "Audio File (.mp3)|*.mp3"; 
 
             fileDialog.ShowDialog();
-            //TextBlock2 = fileDialog.FileName;
             AudioPath = fileDialog.FileName;
         }
 
@@ -183,21 +190,71 @@ namespace P2Project.ViewModel
         {
             get
             {
-                return _exerciseCreateCommand ?? (_exerciseCreateCommand = new RelayCommand(param => ExerciseCreateClick(param), param => CanExerciseCreateClick(param)));
+                return _exerciseCreateCommand ?? (_exerciseCreateCommand = new RelayCommand(param => ExerciseCreateClick(param)));
             }
         }
 
-        private bool CanExerciseCreateClick(object param)
+        public string Error
         {
-            return Name != null && Name != "" && Description != null && Description != "";
+            get { return null; }
+        }
+
+        public string this[string columnName]
+        {
+            get
+            {
+                if (!IsValidating) return null;
+                string error = string.Empty;
+                switch (columnName)
+                {
+                    case "Name":
+                        error = ValidateName();
+                        break;
+                    case "Description":
+                        error = ValidateDescription();
+                        break;
+                }
+                return error;
+            }
         }
 
         private void ExerciseCreateClick(object param)
         {
-            //TRY
-            List<double> profile = new List<double>() { TextVisual, ImageVisual, Verbal, Auditory, Tactile, Kinesthetic };
+            IsValidating = true;
+            string error = string.Empty;
+            if((error = ValidateName()) == null)
+            {
+                if((error = ValidateDescription()) == null)
+                {
+                    if (!Uri.IsWellFormedUriString(URI, UriKind.RelativeOrAbsolute)) URI = null;
+                    List<double> profile = new List<double>() { TextVisual, ImageVisual, Verbal, Auditory, Tactile, Kinesthetic };
+                    UpdateProfileValues(profile);
+                    ExerciseDescription exDescription = new ExerciseDescription(Description) { AudioPath = this.AudioPath, VideoPath = this.VideoPath, ImagePaths = this.ImagePaths, SolutionPath = this.SolutionPath };
+                    Exercise exercise = new Exercise(Name, exDescription, profile, CurrentUser.UserName, DateTime.Now, URI);
+                    try
+                    {
+                        DBConnection.CreateExercise(exercise);
+
+                        MakeExercisePage makeexercisePage = new MakeExercisePage();
+                        makeexercisePage.DataContext = new MakeExerciseViewModel(CurrentUser);
+                        Navigator.SubNavigationService.Navigate(makeexercisePage);
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Kunne ikke oprette forbindelse til databasen!");
+                    }
+                }
+                else
+                    MessageBox.Show(error);
+            }
+            else
+                MessageBox.Show(error);
+        }
+
+        private void UpdateProfileValues(List<double> profile)
+        {
             double sum = profile.Sum();
-            if(sum != 0)
+            if (sum != 0)
             {
                 for (int i = 0; i < profile.Count; i++)
                     profile[i] /= sum;
@@ -207,14 +264,26 @@ namespace P2Project.ViewModel
                 for (int i = 0; i < profile.Count; i++)
                     profile[i] = 1 / profile.Count;
             }
-
-            ExerciseDescription exDescription = new ExerciseDescription(Description) { AudioPath = this.AudioPath, VideoPath = this.VideoPath, ImagePaths = this.ImagePaths, SolutionPath = this.SolutionPath };
-            Exercise exercise = new Exercise(Name, exDescription, profile, CurrentUser.UserName, DateTime.Now, URI);
-            DBConnection.CreateExercise(exercise);
-
-            MakeExercisePage makeexercisePage = new MakeExercisePage();
-            makeexercisePage.DataContext = new MakeExerciseViewModel(CurrentUser);
-            Navigator.SubNavigationService.Navigate(makeexercisePage);
         }
+
+        private string ValidateName()
+        {
+            if (this.Name.Length < 2)
+                return "Navn skal mindst indeholde 2 tegn!";
+            if (this.Name.Length > 25)
+                return "Navn må højst indeholde 25 tegn!";
+            if (!this.Name.All(c => Char.IsLetterOrDigit(c) || c.Equals(' ')))
+                return "Navn må kun indeholde bogstaver, tal og mellemrum!";
+            return null;
+        }
+
+        private string ValidateDescription()
+        {
+            if (this.Description.Length < 2)
+                return "Beskrivelsen skal mindst indeholde 2 tegn!";
+            if (this.Description.Length > 5000)
+                return "Beskrivelsen må højst indeholde 5000 tegn!";
+            return null;
+        } 
     }
 }

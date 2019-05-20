@@ -31,7 +31,7 @@ namespace P2Project.ViewModel
 
         private void FeedbackClick(object param)
         {
-            int result = Convert.ToInt32(param); //TRY
+            int.TryParse(param.ToString(), out int result);
             if (result == 1)
                 UserFeedback = Feedback.Good;
             else if (result == -1)

@@ -180,9 +180,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\VectorArrow.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\VectorMediaMaximizePlayer.png" />
     <Resource Include="Resources\VectorMediaStopPlayer.png" />
   </ItemGroup>

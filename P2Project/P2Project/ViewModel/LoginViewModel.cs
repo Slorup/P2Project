@@ -34,17 +34,24 @@ namespace P2Project.ViewModel
 
         private void ExecuteLoginClick(object param)
         {
-            User currentUser = DBConnection.GetUserByUsername((string)param); //TRYCATCH
-            if (currentUser != null)
+            try
             {
-                MainPage mainPage = new MainPage();
-                MainViewModel mainvm = new MainViewModel(currentUser);
-                mainPage.DataContext = mainvm;
-                Navigator.MainNavigationService.Navigate(mainPage);
+                User currentUser = DBConnection.GetUserByUsername((string)param);
+                if (currentUser != null)
+                {
+                    MainPage mainPage = new MainPage();
+                    MainViewModel mainvm = new MainViewModel(currentUser);
+                    mainPage.DataContext = mainvm;
+                    Navigator.MainNavigationService.Navigate(mainPage);
+                }
+                else
+                {
+                    MessageBox.Show("Der findes ingen profil med det ønskede brugernavn");
+                }
             }
-            else
+            catch(Exception)
             {
-                MessageBox.Show("Der findes ingen profil med det ønskede brugernavn");
+                MessageBox.Show("Kunne ikke oprette forbindelse til databasen!");
             }
         }
 

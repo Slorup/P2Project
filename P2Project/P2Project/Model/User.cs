@@ -36,11 +36,18 @@ namespace P2Project.Model
             GiveNewExercise();
         }
 
-        public bool GiveNewExercise() //TODO - Opdeles i flere metoder
+        public bool GiveNewExercise()
+        {
+            List<Exercise> exerciseList = GetExercisesNotCompleted(); //Get all non-completed exercises from DB
+            bool newExerciseFound = SelectRandomExerciseFromLiking(exerciseList);
+            return newExerciseFound;
+        }
+
+        //Calc chance of user liking the exercises
+        //Get random exercise from chances
+        public bool SelectRandomExerciseFromLiking(List<Exercise> exerciseList)
         {
             bool newExerciseFound = false;
-            List<Exercise> exerciseList = GetExercisesNotCompleted();
-
             var chancelist = exerciseList.GroupBy(p => p).Select(p => new { ExerciseInfo = p.Key, Liking = CalcChanceLikeExercise(p.Key) });
             if (chancelist.Count() != 0)
             {
@@ -64,26 +71,24 @@ namespace P2Project.Model
             else
                 CurrentExercise = null;
             return newExerciseFound;
-            //Get all exercises fom DB (maybe where completed ids isnt chosen)
-            //(Remove completed ones)
-            //Calc chance of liking them
-            //Get "random" exercise from chances
         }
 
+        //Get exercises from DB, then remove completed ones
         private List<Exercise> GetExercisesNotCompleted()
         {
             List<Exercise> exerciselist = DBConnection.GetAllExercises();
             return exerciselist.Where(p => !CompletedExercisesID.Contains(p.ID)).ToList();
         }
 
+        //Udregner "liking" for en opgave.
         //Stardardafvigelse: sqrt(1/2 * Sum((E_x - S_x)^2))
-        private int CalcChanceLikeExercise(Exercise exercise)
+        public int CalcChanceLikeExercise(Exercise exercise)
         {
             double profileDifferenceSum = CalcProfileDifferenceSum(exercise);
             return (int)((1 - Math.Sqrt(profileDifferenceSum / 2)) * 100); 
         }
 
-        private double CalcProfileDifferenceSum(Exercise exercise)
+        public double CalcProfileDifferenceSum(Exercise exercise)
         {
             double sum = 0;
             for (int i = 0; i < Profile.Count; i++)
@@ -102,7 +107,7 @@ namespace P2Project.Model
             }
         }
 
-        private void UpdateProfileValues(Feedback feedback) //TODO
+        public void UpdateProfileValues(Feedback feedback)
         {
             if (feedback == Feedback.Good)
                 for (int i = 0; i < Profile.Count; i++)
@@ -110,6 +115,20 @@ namespace P2Project.Model
             if (feedback == Feedback.Bad)
                 for (int i = 0; i < Profile.Count; i++)
                     Profile[i] -= (CurrentExercise.Profile[i] - Profile[i]) / 20;
+            CheckProfileBounds();
+        }
+
+        public void CheckProfileBounds() //TODO
+        {
+            int negativeValuesCount = Profile.Count(c => c < 0);
+            while(negativeValuesCount > 0)
+            {
+                double negativeSum = Profile.Where(c => c < 0).Sum();
+                int positiveValuesCount = Profile.Count(c => c > 0);
+                Profile.Where(c => c < 0).Select(c => c = 0);
+                Profile.Where(c => c > 0).Select(c => c -= negativeSum / positiveValuesCount);
+                negativeValuesCount = Profile.Count(c => c < 0);
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

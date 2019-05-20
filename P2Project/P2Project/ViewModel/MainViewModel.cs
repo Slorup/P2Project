@@ -53,7 +53,7 @@ namespace P2Project.ViewModel
             }
         }
 
-        private void MenuExerciseClick(object param) //CHECK IF ALREADY IN SUBPAGE
+        private void MenuExerciseClick(object param)
         {
             ExercisePage exercisePage = new ExercisePage();
             exercisePage.DataContext = new ExerciseViewModel(CurrentUser);

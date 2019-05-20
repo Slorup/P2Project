@@ -191,7 +191,7 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" Text="BRUGERNAVN:" VerticalAlignment="Center" FontSize="24" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
-                    <TextBox Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" Text="{Binding UserName}" VerticalAlignment="Center" Height="25" Width="220"/>
+                    <TextBox Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" VerticalAlignment="Center" Height="25" Width="220"/>
                     <TextBlock Grid.Column="1" Grid.Row="4" TextWrapping="Wrap" Text="BRUGERTYPE:" VerticalAlignment="Center" FontSize="24" FontFamily="Mongolian Baiti" FontWeight="Bold" HorizontalAlignment="Left"/>
                     <ListBox Grid.Column="0" Grid.Row="5" Height="30" Margin="10,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Width="220" SelectedIndex="{Binding SelectedUserTypeIndex}" >
                         <ListBox.ItemsPanel>

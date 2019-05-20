@@ -24,14 +24,6 @@ namespace P2Project.ViewModel
             set { SetProperty(ref _currentUser, value); }
         }
 
-        /*private string _solutionPath;
-
-        public string SolutionPath
-        {
-            get { return _solutionPath; }
-            set { SetProperty(ref _solutionPath, value); }
-        }*/
-
         private Visibility _solutionVisibility;
 
         public Visibility SolutionVisibility
@@ -64,14 +56,6 @@ namespace P2Project.ViewModel
             set { SetProperty(ref _solutionFrame, value); }
         }
 
-        /*private bool _videoVisible;
-
-        public bool VideoVisible
-        {
-            get { return _videoVisible; }
-            set { SetProperty(ref _videoVisible, value); }
-        }*/
-
         private Page _imageFrame;
 
         public Page ImageFrame
@@ -79,15 +63,6 @@ namespace P2Project.ViewModel
             get { return _imageFrame; }
             set { SetProperty(ref _imageFrame, value); }
         }
-
-
-        /*private bool _imageVisible;
-
-        public bool ImageVisible
-        {
-            get { return _imageVisible; }
-            set { SetProperty(ref _imageVisible, value); }
-        }*/
 
         private Visibility _panelVisibility;
 
@@ -105,8 +80,6 @@ namespace P2Project.ViewModel
             set { SetProperty(ref _uriSource, value); }
         }
 
-        //private MediaPlayer _audioPlayer;
-
         public ExerciseViewModel(User currentUser)
         {
             CurrentUser = currentUser;
@@ -114,7 +87,6 @@ namespace P2Project.ViewModel
             if (!result)
                 MessageBox.Show("Tillykke! Du har gennemført alle opgaver!");
             UpdateExerciseDesc();
-            //_audioPlayer = new MediaPlayer();
             SolutionVisibility = Visibility.Hidden;
         }
 
@@ -172,52 +144,12 @@ namespace P2Project.ViewModel
                     AudioFrame = null;
                 }
 
-                /*if (CurrentUser.CurrentExercise.Description.AudioPath != null && CurrentUser.CurrentExercise.Description.AudioPath != "")
-                {
-                    _audioPlayer = new MediaPlayer();
-                    _audioPlayer.Open(new Uri(CurrentUser.CurrentExercise.Description.AudioPath));
-                }
-                else
-                    _audioPlayer = null;*/
-
                 if (CurrentUser.CurrentExercise.URI != null && CurrentUser.CurrentExercise.URI != "")
                     URISource = CurrentUser.CurrentExercise.URI;
                 else
                     URISource = null;
             }
         }
-
-       /* private float _butRot;
-
-        public float ButRot
-        {
-            get { return _butRot; }
-            set { SetProperty(ref _butRot, value); }
-        }
-
-        private ICommand _panelShowCommand;
-
-        public ICommand PanelShowCommand
-        {
-            get
-            {
-                return _panelShowCommand ?? (_panelShowCommand = new RelayCommand(param => PanelShowClick(param)));
-            }
-        }
-
-        private void PanelShowClick(object param)
-        {
-            if (PanelVisibility == Visibility.Collapsed)
-            {
-                PanelVisibility = Visibility.Visible;
-                ButRot = 0;
-            }
-            else
-            {
-                PanelVisibility = Visibility.Collapsed;
-                ButRot = 180;
-            }
-        }*/
 
         private ICommand _finishedExerciseCommand;
 
@@ -269,7 +201,6 @@ namespace P2Project.ViewModel
                 feedback = vm.UserFeedback;
             CurrentUser.ExerciseCompleted(feedback);
             UpdateExerciseDesc();
-            //TODO
         }
 
         private ICommand _skipExerciseCommand;
@@ -286,27 +217,6 @@ namespace P2Project.ViewModel
         {
             CurrentUser.GiveNewExercise();
             UpdateExerciseDesc();
-            //TODO
         }
-
-        /*private ICommand _playAudioCommand;
-
-        public ICommand PlayAudioCommand
-        {
-            get
-            {
-                return _playAudioCommand ?? (_playAudioCommand = new RelayCommand(param => PlayAudioClick(param), param => CanPlayAudioClick(param)));
-            }
-        }
-
-        private bool CanPlayAudioClick(object param)
-        {
-            return _audioPlayer != null && CurrentUser.CurrentExercise != null && CurrentUser.CurrentExercise.Description.AudioPath != null && CurrentUser.CurrentExercise.Description.AudioPath != "";
-        }
-
-        private void PlayAudioClick(object param)
-        {
-            _audioPlayer.Play();
-        }*/
     }
 }

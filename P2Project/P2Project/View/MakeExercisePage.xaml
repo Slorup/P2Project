@@ -215,10 +215,10 @@
                     </Grid.RowDefinitions>
 
                     <TextBlock Text="Opgavenavn:" FontSize="20"/>
-                    <TextBox HorizontalAlignment="Left" Grid.Row="1" Height="25" TextWrapping="Wrap" Text="{Binding Name}" VerticalAlignment="Top" Width="380" Background="#e6f5ff"/>
+                    <TextBox HorizontalAlignment="Left" Grid.Row="1" Height="25" TextWrapping="Wrap" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" VerticalAlignment="Top" Width="380" Background="#e6f5ff"/>
                     
                     <TextBlock Text="Opgave beskrivelse:" FontSize="20" Grid.Row="3"/>
-                    <TextBox AcceptsReturn="True" HorizontalAlignment="Left" Grid.Row="4" Height="250" TextWrapping="Wrap" Text="{Binding Description}" VerticalAlignment="Top" Width="380" Background="#e6f5ff"/>
+                    <TextBox AcceptsReturn="True" HorizontalAlignment="Left" Grid.Row="4" Height="250" TextWrapping="Wrap" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" VerticalAlignment="Top" Width="380" Background="#e6f5ff"/>
                 </Grid>
                 <Grid Grid.Column="1">
                     <Grid.RowDefinitions>
