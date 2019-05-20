@@ -84,11 +84,11 @@ namespace P2Project.Model
         //Stardardafvigelse: sqrt(1/2 * Sum((E_x - S_x)^2))
         public int CalcChanceLikeExercise(Exercise exercise)
         {
-            double profileDifferenceSum = CalcProfileDifferenceSum(exercise);
+            double profileDifferenceSum = CalcProfileDifferencePowSum(exercise);
             return (int)((1 - Math.Sqrt(profileDifferenceSum / 2)) * 100); 
         }
 
-        public double CalcProfileDifferenceSum(Exercise exercise)
+        public double CalcProfileDifferencePowSum(Exercise exercise)
         {
             double sum = 0;
             for (int i = 0; i < Profile.Count; i++)
@@ -111,22 +111,22 @@ namespace P2Project.Model
         {
             if (feedback == Feedback.Good)
                 for (int i = 0; i < Profile.Count; i++)
-                    Profile[i] += (CurrentExercise.Profile[i] - Profile[i]) / 20;
+                    Math.Round(Profile[i] += (CurrentExercise.Profile[i] - Profile[i]) / 20, 5);
             if (feedback == Feedback.Bad)
                 for (int i = 0; i < Profile.Count; i++)
-                    Profile[i] -= (CurrentExercise.Profile[i] - Profile[i]) / 20;
+                    Math.Round(Profile[i] -= (CurrentExercise.Profile[i] - Profile[i]) / 20, 5);
             CheckProfileBounds();
         }
 
-        public void CheckProfileBounds() //TODO
+        public void CheckProfileBounds()
         {
             int negativeValuesCount = Profile.Count(c => c < 0);
-            while(negativeValuesCount > 0)
+            while (negativeValuesCount > 0)
             {
-                double negativeSum = Profile.Where(c => c < 0).Sum();
+                double negativeSum = Math.Abs(Profile.Where(c => c < 0).Sum());
                 int positiveValuesCount = Profile.Count(c => c > 0);
-                Profile.Where(c => c < 0).Select(c => c = 0);
-                Profile.Where(c => c > 0).Select(c => c -= negativeSum / positiveValuesCount);
+                Profile = Profile.Select(c => c < 0 ? 0 : c).ToList();
+                Profile = Profile.Select(c => c > 0 ? Math.Round(c -= negativeSum / positiveValuesCount, 5) : c).ToList();
                 negativeValuesCount = Profile.Count(c => c < 0);
             }
         }
