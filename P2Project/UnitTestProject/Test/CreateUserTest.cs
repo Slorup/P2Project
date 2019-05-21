@@ -14,23 +14,17 @@ namespace UnitTestProject
     public class CreateUserTest
     {
         [TestMethod]
-        public void FillSurvey_CorrectValues()
+        public void CalcLearningProfile_SameValues_CorrectValues()
         {
             //Arrange
             CreateUserViewModel vm = new CreateUserViewModel();
-            List<SurveyQuestion> expected = new List<SurveyQuestion>();
-            expected.Add(new SurveyQuestion("1. Jeg lærer godt ved hjælp af tekster"));
-            expected.Add(new SurveyQuestion("2. Jeg lærer godt ved hjælp af billeder"));
-            expected.Add(new SurveyQuestion("3. Jeg lærer godt ved hjælp af at lytte"));
-            expected.Add(new SurveyQuestion("4. Jeg lærer godt ved hjælp af at tale"));
-            expected.Add(new SurveyQuestion("5. Jeg lærer godt ved hjælp af at bruge mine hænder"));
-            expected.Add(new SurveyQuestion("6. Jeg lærer godt ved hjælp af at være fysisk aktiv"));
+            List<double> expected = new List<double>() { 1.0/6, 1.0/6, 1.0/6, 1.0/6, 1.0/6, 1.0/6 };
 
             //Act
-            List<SurveyQuestion> result = vm.Survey.QuestionList;
+            List<double> result = vm.CalcLearningProfile();
 
             //Assert
-            CollectionAssert.AreEqual(expected, result, new SurveyQuestionComparer());
+            CollectionAssert.AreEqual(expected, result, new ListToleranceComparer(0.0001));
         }
 
         [TestMethod]
@@ -44,21 +38,7 @@ namespace UnitTestProject
             vm.Survey.QuestionList[3].SliderValue = 2;
             vm.Survey.QuestionList[4].SliderValue = 4;
             vm.Survey.QuestionList[5].SliderValue = 1;
-            List<double> expected = new List<double>() { 5.0/16, 1.0/16, 3.0/16, 2.0/16, 4.0/16, 1.0/16 };
-
-            //Act
-            List<double> result = vm.CalcLearningProfile();
-
-            //Assert
-            CollectionAssert.AreEqual(expected, result, new ListToleranceComparer(0.0001));
-        }
-
-        [TestMethod]
-        public void CalcLearningProfile_SameValues_CorrectValues()
-        {
-            //Arrange
-            CreateUserViewModel vm = new CreateUserViewModel();
-            List<double> expected = new List<double>() { 1.0/6, 1.0/6, 1.0/6, 1.0/6, 1.0/6, 1.0/6 };
+            List<double> expected = new List<double>() { 5.0 / 16, 1.0 / 16, 3.0 / 16, 2.0 / 16, 4.0 / 16, 1.0 / 16 };
 
             //Act
             List<double> result = vm.CalcLearningProfile();
@@ -95,6 +75,26 @@ namespace UnitTestProject
 
             //Assert
             CollectionAssert.AreEqual(expected, result, new ListToleranceComparer(0.0001));
+        }
+
+        [TestMethod]
+        public void FillSurvey_CorrectValues()
+        {
+            //Arrange
+            CreateUserViewModel vm = new CreateUserViewModel();
+            List<SurveyQuestion> expected = new List<SurveyQuestion>();
+            expected.Add(new SurveyQuestion("1. Jeg lærer godt ved hjælp af tekster"));
+            expected.Add(new SurveyQuestion("2. Jeg lærer godt ved hjælp af billeder"));
+            expected.Add(new SurveyQuestion("3. Jeg lærer godt ved hjælp af at lytte"));
+            expected.Add(new SurveyQuestion("4. Jeg lærer godt ved hjælp af at tale"));
+            expected.Add(new SurveyQuestion("5. Jeg lærer godt ved hjælp af at bruge mine hænder"));
+            expected.Add(new SurveyQuestion("6. Jeg lærer godt ved hjælp af at være fysisk aktiv"));
+
+            //Act
+            List<SurveyQuestion> result = vm.Survey.QuestionList;
+
+            //Assert
+            CollectionAssert.AreEqual(expected, result, new SurveyQuestionComparer());
         }
     }
 }

@@ -264,7 +264,7 @@ namespace UnitTestProject
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void SelectRandomExerciseFromLiking_NullList_NullReferenceException()
+        public void SelectRandomExerciseFromLiking_NullList_ArgumentNullException()
         {
             //Arrange
             List<double> userProfile = new List<double>() { 0.2, 0.2, 0.1, 0.1, 0.2, 0.2 };
