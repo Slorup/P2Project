@@ -230,33 +230,54 @@ namespace UnitTestProject
         public void SelectRandomExerciseFromLiking_NormalValues_NewExercise()
         {
             //Arrange
+            List<double> userProfile = new List<double>() { 0.2, 0.2, 0.1, 0.1, 0.2, 0.2 };
+            User user = new User("Test", userProfile, UserType.Teacher, new List<int>());
+            List<double> exerciseProfile = new List<double>() { 0.1, 0.1, 0.2, 0.1, 0.2, 0.3 };
+            Exercise exercise = new Exercise("Name", new ExerciseDescription("Description"), exerciseProfile, "Creator", DateTime.Now, "uri");
+            Exercise exercise2 = new Exercise("Name2", new ExerciseDescription("Description"), exerciseProfile, "Creator", DateTime.Now, "uri");
+            List<Exercise> exerciseList = new List<Exercise>();
+            exerciseList.Add(exercise);
+            exerciseList.Add(exercise2);
 
             //Act
+            user.SelectRandomExerciseFromLiking(exerciseList);
+            Exercise result = user.CurrentExercise;
 
             //Assert
-
+            Assert.IsNotNull(result);
         }
 
         [TestMethod]
-        public void SelectRandomExerciseFromLiking_EmptyList_ERROR()
+        public void SelectRandomExerciseFromLiking_EmptyList_CurrentExerciseNull()
         {
             //Arrange
+            List<double> userProfile = new List<double>() { 0.2, 0.2, 0.1, 0.1, 0.2, 0.2 };
+            User user = new User("Test", userProfile, UserType.Teacher, new List<int>());
+            List<Exercise> exerciseList = new List<Exercise>();
 
             //Act
+            user.SelectRandomExerciseFromLiking(exerciseList);
+            Exercise result = user.CurrentExercise;
 
             //Assert
-
+            Assert.IsNull(result);
         }
 
         [TestMethod]
-        public void SelectRandomExerciseFromLiking_nullList_ERROR()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void SelectRandomExerciseFromLiking_NullList_NullReferenceException()
         {
             //Arrange
+            List<double> userProfile = new List<double>() { 0.2, 0.2, 0.1, 0.1, 0.2, 0.2 };
+            User user = new User("Test", userProfile, UserType.Teacher, new List<int>());
+            List<Exercise> exerciseList = null;
 
             //Act
+            user.SelectRandomExerciseFromLiking(exerciseList);
+            Exercise result = user.CurrentExercise;
 
             //Assert
-
+            Assert.IsNull(result);
         }
     }
 }

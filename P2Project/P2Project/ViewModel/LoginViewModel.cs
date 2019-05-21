@@ -39,6 +39,7 @@ namespace P2Project.ViewModel
                 User currentUser = DBConnection.GetUserByUsername((string)param);
                 if (currentUser != null)
                 {
+                    currentUser.GiveNewExercise();
                     MainPage mainPage = new MainPage();
                     MainViewModel mainvm = new MainViewModel(currentUser);
                     mainPage.DataContext = mainvm;

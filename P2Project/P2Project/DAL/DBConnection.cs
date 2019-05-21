@@ -12,7 +12,7 @@ namespace P2Project.DAL
 {
     static class DBConnection
     {
-        static string connString = "Server=p2project-server.database.windows.net; Database=P2ProjectDB; User Id=Slorup; Password=Password123";
+        static string connString = "Server=p2projectserver.database.windows.net; Database=P2Project; User Id=Azureadmin; Password=Azure123";
 
         public static void CreateUser(User user)
         {

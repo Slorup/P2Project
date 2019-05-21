@@ -33,7 +33,6 @@ namespace P2Project.Model
             Profile = profile;
             Type = type;
             CompletedExercisesID = completedExercisesID;
-            GiveNewExercise();
         }
 
         public bool GiveNewExercise()
