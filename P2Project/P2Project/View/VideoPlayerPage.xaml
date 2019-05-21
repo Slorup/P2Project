@@ -259,7 +259,7 @@
             </Grid.ColumnDefinitions>
             <Button Grid.Column="0" Command="{Binding PauseCommand}" CommandParameter="{Binding ElementName=VideoPlayer}" Style="{StaticResource PauseButton}" Visibility="{Binding PauseVisibility}"/>
             <Button Grid.Column="0" Command="{Binding PauseCommand}" CommandParameter="{Binding ElementName=VideoPlayer}" Style="{StaticResource PlayButton}" Visibility="{Binding PlayVisibility}"/>
-            <Slider Grid.Column="1" VerticalAlignment="Center" Maximum="100" IsSnapToTickEnabled="False" PreviewMouseLeftButtonUp="Slider_PreviewMouseLeftButtonUp" PreviewMouseLeftButtonDown="Slider_PreviewMouseLeftButtonDown" Value="{Binding SliderValue}" Style="{StaticResource CustomSlider1}"/>
+            <Slider Grid.Column="1" Margin="1" VerticalAlignment="Center" Maximum="100" IsSnapToTickEnabled="False" PreviewMouseLeftButtonUp="Slider_PreviewMouseLeftButtonUp" PreviewMouseLeftButtonDown="Slider_PreviewMouseLeftButtonDown" Value="{Binding SliderValue}" Style="{StaticResource CustomSlider1}"/>
             <Button Grid.Column="2"  Command="{Binding ResetCommand}" CommandParameter="{Binding ElementName=VideoPlayer}" Style="{StaticResource StopButton}"/>
             <Button Grid.Column="3" Command="{Binding FullScreenCommand}" Visibility="{Binding MediaVisibility}" Style="{StaticResource MaxButton}"/>
         </Grid>
