@@ -114,6 +114,9 @@ namespace P2Project.ViewModel
         {
             ((MediaElement)param).Stop();
             ((MediaElement)param).Play();
+            IsPlaying = true;
+            PlayVisibility = Visibility.Collapsed;
+            PauseVisibility = Visibility.Visible;
         }
 
         private void FullScreenClick(object param)
@@ -148,6 +151,8 @@ namespace P2Project.ViewModel
 
             _player.Play();
             IsPlaying = true;
+            PlayVisibility = Visibility.Collapsed;
+            PauseVisibility = Visibility.Visible;
             if (_totalTime.TotalSeconds > 0)
                 _player.Position = TimeSpan.FromSeconds((SliderValue / 100) * _totalTime.TotalSeconds);
 

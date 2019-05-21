@@ -125,19 +125,25 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <StackPanel Grid.Column="1" Grid.Row="1">
-                    <ScrollViewer Grid.Column="1" Margin="0,0,5,2">
-                        <TextBox IsReadOnly="True" Background="#3c4f65" BorderBrush="#3c4f65" TextWrapping="Wrap" Text="{Binding CurrentUser.CurrentExercise.Description.TextDescription}" Height="250"/>
+                <Grid Grid.Column="1" Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="5*"/>
+                        <RowDefinition Height="5*"/>
+                        <RowDefinition Height="4*"/>
+                        <RowDefinition Height="4*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <ScrollViewer VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="0" Margin="0,0,5,2">
+                        <TextBox IsReadOnly="True" Background="#3c4f65" BorderBrush="#3c4f65" TextWrapping="Wrap" Text="{Binding CurrentUser.CurrentExercise.Description.TextDescription}"/>
                     </ScrollViewer>
-                    <Frame Height="240" Width="220" Content="{Binding ImageFrame}" Margin="0,10,0,0"/>
-                    <Frame Height="200" Width="260" Content="{Binding VideoFrame}" Margin="00,10,0,0"/>
-                    <StackPanel Orientation="Horizontal" Height="100">
+                    <Frame Grid.Row="1" VerticalAlignment="Stretch" Content="{Binding ImageFrame}" Margin="0,10,0,0"/>
+                    <Frame Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="{Binding VideoFrame}" Margin="00,10,0,0"/>
+                    <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="3" Orientation="Horizontal">
                         <Button Content="VIS LØSNING" Width="100" Height="30" Command="{Binding ShowSolutionCommand}" Style="{StaticResource RoundButton}"/>
-                        <Frame Width="120" HorizontalAlignment="Center" Content="{Binding SolutionFrame}" Visibility="{Binding SolutionVisibility}"/>
+                        <Frame VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="{Binding SolutionFrame}" Visibility="{Binding SolutionVisibility}"/>
                     </StackPanel>
-                    <Frame Height="35" Width="260" Content="{Binding AudioFrame}"/>
-                    <!--<Button Content="🎤" Width="30" Height="30" HorizontalAlignment="Left" Command="{Binding PlayAudioCommand}" Style="{StaticResource RoundButton}" Margin="0,10,0,0"/>-->
-                </StackPanel>
+                    <Frame VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="4" Height="35" Width="260" Content="{Binding AudioFrame}"/>
+                </Grid>
 
                 <Button Content="FÆRDIG" Grid.Column="1" Grid.Row="3" Command="{Binding FinishedExerciseCommand}" Style="{StaticResource RoundButton}" Width="250" Height="30"/>
                 <Button Content="SPRING OVER" Grid.Column="1" Grid.Row="5" Command="{Binding SkipExerciseCommand}" Style="{StaticResource RoundButton}" Width="250" Height="30"/>

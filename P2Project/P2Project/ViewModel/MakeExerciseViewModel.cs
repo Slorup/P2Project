@@ -259,7 +259,7 @@ namespace P2Project.ViewModel
             else
             {
                 for (int i = 0; i < profile.Count; i++)
-                    profile[i] = 1 / profile.Count;
+                    profile[i] = 1.0 / profile.Count;
             }
         }
 
