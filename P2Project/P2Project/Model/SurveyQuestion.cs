@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace P2Project.Model
 {
-    class SurveyQuestion
+    public class SurveyQuestion
     {
         public int SliderValue { get; set; }
         public string QuestionText { get; set; }
-        public SurveyQuestion()
+
+        public SurveyQuestion(string question, int value = 3)
         {
-            SliderValue = 3;
+            QuestionText = question;
+            SliderValue = value;
         }
     }
 }

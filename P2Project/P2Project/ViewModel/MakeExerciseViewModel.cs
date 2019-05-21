@@ -175,14 +175,11 @@ namespace P2Project.ViewModel
             fileDialog.ShowDialog();
             ImagePaths.Clear();
             DisplayImagePaths = "";
-            foreach (string filename in fileDialog.FileNames) //CHECK IF DIALOG OK
+            foreach (string filename in fileDialog.FileNames) 
                 ImagePaths.Add(filename);
 
             foreach (string ImagePaths in ImagePaths)
-            {
                 DisplayImagePaths += ImagePaths + "\n";
-            }
-            
         }
 
         private ICommand _exerciseCreateCommand;

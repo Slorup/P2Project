@@ -6,17 +6,13 @@ using System.Threading.Tasks;
 
 namespace P2Project.Model
 {
-    class Survey
+    public class Survey
     {
         public List<SurveyQuestion> QuestionList { get; set; }
 
-        public Survey(int NumberofSurveys)
+        public Survey()
         {
             QuestionList = new List<SurveyQuestion>();
-            for (int i = 0; i < NumberofSurveys; i++)
-            {
-                QuestionList.Add(new SurveyQuestion());
-            }
         }
     }
 }

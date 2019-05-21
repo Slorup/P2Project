@@ -14,10 +14,10 @@ using System.Windows.Input;
 
 namespace P2Project.ViewModel
 {
-    class CreateUserViewModel : BaseViewModel, IDataErrorInfo
+    public class CreateUserViewModel : BaseViewModel, IDataErrorInfo
     {
         public int SelectedUserTypeIndex { get; set; }
-        public Survey Surveys { get; set; }
+        public Survey Survey { get; set; }
 
         private string _userName;
 
@@ -39,11 +39,21 @@ namespace P2Project.ViewModel
             }
         }
 
-
         public CreateUserViewModel()
         {
             UserName = string.Empty;
-            Surveys = new Survey(6);
+            this.Survey = new Survey();
+            FillSurvey();
+        }
+
+        public void FillSurvey()
+        {
+            this.Survey.QuestionList.Add(new SurveyQuestion("1. Jeg lærer godt ved hjælp af tekster"));
+            this.Survey.QuestionList.Add(new SurveyQuestion("2. Jeg lærer godt ved hjælp af billeder"));
+            this.Survey.QuestionList.Add(new SurveyQuestion("3. Jeg lærer godt ved hjælp af at lytte"));
+            this.Survey.QuestionList.Add(new SurveyQuestion("4. Jeg lærer godt ved hjælp af at tale"));
+            this.Survey.QuestionList.Add(new SurveyQuestion("5. Jeg lærer godt ved hjælp af at bruge mine hænder"));
+            this.Survey.QuestionList.Add(new SurveyQuestion("6. Jeg lærer godt ved hjælp af at være fysisk aktiv"));
         }
 
         private ICommand _createUserCommand;
@@ -66,7 +76,7 @@ namespace P2Project.ViewModel
                 {
                     if (!DBConnection.UserExist(UserName))
                     {
-                        DBConnection.CreateUser(new User(UserName, StartLearningProfile(Surveys), (UserType)SelectedUserTypeIndex, new List<int>()));
+                        DBConnection.CreateUser(new User(UserName, CalcLearningProfile(), (UserType)SelectedUserTypeIndex, new List<int>()));
                         Navigator.MainNavigationService.GoBack();
                     }
                     else
@@ -94,15 +104,23 @@ namespace P2Project.ViewModel
             return null;
         }
 
-        public List<double> StartLearningProfile(Survey survey)
+        public List<double> CalcLearningProfile()
         {
             List<double> lp = new List<double>();
-            double sliderSum = 0;
-            for (int i = 0; i < 6; i++)
-                sliderSum += survey.QuestionList[i].SliderValue;
+            int prefAmount = 6;
 
             for (int i = 0; i < 6; i++)
-                lp.Add(survey.QuestionList[i].SliderValue / sliderSum);
+                lp.Add(1.0 / 6);
+
+            if (Survey.QuestionList.Count >= prefAmount)
+            {
+                double sliderSum = 0;
+                for (int i = 0; i < prefAmount; i++)
+                    sliderSum += Survey.QuestionList[i].SliderValue;
+
+                for (int i = 0; i < prefAmount; i++)
+                    lp[i] = Survey.QuestionList[i].SliderValue / sliderSum;
+            }
             return lp;
         }
 

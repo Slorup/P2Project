@@ -110,10 +110,10 @@ namespace P2Project.Model
         {
             if (feedback == Feedback.Good)
                 for (int i = 0; i < Profile.Count; i++)
-                    Math.Round(Profile[i] += (CurrentExercise.Profile[i] - Profile[i]) / 20, 5);
+                    Profile[i] += (CurrentExercise.Profile[i] - Profile[i]) / 20;
             if (feedback == Feedback.Bad)
                 for (int i = 0; i < Profile.Count; i++)
-                    Math.Round(Profile[i] -= (CurrentExercise.Profile[i] - Profile[i]) / 20, 5);
+                    Profile[i] -= (CurrentExercise.Profile[i] - Profile[i]) / 20;
             CheckProfileBounds();
         }
 
@@ -125,7 +125,7 @@ namespace P2Project.Model
                 double negativeSum = Math.Abs(Profile.Where(c => c < 0).Sum());
                 int positiveValuesCount = Profile.Count(c => c > 0);
                 Profile = Profile.Select(c => c < 0 ? 0 : c).ToList();
-                Profile = Profile.Select(c => c > 0 ? Math.Round(c -= negativeSum / positiveValuesCount, 5) : c).ToList();
+                Profile = Profile.Select(c => c > 0 ? c -= negativeSum / positiveValuesCount : c).ToList();
                 negativeValuesCount = Profile.Count(c => c < 0);
             }
         }

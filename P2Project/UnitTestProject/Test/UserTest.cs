@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnitTestProject.Comparer;
 
 namespace UnitTestProject
 {
@@ -24,7 +25,7 @@ namespace UnitTestProject
             List<double> result = user.Profile;
 
             //Assert
-            CollectionAssert.AreEqual(expected, result);
+            CollectionAssert.AreEqual(expected, result, new ListToleranceComparer(0.0001));
         }
 
         [TestMethod]
@@ -40,7 +41,7 @@ namespace UnitTestProject
             List<double> result = user.Profile;
 
             //Assert
-            CollectionAssert.AreEqual(expected, result);
+            CollectionAssert.AreEqual(expected, result, new ListToleranceComparer(0.0001));
         }
 
         [TestMethod]
@@ -56,7 +57,7 @@ namespace UnitTestProject
             List<double> result = user.Profile;
 
             //Assert
-            CollectionAssert.AreEqual(expected, result);
+            CollectionAssert.AreEqual(expected, result, new ListToleranceComparer(0.0001));
         }
 
         [TestMethod]
@@ -72,7 +73,7 @@ namespace UnitTestProject
             List<double> result = user.Profile;
 
             //Assert
-            CollectionAssert.AreEqual(expected, result);
+            CollectionAssert.AreEqual(expected, result, new ListToleranceComparer(0.0001));
         }
 
         [TestMethod]
@@ -88,7 +89,7 @@ namespace UnitTestProject
             List<double> result = user.Profile;
 
             //Assert
-            CollectionAssert.AreEqual(expected, result);
+            CollectionAssert.AreEqual(expected, result, new ListToleranceComparer(0.0001));
         }
 
         [TestMethod]
@@ -105,7 +106,7 @@ namespace UnitTestProject
             List<double> result = user.Profile;
 
             //Assert
-            CollectionAssert.AreEqual(expected, result);
+            CollectionAssert.AreEqual(expected, result, new ListToleranceComparer(0.0001));
         }
         
         [TestMethod]
