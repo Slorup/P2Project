@@ -218,13 +218,11 @@ namespace UnitTestProject
             //Arrange
             List<double> userProfile = new List<double>() { 0, 1, 0, 0, 0, 0 };
             User user = new User("Test", userProfile, UserType.Teacher, new List<int>());
-            int expected = 0;
 
             //Act
             int result = user.CalcChanceLikeExercise(null);
 
-            //Assert
-            Assert.AreEqual(expected, result);
+            //Assert - Expects exception
         }
 
         [TestMethod]
@@ -275,10 +273,8 @@ namespace UnitTestProject
 
             //Act
             user.SelectRandomExerciseFromLiking(exerciseList);
-            Exercise result = user.CurrentExercise;
 
-            //Assert
-            Assert.IsNull(result);
+            //Assert - Expects exception
         }
     }
 }
