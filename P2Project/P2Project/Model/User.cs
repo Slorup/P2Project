@@ -106,7 +106,7 @@ namespace P2Project.Model
             }
         }
 
-        public void UpdateProfileValues(Feedback feedback)
+        private void UpdateProfileValues(Feedback feedback)
         {
             if (feedback == Feedback.Good)
                 for (int i = 0; i < Profile.Count; i++)
@@ -115,6 +115,7 @@ namespace P2Project.Model
                 for (int i = 0; i < Profile.Count; i++)
                     Profile[i] -= CalcDifference(CurrentExercise.Profile[i], Profile[i]);
             CheckProfileBounds();
+            DBConnection.UpdateUserPrefs(this);
         }
 
         private double CalcDifference(double exercisepref, double userpref)
