@@ -119,7 +119,7 @@ namespace P2Project.Model
 
         private double CalcDifference(double exercisepref, double userpref)
         {
-            return (exercisepref - userpref) / 20;
+            return (exercisepref - userpref) / 15;
         }
 
         public void CheckProfileBounds()
