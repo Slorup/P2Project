@@ -100,8 +100,8 @@ namespace P2Project.Model
             if(CurrentExercise != null)
             {
                 DBConnection.InsertCompletedExercise(UserName, CurrentExercise.ID);
-                UpdateProfileValues(feedback);
                 CompletedExercisesID.Add(CurrentExercise.ID);
+                UpdateProfileValues(feedback);
                 GiveNewExercise();
             }
         }

@@ -214,7 +214,7 @@ namespace P2Project.ViewModel
             }
             catch (SqlException)
             {
-                MessageBox.Show("Kunne ikke oprette forbindelse til databasen!");
+                MessageBox.Show($"Kunne ikke oprette forbindelse til databasen!");
             }
             UpdateExerciseDesc();
         }

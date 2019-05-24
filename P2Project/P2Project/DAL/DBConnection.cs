@@ -163,7 +163,7 @@ namespace P2Project.DAL
         {
             using (SqlConnection conn = new SqlConnection(connString))
             {
-                SqlCommand cmd = new SqlCommand("update User set textvisualpref = @text, imagevisualpref = @image, verbalpref = @verbal, auditorypref = @auditory, tactilepref = @tactile, kinestheticpref = @kinesthetic", conn);
+                SqlCommand cmd = new SqlCommand("update [User] set textvisualpref = @text, imagevisualpref = @image, verbalpref = @verbal, auditorypref = @auditory, tactilepref = @tactile, kinestheticpref = @kinesthetic", conn);
                 cmd.Parameters.AddWithValue("@text", user.Profile[0]);
                 cmd.Parameters.AddWithValue("@image", user.Profile[1]);
                 cmd.Parameters.AddWithValue("@verbal", user.Profile[2]);
