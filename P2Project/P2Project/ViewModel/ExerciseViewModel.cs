@@ -4,6 +4,7 @@ using P2Project.MVVM;
 using P2Project.View;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -83,9 +84,17 @@ namespace P2Project.ViewModel
         public ExerciseViewModel(User currentUser)
         {
             CurrentUser = currentUser;
-            bool result = CurrentUser.GiveNewExercise();
-            if (!result)
-                MessageBox.Show("Tillykke! Du har gennemført alle opgaver!");
+            try
+            {
+                bool result = CurrentUser.GiveNewExercise();
+                if (!result)
+                    MessageBox.Show("Tillykke! Du har gennemført alle opgaver!");
+            }
+            catch(SqlException)
+            {
+                MessageBox.Show("Kunne ikke oprette forbindelse til databasen!");
+            }
+            
             UpdateExerciseDesc();
             SolutionVisibility = Visibility.Hidden;
         }
@@ -220,7 +229,14 @@ namespace P2Project.ViewModel
             bool? result = window.ShowDialog();
             if (result == true)
                 feedback = vm.UserFeedback;
-            CurrentUser.ExerciseCompleted(feedback);
+            try
+            {
+                CurrentUser.ExerciseCompleted(feedback);
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show($"Kunne ikke oprette forbindelse til databasen!");
+            }
             UpdateExerciseDesc();
         }
 
@@ -236,7 +252,14 @@ namespace P2Project.ViewModel
 
         private void SkipExerciseClick(object param)
         {
-            CurrentUser.GiveNewExercise();
+            try
+            {
+                CurrentUser.GiveNewExercise();
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show("Kunne ikke oprette forbindelse til databasen!");
+            }
             UpdateExerciseDesc();
         }
     }

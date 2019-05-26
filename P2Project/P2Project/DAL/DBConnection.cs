@@ -135,7 +135,7 @@ namespace P2Project.DAL
                 cmd.Parameters.AddWithValue("@creationdate", exercise.CreationDate);
                 cmd.Parameters.AddWithValue("@creator", exercise.Creator);
                 cmd.Parameters.AddWithValue("@textvisual", exercise.Profile[0]);
-                cmd.Parameters.AddWithValue("imagevisual", exercise.Profile[1]);
+                cmd.Parameters.AddWithValue("@imagevisual", exercise.Profile[1]);
                 cmd.Parameters.AddWithValue("@verbal", exercise.Profile[2]);
                 cmd.Parameters.AddWithValue("@auditory", exercise.Profile[3]);
                 cmd.Parameters.AddWithValue("@tactile", exercise.Profile[4]);
@@ -156,6 +156,23 @@ namespace P2Project.DAL
                     imagecmd.Parameters.AddWithValue("@imagepath", path);
                     imagecmd.ExecuteNonQuery();
                 }
+            }
+        }
+
+        public static void UpdateUserPrefs(User user)
+        {
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                SqlCommand cmd = new SqlCommand("update [User] set textvisualpref = @text, imagevisualpref = @image, verbalpref = @verbal, auditorypref = @auditory, tactilepref = @tactile, kinestheticpref = @kinesthetic", conn);
+                cmd.Parameters.AddWithValue("@text", user.Profile[0]);
+                cmd.Parameters.AddWithValue("@image", user.Profile[1]);
+                cmd.Parameters.AddWithValue("@verbal", user.Profile[2]);
+                cmd.Parameters.AddWithValue("@auditory", user.Profile[3]);
+                cmd.Parameters.AddWithValue("@tactile", user.Profile[4]);
+                cmd.Parameters.AddWithValue("@kinesthetic", user.Profile[5]);
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
             }
         }
     }

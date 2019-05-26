@@ -91,23 +91,6 @@ namespace UnitTestProject
             //Assert
             CollectionAssert.AreEqual(expected, result, new ListToleranceComparer(0.0001));
         }
-
-        [TestMethod]
-        public void UpdateProfileValues_MediumFeedback_SameValues()
-        {
-            //Arrange
-            List<double> profile = new List<double>() { 0.2, 0.2, 0.1, 0.1, 0.2, 0.2 };
-            User user = new User("Test", profile, UserType.Teacher, new List<int>());
-            Feedback feedback = Feedback.Medium;
-            List<double> expected = new List<double>() { 0.2, 0.2, 0.1, 0.1, 0.2, 0.2 };
-
-            //Act
-            user.UpdateProfileValues(feedback);
-            List<double> result = user.Profile;
-
-            //Assert
-            CollectionAssert.AreEqual(expected, result, new ListToleranceComparer(0.0001));
-        }
         
         [TestMethod]
         public void CalcProfileDifferenceSum_NormalValues_CorrectValue()
@@ -168,7 +151,7 @@ namespace UnitTestProject
             User user = new User("Test", userProfile, UserType.Teacher, new List<int>());
             List<double> exerciseProfile = new List<double>() { 0.1, 0.1, 0.2, 0.1, 0.2, 0.3 };
             Exercise exercise = new Exercise("Name", new ExerciseDescription("Description"), exerciseProfile, "Creator", DateTime.Now, "uri");
-            int expected = 85;
+            int expected = 86;
 
             //Act
             int result = user.CalcChanceLikeExercise(exercise);

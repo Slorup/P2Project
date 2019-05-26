@@ -84,7 +84,7 @@ namespace P2Project.Model
         public int CalcChanceLikeExercise(Exercise exercise)
         {
             double profileDifferenceSum = CalcProfileDifferencePowSum(exercise);
-            return (int)((1 - Math.Sqrt(profileDifferenceSum / 2)) * 100); 
+            return (int)Math.Round((1 - Math.Sqrt(profileDifferenceSum / 2)) * 100); 
         }
 
         public double CalcProfileDifferencePowSum(Exercise exercise)
@@ -100,21 +100,27 @@ namespace P2Project.Model
             if(CurrentExercise != null)
             {
                 DBConnection.InsertCompletedExercise(UserName, CurrentExercise.ID);
-                UpdateProfileValues(feedback);
                 CompletedExercisesID.Add(CurrentExercise.ID);
+                UpdateProfileValues(feedback);
                 GiveNewExercise();
             }
         }
 
-        public void UpdateProfileValues(Feedback feedback)
+        private void UpdateProfileValues(Feedback feedback)
         {
             if (feedback == Feedback.Good)
                 for (int i = 0; i < Profile.Count; i++)
-                    Profile[i] += (CurrentExercise.Profile[i] - Profile[i]) / 20;
+                    Profile[i] += CalcDifference(CurrentExercise.Profile[i], Profile[i]);
             if (feedback == Feedback.Bad)
                 for (int i = 0; i < Profile.Count; i++)
-                    Profile[i] -= (CurrentExercise.Profile[i] - Profile[i]) / 20;
+                    Profile[i] -= CalcDifference(CurrentExercise.Profile[i], Profile[i]);
             CheckProfileBounds();
+            DBConnection.UpdateUserPrefs(this);
+        }
+
+        private double CalcDifference(double exercisepref, double userpref)
+        {
+            return (exercisepref - userpref) / 15;
         }
 
         public void CheckProfileBounds()

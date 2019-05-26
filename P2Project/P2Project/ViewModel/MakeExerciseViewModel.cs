@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -236,7 +237,7 @@ namespace P2Project.ViewModel
                         makeexercisePage.DataContext = new MakeExerciseViewModel(CurrentUser);
                         Navigator.SubNavigationService.Navigate(makeexercisePage);
                     }
-                    catch (Exception)
+                    catch (SqlException)
                     {
                         MessageBox.Show("Kunne ikke oprette forbindelse til databasen!");
                     }

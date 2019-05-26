@@ -134,7 +134,7 @@
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
                     <ScrollViewer VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="0" Margin="0,0,5,2">
-                        <TextBox IsReadOnly="True" Background="#3c4f65" BorderBrush="#3c4f65" TextWrapping="Wrap" Text="{Binding CurrentUser.CurrentExercise.Description.TextDescription}"/>
+                        <TextBox IsReadOnly="True" Foreground="#E6F5FF" Background="#3c4f65" BorderBrush="#3c4f65" TextWrapping="Wrap" Text="{Binding CurrentUser.CurrentExercise.Description.TextDescription}"/>
                     </ScrollViewer>
                     <Frame Grid.Row="1" VerticalAlignment="Stretch" Content="{Binding ImageFrame}" Margin="0,10,0,0"/>
                     <Frame Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="{Binding VideoFrame}" Margin="00,10,0,0"/>

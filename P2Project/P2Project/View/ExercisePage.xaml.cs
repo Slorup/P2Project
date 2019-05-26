@@ -25,6 +25,7 @@ namespace P2Project.View
         {
             InitializeComponent();
             this.Unloaded += (s, e) => { ExerciseViewer.Dispose(); };
+            this.Loaded += (s, e) => { ExerciseViewer = new WebBrowser(); };
         }
 
         private void ExerciseViewer_Navigating(object sender, NavigatingCancelEventArgs e)
@@ -33,7 +34,8 @@ namespace P2Project.View
                 BindingFlags.GetProperty | BindingFlags.Instance | BindingFlags.NonPublic,
                 null, this.ExerciseViewer, new object[] { });
 
-            activeX.Silent = true;
+            if(activeX != null)
+                activeX.Silent = true;
         }
     }
 }

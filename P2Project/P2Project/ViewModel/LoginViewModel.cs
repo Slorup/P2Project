@@ -4,6 +4,7 @@ using P2Project.MVVM;
 using P2Project.View;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -50,7 +51,7 @@ namespace P2Project.ViewModel
                     MessageBox.Show("Der findes ingen profil med det ønskede brugernavn");
                 }
             }
-            catch(Exception)
+            catch(SqlException)
             {
                 MessageBox.Show("Kunne ikke oprette forbindelse til databasen!");
             }
