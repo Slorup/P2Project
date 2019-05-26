@@ -94,60 +94,81 @@ namespace P2Project.ViewModel
         {
             if (CurrentUser.CurrentExercise != null)
             {
-                if (CurrentUser.CurrentExercise.Description.VideoPath != null && CurrentUser.CurrentExercise.Description.VideoPath != "")
-                {
-                    VideoPlayerPage videopage = new VideoPlayerPage();
-                    VideoPlayerViewModel videovm = new VideoPlayerViewModel(CurrentUser.CurrentExercise.Description.VideoPath, false);
-                    videopage.DataContext = videovm;
-                    VideoFrame = videopage;
-                }
-                else
-                {
-                    VideoFrame = null;
-                }
+                UpdateVideoPlayer();
+                UpdateImages();
+                UpdateSolution();
+                UpdateAudio();
+                UpdateWebBrowser();
+            }
+        }
 
-                if (CurrentUser.CurrentExercise.Description.ImagePaths != null && CurrentUser.CurrentExercise.Description.ImagePaths.Count != 0)
-                {
-                    ImageScrollPage imagepage = new ImageScrollPage();
-                    ImageScrollViewModel imagevm = new ImageScrollViewModel(CurrentUser.CurrentExercise.Description.ImagePaths);
-                    imagepage.DataContext = imagevm;
-                    ImageFrame = imagepage;
-                }
-                else
-                {
-                    ImageFrame = null;
-                }
+        private void UpdateWebBrowser()
+        {
+            if (CurrentUser.CurrentExercise.URI != null && CurrentUser.CurrentExercise.URI != "")
+                URISource = CurrentUser.CurrentExercise.URI;
+            else
+                URISource = null;
+        }
 
-                if(CurrentUser.CurrentExercise.Description.SolutionPath != null && CurrentUser.CurrentExercise.Description.SolutionPath != "")
-                {
-                    List<string> solutions = new List<string>();
-                    solutions.Add(CurrentUser.CurrentExercise.Description.SolutionPath);
-                    ImageScrollPage page = new ImageScrollPage();
-                    ImageScrollViewModel vm = new ImageScrollViewModel(solutions);
-                    page.DataContext = vm;
-                    SolutionFrame = page;
-                }
-                else
-                {
-                    SolutionFrame = null;
-                }
+        private void UpdateAudio()
+        {
+            if (CurrentUser.CurrentExercise.Description.AudioPath != null && CurrentUser.CurrentExercise.Description.AudioPath != "")
+            {
+                VideoPlayerPage page = new VideoPlayerPage();
+                VideoPlayerViewModel vm = new VideoPlayerViewModel(CurrentUser.CurrentExercise.Description.AudioPath, true);
+                page.DataContext = vm;
+                AudioFrame = page;
+            }
+            else
+            {
+                AudioFrame = null;
+            }
+        }
 
-                if (CurrentUser.CurrentExercise.Description.AudioPath != null && CurrentUser.CurrentExercise.Description.AudioPath != "")
-                {
-                    VideoPlayerPage page = new VideoPlayerPage();
-                    VideoPlayerViewModel vm = new VideoPlayerViewModel(CurrentUser.CurrentExercise.Description.AudioPath, true);
-                    page.DataContext = vm;
-                    AudioFrame = page;
-                }
-                else
-                {
-                    AudioFrame = null;
-                }
+        private void UpdateSolution()
+        {
+            if (CurrentUser.CurrentExercise.Description.SolutionPath != null && CurrentUser.CurrentExercise.Description.SolutionPath != "")
+            {
+                List<string> solutions = new List<string>();
+                solutions.Add(CurrentUser.CurrentExercise.Description.SolutionPath);
+                ImageScrollPage page = new ImageScrollPage();
+                ImageScrollViewModel vm = new ImageScrollViewModel(solutions);
+                page.DataContext = vm;
+                SolutionFrame = page;
+            }
+            else
+            {
+                SolutionFrame = null;
+            }
+        }
 
-                if (CurrentUser.CurrentExercise.URI != null && CurrentUser.CurrentExercise.URI != "")
-                    URISource = CurrentUser.CurrentExercise.URI;
-                else
-                    URISource = null;
+        private void UpdateImages()
+        {
+            if (CurrentUser.CurrentExercise.Description.ImagePaths != null && CurrentUser.CurrentExercise.Description.ImagePaths.Count != 0)
+            {
+                ImageScrollPage imagepage = new ImageScrollPage();
+                ImageScrollViewModel imagevm = new ImageScrollViewModel(CurrentUser.CurrentExercise.Description.ImagePaths);
+                imagepage.DataContext = imagevm;
+                ImageFrame = imagepage;
+            }
+            else
+            {
+                ImageFrame = null;
+            }
+        }
+
+        private void UpdateVideoPlayer()
+        {
+            if (CurrentUser.CurrentExercise.Description.VideoPath != null && CurrentUser.CurrentExercise.Description.VideoPath != "")
+            {
+                VideoPlayerPage videopage = new VideoPlayerPage();
+                VideoPlayerViewModel videovm = new VideoPlayerViewModel(CurrentUser.CurrentExercise.Description.VideoPath, false);
+                videopage.DataContext = videovm;
+                VideoFrame = videopage;
+            }
+            else
+            {
+                VideoFrame = null;
             }
         }
 
