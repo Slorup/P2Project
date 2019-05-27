@@ -21,6 +21,7 @@ namespace P2Project.View
     /// </summary>
     public partial class ExercisePage : Page
     {
+        //Makes sure the webbrowser is disposed when leaving page to avoid memory leak.
         public ExercisePage()
         {
             InitializeComponent();
@@ -28,6 +29,7 @@ namespace P2Project.View
             this.Loaded += (s, e) => { ExerciseViewer = new WebBrowser(); };
         }
 
+        //Silences script errors from webbrowser when navigating.
         private void ExerciseViewer_Navigating(object sender, NavigatingCancelEventArgs e)
         {
             dynamic activeX = this.ExerciseViewer.GetType().InvokeMember("ActiveXInstance",

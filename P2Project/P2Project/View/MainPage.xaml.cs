@@ -22,10 +22,11 @@ namespace P2Project.View
     /// </summary>
     public partial class MainPage : Page
     {
+        //Sets sub-navigator to the frame
         public MainPage()
         {
             InitializeComponent();
-            Navigator.SubNavigationService = SubNavigationFrame.NavigationService; //TODO, Skal flyttes
+            Navigator.SubNavigationService = SubNavigationFrame.NavigationService;
         }
     }
 }

@@ -23,10 +23,11 @@ namespace P2Project
     /// </summary>
     public partial class MainWindow : Window
     {
+        //sets main navigator to frame. Navigates to loginpage
         public MainWindow()
         {
             InitializeComponent();
-            Navigator.MainNavigationService = NavigationFrame.NavigationService; //TODO, skal flyttes
+            Navigator.MainNavigationService = NavigationFrame.NavigationService;
 
             LoginViewModel loginvm = new LoginViewModel();
             LoginPage loginPage = new LoginPage();
