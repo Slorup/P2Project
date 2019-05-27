@@ -216,6 +216,7 @@ namespace P2Project.ViewModel
             }
         }
 
+        //If no validating errors, insert exercise in database and reload page
         private void ExerciseCreateClick(object param)
         {
             IsValidating = true;
@@ -249,6 +250,7 @@ namespace P2Project.ViewModel
                 MessageBox.Show(error);
         }
 
+        //Update profile values from slider values
         private void UpdateProfileValues(List<double> profile)
         {
             double sum = profile.Sum();

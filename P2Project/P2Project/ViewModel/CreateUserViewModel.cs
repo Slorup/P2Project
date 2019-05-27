@@ -47,6 +47,7 @@ namespace P2Project.ViewModel
             FillSurvey();
         }
 
+        //Fills survey with default questions
         public void FillSurvey()
         {
             this.Survey.QuestionList.Add(new SurveyQuestion("1. Jeg lærer godt ved hjælp af tekster"));
@@ -67,6 +68,7 @@ namespace P2Project.ViewModel
             }
         }
 
+        //Checks if validate errors. If not, create user in database and navigate back.
         private void CreateUserClick(object param)
         {
             IsValidating = true;
@@ -89,9 +91,7 @@ namespace P2Project.ViewModel
                 }
             }
             else
-            {
                 MessageBox.Show(error);
-            }
         }
 
         private string ValidateUserName()
@@ -105,6 +105,7 @@ namespace P2Project.ViewModel
             return null;
         }
 
+        //Calculates profile from survey values
         public List<double> CalcLearningProfile()
         {
             List<double> lp = new List<double>();

@@ -35,9 +35,10 @@ namespace P2Project.Model
             CompletedExercisesID = completedExercisesID;
         }
 
+        //Finds a new exercise for the user
         public bool GiveNewExercise()
         {
-            List<Exercise> exerciseList = GetExercisesNotCompleted(); //Get all non-completed exercises from DB
+            List<Exercise> exerciseList = GetExercisesNotCompleted();
             bool newExerciseFound = SelectRandomExerciseFromLiking(exerciseList);
             return newExerciseFound;
         }
@@ -79,14 +80,14 @@ namespace P2Project.Model
             return exerciselist.Where(p => !CompletedExercisesID.Contains(p.ID)).ToList();
         }
 
-        //Udregner "liking" for en opgave.
-        //Stardardafvigelse: sqrt(1/2 * Sum((E_x - S_x)^2))
+        //Calculates change of liking exercise
         public int CalcChanceLikeExercise(Exercise exercise)
         {
             double profileDifferenceSum = CalcProfileDifferencePowSum(exercise);
             return (int)Math.Round((1 - Math.Sqrt(profileDifferenceSum / 2)) * 100); 
         }
 
+        //Calculates sum of differences squared
         public double CalcProfileDifferencePowSum(Exercise exercise)
         {
             double sum = 0;
@@ -95,6 +96,8 @@ namespace P2Project.Model
             return sum;
         }
 
+        //Inserts completed exercise in database and updates profile values
+        //Finds new exercise
         public void ExerciseCompleted(Feedback feedback = Feedback.Medium)
         {
             if(CurrentExercise != null)
@@ -106,6 +109,7 @@ namespace P2Project.Model
             }
         }
 
+        //Calculates new profile values from feedback. Update in database.
         private void UpdateProfileValues(Feedback feedback)
         {
             if (feedback == Feedback.Good)
@@ -118,11 +122,13 @@ namespace P2Project.Model
             DBConnection.UpdateUserPrefs(this);
         }
 
+        //Calculates difference between profiles divided by constant
         private double CalcDifference(double exercisepref, double userpref)
         {
             return (exercisepref - userpref) / 15;
         }
 
+        //Checks and make sure profile values aren't out of bound
         public void CheckProfileBounds()
         {
             int negativeValuesCount = Profile.Count(c => c < 0);

@@ -12,6 +12,9 @@ namespace P2Project.Model
         private Action<object> _execute;
         private Func<object, bool> _canExecute;
 
+        //Notifies command source when CanExecute has changed
+        //RequerySuggested raises event when it thinks that something has changed,
+        // that might affect the ability of the command to execute
         public event EventHandler CanExecuteChanged
         {
             add => CommandManager.RequerySuggested += value;

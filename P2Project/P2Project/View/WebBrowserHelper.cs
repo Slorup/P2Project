@@ -10,6 +10,7 @@ namespace P2Project.View
 {
     public class WebBrowserHelper
     {
+        //Creates a new bindable property for the webbrowser
         public static readonly DependencyProperty BindableSource = DependencyProperty.RegisterAttached("BindableSource", typeof(string), typeof(WebBrowserHelper), new PropertyMetadata(BindableSourcePropertyChanged));
 
         public static object GetBindableSource(DependencyObject obj)
@@ -22,6 +23,7 @@ namespace P2Project.View
             obj.SetValue(BindableSource, value);
         }
 
+        //Sets browser source to uri/string when bindablesource is changed
         private static void BindableSourcePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             WebBrowser browser = d as WebBrowser;

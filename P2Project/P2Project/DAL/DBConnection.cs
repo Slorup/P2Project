@@ -14,6 +14,7 @@ namespace P2Project.DAL
     {
         static string connString = "Server=p2projectserver.database.windows.net; Database=P2Project; User Id=Azureadmin; Password=Azure123";
 
+        //Inserts an user in the database
         public static void CreateUser(User user)
         {
             using(SqlConnection conn = new SqlConnection(connString))
@@ -34,6 +35,7 @@ namespace P2Project.DAL
             }
         }
 
+        //Returns a list of all exercise from database
         public static List<Exercise> GetAllExercises()
         {
             List<Exercise> exerciselist = new List<Exercise>();
@@ -68,6 +70,7 @@ namespace P2Project.DAL
             return exerciselist;
         }
 
+        //Inserts an completed exerciseID for an user
         public static void InsertCompletedExercise(string userName, int id)
         {
             using(SqlConnection conn = new SqlConnection(connString))
@@ -81,6 +84,7 @@ namespace P2Project.DAL
             }
         }
 
+        //Get User objekt from database from username
         public static User GetUserByUsername(string username)
         {
             User user = null;
@@ -111,6 +115,7 @@ namespace P2Project.DAL
             return user;
         }
 
+        //Check if a user with a specific username exists in database
         public static bool UserExist(string username)
         {
             int userCount;
@@ -124,6 +129,7 @@ namespace P2Project.DAL
             return userCount != 0;
         }
 
+        //Inserts an exercise in the database
         public static void CreateExercise(Exercise exercise)
         {
             int id = 0;
@@ -159,6 +165,7 @@ namespace P2Project.DAL
             }
         }
 
+        //Updates a users profile in the database
         public static void UpdateUserPrefs(User user)
         {
             using (SqlConnection conn = new SqlConnection(connString))

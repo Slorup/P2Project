@@ -29,6 +29,7 @@ namespace P2Project.ViewModel
             }
         }
 
+        //Updates UserFeedback and closes window
         private void FeedbackClick(object param)
         {
             int.TryParse(param.ToString(), out int result);

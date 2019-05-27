@@ -144,6 +144,7 @@ namespace P2Project.ViewModel
                 MediaVisibility = Visibility.Visible;
         }
         
+        //Sets timespan for player and starts a timer for the slider
         public void Player_MediaOpened(MediaElement player)
         {
             _player = player;

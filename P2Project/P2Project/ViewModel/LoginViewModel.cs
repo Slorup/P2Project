@@ -33,6 +33,7 @@ namespace P2Project.ViewModel
             return username != null && username.Length != 0;
         }
 
+        //Check if user is in database. Navigate to main page.
         private void ExecuteLoginClick(object param)
         {
             try

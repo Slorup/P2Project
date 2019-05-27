@@ -99,6 +99,7 @@ namespace P2Project.ViewModel
             SolutionVisibility = Visibility.Hidden;
         }
 
+        //Updates exercise properties
         private void UpdateExerciseDesc()
         {
             if (CurrentUser.CurrentExercise != null)
